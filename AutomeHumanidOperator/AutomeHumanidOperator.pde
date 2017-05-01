@@ -19,6 +19,8 @@ ControlP5 button_pos14;
 ControlP5 button_pos15;
 
 ControlP5 button_back;
+ControlP5 play_pos;
+ControlP5 play_motion;
 
 State state;
 MotionState motion_state = new MotionState();
@@ -62,6 +64,8 @@ void setup() {
   button_pos14 = new ControlP5(this);
   button_pos15 = new ControlP5(this);
   button_back = new ControlP5(this);
+  play_pos = new ControlP5(this);
+  play_motion = new ControlP5(this);
   state = new StartState(motion_state);
 }
 
@@ -121,6 +125,7 @@ class MotionState extends State
   void initialise(){
     if(flag == 0){
       pointer = this;
+      play_motion.addButton("PLAY_MOTION").setLabel("PLAY").setPosition(OFFSET_X+ELEMENT_X*4, OFFSET_Y+ELEMENT_Y*(-1)).setSize(100, 40);
       button_pos0.addButton("POS0").setLabel("POS0").setPosition(OFFSET_X+ELEMENT_X*0, OFFSET_Y+ELEMENT_Y*0).setSize(100, 40);
       button_pos1.addButton("POS1").setLabel("POS1").setPosition(OFFSET_X+ELEMENT_X*1, OFFSET_Y+ELEMENT_Y*0).setSize(100, 40);
       button_pos2.addButton("POS2").setLabel("POS2").setPosition(OFFSET_X+ELEMENT_X*2, OFFSET_Y+ELEMENT_Y*0).setSize(100, 40);
@@ -175,6 +180,7 @@ class MotionState extends State
     button_pos13.remove("POS13");
     button_pos14.remove("POS14");
     button_pos15.remove("POS15");
+    play_motion.remove("PLAY_MOTION");
     pointer = s;
   }
 }
@@ -212,6 +218,7 @@ class PositionState extends State
     if(flag == 0){
       pointer = current_pos = this;
       button_back.addButton("BACK").setLabel("BACK").setPosition(50, 40).setSize(100, 40);
+      play_pos.addButton("PLAY_POS").setLabel("PLAY").setPosition(OFFSET_X+ELEMENT_X*3, OFFSET_Y+ELEMENT_Y*(-1)).setSize(100, 40);
       slider.addSlider("SERVO0").setRange(0, 180).setValue(val[0]).setPosition(OFFSET_X+ELEMENT_X*0, OFFSET_Y+ELEMENT_Y*0).setSize(300, 30);
       slider.getController("SERVO0").getValueLabel().align(ControlP5.RIGHT, ControlP5.BOTTOM_OUTSIDE).setPaddingX(-20);
       slider.addSlider("SERVO1").setRange(0, 180).setValue(val[1]).setPosition(OFFSET_X+ELEMENT_X*1, OFFSET_Y+ELEMENT_Y*0).setSize(300, 30);
@@ -262,7 +269,7 @@ class PositionState extends State
     initialise();
     textSize(20);
     text("POS"+id+" setting", width*0.2, height*0.1);
-    read_val();
+    //read_val();
   }
   
   State decideState()
@@ -275,7 +282,9 @@ class PositionState extends State
   
   void read_val()
   {
-    if(readable == 0)return;
+    if(readable == 0){
+      return;
+    }
     val[0] = slider.getController("SERVO0").getValue();
     val[1] = slider.getController("SERVO1").getValue();
     val[2] = slider.getController("SERVO2").getValue();
@@ -302,6 +311,7 @@ class PositionState extends State
   {
     read_val();
     button_back.remove("BACK");
+    play_pos.remove("PLAY_POS");
     slider.remove("SERVO0");
     slider.remove("SERVO1");
     slider.remove("SERVO2");
@@ -457,4 +467,14 @@ void POS14()
 void POS15()
 {
     motion_state.setNextState(_POS15);
+}
+
+void PLAY_MOTION()
+{
+  current_pos.read_val();
+}
+
+void PLAY_POS()
+{
+  current_pos.read_val();
 }

@@ -20,6 +20,7 @@ ControlP5 button_pos15;
 
 ControlP5 button_back;
 ControlP5 play_pos;
+ControlP5 reset_pos;
 ControlP5 play_motion;
 
 State state;
@@ -65,6 +66,7 @@ void setup() {
   button_pos15 = new ControlP5(this);
   button_back = new ControlP5(this);
   play_pos = new ControlP5(this);
+  reset_pos = new ControlP5(this);
   play_motion = new ControlP5(this);
   state = new StartState(motion_state);
 }
@@ -191,6 +193,7 @@ class PositionState extends State
   float ELEMENT_X =350;
   float OFFSET_Y = 250;
   float ELEMENT_Y = 100;
+  float CENTER_ANGLE = 90;
   int flag = 0;
   int id = 0;
   float val[] = new float[20];
@@ -200,14 +203,36 @@ class PositionState extends State
   PositionState(int x)
   {
     id = x;
-    reset_val();
+    resetVal();
   }
   
-  void reset_val()
+  void resetVal()
   {
     for(int i=0;i<20;i++){
-      val[i] = 90;
+      val[i] = CENTER_ANGLE;
     }
+    if(flag==0)return;
+    slider.getController("SERVO0").setValue(CENTER_ANGLE);
+    slider.getController("SERVO1").setValue(CENTER_ANGLE);
+    slider.getController("SERVO2").setValue(CENTER_ANGLE);
+    slider.getController("SERVO3").setValue(CENTER_ANGLE);
+    slider.getController("SERVO4").setValue(CENTER_ANGLE);
+    slider.getController("SERVO5").setValue(CENTER_ANGLE);
+    slider.getController("SERVO6").setValue(CENTER_ANGLE);
+    slider.getController("SERVO7").setValue(CENTER_ANGLE);
+    slider.getController("SERVO8").setValue(CENTER_ANGLE);
+    slider.getController("SERVO9").setValue(CENTER_ANGLE);
+    slider.getController("SERVO10").setValue(CENTER_ANGLE);
+    slider.getController("SERVO11").setValue(CENTER_ANGLE);
+    slider.getController("SERVO12").setValue(CENTER_ANGLE);
+    slider.getController("SERVO13").setValue(CENTER_ANGLE);
+    slider.getController("SERVO14").setValue(CENTER_ANGLE);
+    slider.getController("SERVO15").setValue(CENTER_ANGLE);
+    slider.getController("SERVO16").setValue(CENTER_ANGLE);
+    slider.getController("SERVO17").setValue(CENTER_ANGLE);
+    slider.getController("SERVO18").setValue(CENTER_ANGLE);
+    slider.getController("SERVO19").setValue(CENTER_ANGLE);
+    
   }
   int getID()
   {
@@ -218,6 +243,7 @@ class PositionState extends State
     if(flag == 0){
       pointer = current_pos = this;
       button_back.addButton("BACK").setLabel("BACK").setPosition(50, 40).setSize(100, 40);
+      reset_pos.addButton("RESET_POS").setLabel("RESET").setPosition(OFFSET_X+ELEMENT_X*3.5, OFFSET_Y+ELEMENT_Y*(-1)).setSize(100, 40);
       play_pos.addButton("PLAY_POS").setLabel("PLAY").setPosition(OFFSET_X+ELEMENT_X*3, OFFSET_Y+ELEMENT_Y*(-1)).setSize(100, 40);
       slider.addSlider("SERVO0").setRange(0, 180).setValue(val[0]).setPosition(OFFSET_X+ELEMENT_X*0, OFFSET_Y+ELEMENT_Y*0).setSize(300, 30);
       slider.getController("SERVO0").getValueLabel().align(ControlP5.RIGHT, ControlP5.BOTTOM_OUTSIDE).setPaddingX(-20);
@@ -312,6 +338,7 @@ class PositionState extends State
     read_val();
     button_back.remove("BACK");
     play_pos.remove("PLAY_POS");
+    reset_pos.remove("RESET_POS");
     slider.remove("SERVO0");
     slider.remove("SERVO1");
     slider.remove("SERVO2");
@@ -471,10 +498,15 @@ void POS15()
 
 void PLAY_MOTION()
 {
-  current_pos.read_val();
+  
 }
 
 void PLAY_POS()
 {
   current_pos.read_val();
+}
+
+void RESET_POS()
+{
+  current_pos.resetVal();
 }

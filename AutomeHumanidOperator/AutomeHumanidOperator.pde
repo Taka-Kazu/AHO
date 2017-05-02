@@ -4,7 +4,6 @@ ControlFont cf;
 PrintWriter output;
 
 ControlP5 slider;
-ControlP5 button_pos[] = new ControlP5[16];
 
 ControlP5 button_back;
 ControlP5 play_pos;
@@ -12,13 +11,14 @@ ControlP5 reset_pos;
 ControlP5 play_motion;
 ControlP5 exit_button;
 ControlP5 enable_button;
-int POS_NUM = 16;
+int POS_NUM = 50;
 int SERVO_NUM = 20;
 
 State state;
 MotionState motion_state = new MotionState();
 PositionState current_pos;
 PositionState _POS[] = new PositionState[POS_NUM];
+ControlP5 button_pos[] = new ControlP5[POS_NUM];
 
 int readable = 0;
 
@@ -90,19 +90,19 @@ class MotionState extends State
 {
   State pointer;
   int flag = 0;
-  float OFFSET_X = 400;
-  float ELEMENT_X = 200;
+  float OFFSET_X = 75;
+  float ELEMENT_X = 150;
   float OFFSET_Y = 250;
   float ELEMENT_Y = 100;
   int UNABLE_COLOR = 0xFF0000FF;
   int ENABLE_COLOR = 0xFFFF00FF;
-  int POS_GYOU = 4;
-  int POS_RETU = 4;
+  int POS_GYOU = 5;
+  int POS_RETU = 10;
   void initialise(){
     if(flag == 0){
       pointer = this;
-      play_motion.addButton("PLAY_MOTION").setLabel("PLAY").setPosition(OFFSET_X+ELEMENT_X*4, OFFSET_Y+ELEMENT_Y*(-1)).setSize(100, 40);
-      exit_button.addButton("EXIT_BUTTON").setLabel("EXIT").setPosition(OFFSET_X+ELEMENT_X*4.75, OFFSET_Y+ELEMENT_Y*(-1)).setSize(100, 40);
+      play_motion.addButton("PLAY_MOTION").setLabel("PLAY").setPosition(OFFSET_X+ELEMENT_X*8, OFFSET_Y+ELEMENT_Y*(-1)).setSize(100, 40);
+      exit_button.addButton("EXIT_BUTTON").setLabel("EXIT").setPosition(OFFSET_X+ELEMENT_X*9, OFFSET_Y+ELEMENT_Y*(-1)).setSize(100, 40);
       for(int i=0;i<POS_GYOU;i++){
         for(int j=0;j<POS_RETU;j++){
           int pos_id = i*POS_RETU+j;

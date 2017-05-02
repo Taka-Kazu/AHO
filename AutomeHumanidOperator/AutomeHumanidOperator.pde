@@ -4,7 +4,7 @@ ControlFont button_font;
 PrintWriter output;
 
 ControlP5 slider;
-
+ControlP5 textbox;
 ControlP5 button_back;
 ControlP5 play_pos;
 ControlP5 reset_pos;
@@ -39,6 +39,7 @@ void setup() {
   exit_button = new ControlP5(this);
   enable_button = new ControlP5(this);
   state = new StartState(motion_state);
+  textbox = new ControlP5(this);
 }
 
 void draw() {
@@ -159,6 +160,7 @@ class PositionState extends State
   int id = 0;
   float val[] = new float[SERVO_NUM];
   int enabled = 0;
+  Integer time_ms = 100;
   
   State pointer;
   
@@ -177,7 +179,8 @@ class PositionState extends State
     for(int i=0;i<SERVO_NUM;i++){
       slider.getController("SERVO"+i).setValue(val[i]);
     }
-    
+    time_ms = 100;
+    textbox.get(Textfield.class, "TEXTBOX").setText(time_ms.toString());
   }
   int getID()
   {
@@ -187,9 +190,10 @@ class PositionState extends State
   void initialise(){
     if(flag == 0){
       pointer = current_pos = this;
-      button_back.addButton("BACK").setLabel("BACK").setPosition(50, 40).setSize(100, 40).setFont(button_font).setFont(button_font);
+      textbox.addTextfield("TEXTBOX").setLabel("TIME[ms]").setPosition(OFFSET_X+ELEMENT_X*(1.5), OFFSET_Y+ELEMENT_Y*5).setSize(100, 40).setFont(button_font).setAutoClear(false).setValue(time_ms.toString());
+      button_back.addButton("BACK").setLabel("BACK").setPosition(50, 40).setSize(100, 40).setFont(button_font);
       reset_pos.addButton("RESET_POS").setLabel("RESET").setPosition(OFFSET_X+ELEMENT_X*3.5, OFFSET_Y+ELEMENT_Y*(-1)).setSize(100, 40).setFont(button_font);
-      enable_button.addButton("ENABLE").setLabel("ENABLE").setPosition(OFFSET_X+ELEMENT_X*3, OFFSET_Y+ELEMENT_Y*5.5).setSize(100, 40).setFont(button_font);
+      enable_button.addButton("ENABLE").setLabel("ENABLE").setPosition(OFFSET_X+ELEMENT_X*3, OFFSET_Y+ELEMENT_Y*5).setSize(100, 40).setFont(button_font);
       play_pos.addButton("PLAY_POS").setLabel("PLAY").setPosition(OFFSET_X+ELEMENT_X*3, OFFSET_Y+ELEMENT_Y*(-1)).setSize(100, 40).setFont(button_font);
       for(int i=0;i<SERVO_GYOU;i++){
         for(int j=0;j<SERVO_RETU;j++){
@@ -231,6 +235,7 @@ class PositionState extends State
     for(int i=0;i<SERVO_NUM;i++){
       val[i] = slider.getController("SERVO"+i).getValue();
     }
+    time_ms = parseInt(textbox.get(Textfield.class, "TEXTBOX").getText());
   }
   
   void setNextState(State s)
@@ -240,6 +245,7 @@ class PositionState extends State
     play_pos.remove("PLAY_POS");
     reset_pos.remove("RESET_POS");
     enable_button.remove("ENABLE");
+    textbox.remove("TEXTBOX");
     for(int i=0;i<SERVO_NUM;i++){
       slider.remove("SERVO"+i);
     }

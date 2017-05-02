@@ -25,6 +25,7 @@ ControlP5 button_back;
 ControlP5 play_pos;
 ControlP5 reset_pos;
 ControlP5 play_motion;
+ControlP5 exit_button;
 
 State state;
 MotionState motion_state = new MotionState();
@@ -73,6 +74,7 @@ void setup() {
   play_pos = new ControlP5(this);
   reset_pos = new ControlP5(this);
   play_motion = new ControlP5(this);
+  exit_button = new ControlP5(this);
   state = new StartState(motion_state);
 }
 
@@ -134,6 +136,7 @@ class MotionState extends State
     if(flag == 0){
       pointer = this;
       play_motion.addButton("PLAY_MOTION").setLabel("PLAY").setPosition(OFFSET_X+ELEMENT_X*4, OFFSET_Y+ELEMENT_Y*(-1)).setSize(100, 40);
+      exit_button.addButton("EXIT_BUTTON").setLabel("EXIT").setPosition(OFFSET_X+ELEMENT_X*4.75, OFFSET_Y+ELEMENT_Y*(-1)).setSize(100, 40);
       button_pos0.addButton("POS0").setLabel("POS0").setPosition(OFFSET_X+ELEMENT_X*0, OFFSET_Y+ELEMENT_Y*0).setSize(100, 40);
       button_pos1.addButton("POS1").setLabel("POS1").setPosition(OFFSET_X+ELEMENT_X*1, OFFSET_Y+ELEMENT_Y*0).setSize(100, 40);
       button_pos2.addButton("POS2").setLabel("POS2").setPosition(OFFSET_X+ELEMENT_X*2, OFFSET_Y+ELEMENT_Y*0).setSize(100, 40);
@@ -189,6 +192,7 @@ class MotionState extends State
     button_pos14.remove("POS14");
     button_pos15.remove("POS15");
     play_motion.remove("PLAY_MOTION");
+    exit_button.remove("EXIT_BUTTON");
     pointer = s;
   }
 }
@@ -514,4 +518,10 @@ void PLAY_POS()
 void RESET_POS()
 {
   current_pos.resetVal();
+}
+
+void EXIT_BUTTON()
+{
+  output.close();
+  exit();
 }

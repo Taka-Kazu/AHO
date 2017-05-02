@@ -1,6 +1,6 @@
 import controlP5.*;
 
-ControlFont cf;
+ControlFont button_font;
 PrintWriter output;
 
 ControlP5 slider;
@@ -25,7 +25,7 @@ int readable = 0;
 void setup() {
   output = createWriter("log.csv");
   size(1600, 900); 
-  cf = new ControlFont(createFont("Arial", 20));
+  button_font = new ControlFont(createFont("Arial", 12));
   slider = new ControlP5(this);
   for(int i=0;i<POS_NUM;i++)
   {
@@ -101,12 +101,12 @@ class MotionState extends State
   void initialise(){
     if(flag == 0){
       pointer = this;
-      play_motion.addButton("PLAY_MOTION").setLabel("PLAY").setPosition(OFFSET_X+ELEMENT_X*8, OFFSET_Y+ELEMENT_Y*(-1)).setSize(100, 40);
-      exit_button.addButton("EXIT_BUTTON").setLabel("EXIT").setPosition(OFFSET_X+ELEMENT_X*9, OFFSET_Y+ELEMENT_Y*(-1)).setSize(100, 40);
+      play_motion.addButton("PLAY_MOTION").setLabel("PLAY").setPosition(OFFSET_X+ELEMENT_X*8, OFFSET_Y+ELEMENT_Y*(-1)).setSize(100, 40).setFont(button_font);
+      exit_button.addButton("EXIT_BUTTON").setLabel("EXIT").setPosition(OFFSET_X+ELEMENT_X*9, OFFSET_Y+ELEMENT_Y*(-1)).setSize(100, 40).setFont(button_font);
       for(int i=0;i<POS_GYOU;i++){
         for(int j=0;j<POS_RETU;j++){
           int pos_id = i*POS_RETU+j;
-          button_pos[pos_id].addButton("POS"+pos_id).setLabel("POS"+pos_id).setPosition(OFFSET_X+ELEMENT_X*j, OFFSET_Y+ELEMENT_Y*i).setSize(100, 40);
+          button_pos[pos_id].addButton("POS"+pos_id).setLabel("POS"+pos_id).setPosition(OFFSET_X+ELEMENT_X*j, OFFSET_Y+ELEMENT_Y*i).setSize(100, 40).setFont(button_font);
           if(_POS[pos_id].enabled == 1){
             button_pos[pos_id].getController("POS"+pos_id).setColorBackground(ENABLE_COLOR);
           }else{
@@ -187,10 +187,10 @@ class PositionState extends State
   void initialise(){
     if(flag == 0){
       pointer = current_pos = this;
-      button_back.addButton("BACK").setLabel("BACK").setPosition(50, 40).setSize(100, 40);
-      reset_pos.addButton("RESET_POS").setLabel("RESET").setPosition(OFFSET_X+ELEMENT_X*3.5, OFFSET_Y+ELEMENT_Y*(-1)).setSize(100, 40);
-      enable_button.addButton("ENABLE").setLabel("ENABLE").setPosition(OFFSET_X+ELEMENT_X*3, OFFSET_Y+ELEMENT_Y*5.5).setSize(100, 40);
-      play_pos.addButton("PLAY_POS").setLabel("PLAY").setPosition(OFFSET_X+ELEMENT_X*3, OFFSET_Y+ELEMENT_Y*(-1)).setSize(100, 40);
+      button_back.addButton("BACK").setLabel("BACK").setPosition(50, 40).setSize(100, 40).setFont(button_font).setFont(button_font);
+      reset_pos.addButton("RESET_POS").setLabel("RESET").setPosition(OFFSET_X+ELEMENT_X*3.5, OFFSET_Y+ELEMENT_Y*(-1)).setSize(100, 40).setFont(button_font);
+      enable_button.addButton("ENABLE").setLabel("ENABLE").setPosition(OFFSET_X+ELEMENT_X*3, OFFSET_Y+ELEMENT_Y*5.5).setSize(100, 40).setFont(button_font);
+      play_pos.addButton("PLAY_POS").setLabel("PLAY").setPosition(OFFSET_X+ELEMENT_X*3, OFFSET_Y+ELEMENT_Y*(-1)).setSize(100, 40).setFont(button_font);
       for(int i=0;i<SERVO_GYOU;i++){
         for(int j=0;j<SERVO_RETU;j++){
           int servo_id = i*SERVO_RETU+j;

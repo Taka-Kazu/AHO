@@ -4,22 +4,7 @@ ControlFont cf;
 PrintWriter output;
 
 ControlP5 slider;
-ControlP5 button_pos0;
-ControlP5 button_pos1;
-ControlP5 button_pos2;
-ControlP5 button_pos3;
-ControlP5 button_pos4;
-ControlP5 button_pos5;
-ControlP5 button_pos6;
-ControlP5 button_pos7;
-ControlP5 button_pos8;
-ControlP5 button_pos9;
-ControlP5 button_pos10;
-ControlP5 button_pos11;
-ControlP5 button_pos12;
-ControlP5 button_pos13;
-ControlP5 button_pos14;
-ControlP5 button_pos15;
+ControlP5 button_pos[] = new ControlP5[16];
 
 ControlP5 button_back;
 ControlP5 play_pos;
@@ -55,22 +40,22 @@ void setup() {
   size(1600, 900); 
   cf = new ControlFont(createFont("Arial", 20));
   slider = new ControlP5(this);
-  button_pos0 = new ControlP5(this);
-  button_pos1 = new ControlP5(this);
-  button_pos2 = new ControlP5(this);
-  button_pos3 = new ControlP5(this);
-  button_pos4 = new ControlP5(this);
-  button_pos5 = new ControlP5(this);
-  button_pos6 = new ControlP5(this);
-  button_pos7 = new ControlP5(this);
-  button_pos8 = new ControlP5(this);
-  button_pos9 = new ControlP5(this);
-  button_pos10 = new ControlP5(this);
-  button_pos11 = new ControlP5(this);
-  button_pos12 = new ControlP5(this);
-  button_pos13 = new ControlP5(this);
-  button_pos14 = new ControlP5(this);
-  button_pos15 = new ControlP5(this);
+  button_pos[0] = new ControlP5(this);
+  button_pos[1]= new ControlP5(this);
+  button_pos[2] = new ControlP5(this);
+  button_pos[3] = new ControlP5(this);
+  button_pos[4] = new ControlP5(this);
+  button_pos[5] = new ControlP5(this);
+  button_pos[6] = new ControlP5(this);
+  button_pos[7] = new ControlP5(this);
+  button_pos[8] = new ControlP5(this);
+  button_pos[9] = new ControlP5(this);
+  button_pos[10]= new ControlP5(this);
+  button_pos[11] = new ControlP5(this);
+  button_pos[12] = new ControlP5(this);
+  button_pos[13] = new ControlP5(this);
+  button_pos[14] = new ControlP5(this);
+  button_pos[15] = new ControlP5(this);
   button_back = new ControlP5(this);
   play_pos = new ControlP5(this);
   reset_pos = new ControlP5(this);
@@ -140,101 +125,101 @@ class MotionState extends State
       pointer = this;
       play_motion.addButton("PLAY_MOTION").setLabel("PLAY").setPosition(OFFSET_X+ELEMENT_X*4, OFFSET_Y+ELEMENT_Y*(-1)).setSize(100, 40);
       exit_button.addButton("EXIT_BUTTON").setLabel("EXIT").setPosition(OFFSET_X+ELEMENT_X*4.75, OFFSET_Y+ELEMENT_Y*(-1)).setSize(100, 40);
-      button_pos0.addButton("POS0").setLabel("POS0").setPosition(OFFSET_X+ELEMENT_X*0, OFFSET_Y+ELEMENT_Y*0).setSize(100, 40);
+      button_pos[0].addButton("POS0").setLabel("POS0").setPosition(OFFSET_X+ELEMENT_X*0, OFFSET_Y+ELEMENT_Y*0).setSize(100, 40);
       if(_POS0.enabled == 1){
-        button_pos0.getController("POS0").setColorBackground(ENABLE_COLOR);
+        button_pos[0].getController("POS0").setColorBackground(ENABLE_COLOR);
       }else{
-        button_pos0.getController("POS0").setColorBackground(UNABLE_COLOR);
+        button_pos[0].getController("POS0").setColorBackground(UNABLE_COLOR);
       }
-      button_pos1.addButton("POS1").setLabel("POS1").setPosition(OFFSET_X+ELEMENT_X*1, OFFSET_Y+ELEMENT_Y*0).setSize(100, 40);
+      button_pos[1].addButton("POS1").setLabel("POS1").setPosition(OFFSET_X+ELEMENT_X*1, OFFSET_Y+ELEMENT_Y*0).setSize(100, 40);
       if(_POS1.enabled == 1){
-        button_pos1.getController("POS1").setColorBackground(ENABLE_COLOR);
+        button_pos[1].getController("POS1").setColorBackground(ENABLE_COLOR);
       }else{
-        button_pos1.getController("POS1").setColorBackground(UNABLE_COLOR);
+        button_pos[1].getController("POS1").setColorBackground(UNABLE_COLOR);
       }
-      button_pos2.addButton("POS2").setLabel("POS2").setPosition(OFFSET_X+ELEMENT_X*2, OFFSET_Y+ELEMENT_Y*0).setSize(100, 40);
+      button_pos[2].addButton("POS2").setLabel("POS2").setPosition(OFFSET_X+ELEMENT_X*2, OFFSET_Y+ELEMENT_Y*0).setSize(100, 40);
       if(_POS2.enabled == 1){
-        button_pos2.getController("POS2").setColorBackground(ENABLE_COLOR);
+        button_pos[2].getController("POS2").setColorBackground(ENABLE_COLOR);
       }else{
-        button_pos2.getController("POS2").setColorBackground(UNABLE_COLOR);
+        button_pos[2].getController("POS2").setColorBackground(UNABLE_COLOR);
       }
-      button_pos3.addButton("POS3").setLabel("POS3").setPosition(OFFSET_X+ELEMENT_X*3, OFFSET_Y+ELEMENT_Y*0).setSize(100, 40);
+      button_pos[3].addButton("POS3").setLabel("POS3").setPosition(OFFSET_X+ELEMENT_X*3, OFFSET_Y+ELEMENT_Y*0).setSize(100, 40);
       if(_POS3.enabled == 1){
-        button_pos3.getController("POS3").setColorBackground(ENABLE_COLOR);
+        button_pos[3].getController("POS3").setColorBackground(ENABLE_COLOR);
       }else{
-        button_pos3.getController("POS3").setColorBackground(UNABLE_COLOR);
+        button_pos[3].getController("POS3").setColorBackground(UNABLE_COLOR);
       }
-      button_pos4.addButton("POS4").setLabel("POS4").setPosition(OFFSET_X+ELEMENT_X*0, OFFSET_Y+ELEMENT_Y*1).setSize(100, 40);
+      button_pos[4].addButton("POS4").setLabel("POS4").setPosition(OFFSET_X+ELEMENT_X*0, OFFSET_Y+ELEMENT_Y*1).setSize(100, 40);
       if(_POS4.enabled == 1){
-        button_pos4.getController("POS4").setColorBackground(ENABLE_COLOR);
+        button_pos[4].getController("POS4").setColorBackground(ENABLE_COLOR);
       }else{
-        button_pos4.getController("POS4").setColorBackground(UNABLE_COLOR);
+        button_pos[4].getController("POS4").setColorBackground(UNABLE_COLOR);
       }
-      button_pos5.addButton("POS5").setLabel("POS5").setPosition(OFFSET_X+ELEMENT_X*1, OFFSET_Y+ELEMENT_Y*1).setSize(100, 40);
+      button_pos[5].addButton("POS5").setLabel("POS5").setPosition(OFFSET_X+ELEMENT_X*1, OFFSET_Y+ELEMENT_Y*1).setSize(100, 40);
       if(_POS5.enabled == 1){
-        button_pos5.getController("POS5").setColorBackground(ENABLE_COLOR);
+        button_pos[5].getController("POS5").setColorBackground(ENABLE_COLOR);
       }else{
-        button_pos5.getController("POS5").setColorBackground(UNABLE_COLOR);
+        button_pos[5].getController("POS5").setColorBackground(UNABLE_COLOR);
       }
-      button_pos6.addButton("POS6").setLabel("POS6").setPosition(OFFSET_X+ELEMENT_X*2, OFFSET_Y+ELEMENT_Y*1).setSize(100, 40);
+      button_pos[6].addButton("POS6").setLabel("POS6").setPosition(OFFSET_X+ELEMENT_X*2, OFFSET_Y+ELEMENT_Y*1).setSize(100, 40);
       if(_POS6.enabled == 1){
-        button_pos6.getController("POS6").setColorBackground(ENABLE_COLOR);
+        button_pos[6].getController("POS6").setColorBackground(ENABLE_COLOR);
       }else{
-        button_pos6.getController("POS6").setColorBackground(UNABLE_COLOR);
+        button_pos[6].getController("POS6").setColorBackground(UNABLE_COLOR);
       }
-      button_pos7.addButton("POS7").setLabel("POS7").setPosition(OFFSET_X+ELEMENT_X*3, OFFSET_Y+ELEMENT_Y*1).setSize(100, 40);
+      button_pos[7].addButton("POS7").setLabel("POS7").setPosition(OFFSET_X+ELEMENT_X*3, OFFSET_Y+ELEMENT_Y*1).setSize(100, 40);
       if(_POS7.enabled == 1){
-        button_pos7.getController("POS7").setColorBackground(ENABLE_COLOR);
+        button_pos[7].getController("POS7").setColorBackground(ENABLE_COLOR);
       }else{
-        button_pos7.getController("POS7").setColorBackground(UNABLE_COLOR);
+        button_pos[7].getController("POS7").setColorBackground(UNABLE_COLOR);
       }
-      button_pos8.addButton("POS8").setLabel("POS8").setPosition(OFFSET_X+ELEMENT_X*0, OFFSET_Y+ELEMENT_Y*2).setSize(100, 40);
+      button_pos[8].addButton("POS8").setLabel("POS8").setPosition(OFFSET_X+ELEMENT_X*0, OFFSET_Y+ELEMENT_Y*2).setSize(100, 40);
       if(_POS8.enabled == 1){
-        button_pos8.getController("POS8").setColorBackground(ENABLE_COLOR);
+        button_pos[8].getController("POS8").setColorBackground(ENABLE_COLOR);
       }else{
-        button_pos8.getController("POS8").setColorBackground(UNABLE_COLOR);
+        button_pos[8].getController("POS8").setColorBackground(UNABLE_COLOR);
       }
-      button_pos9.addButton("POS9").setLabel("POS9").setPosition(OFFSET_X+ELEMENT_X*1, OFFSET_Y+ELEMENT_Y*2).setSize(100, 40);
+      button_pos[9].addButton("POS9").setLabel("POS9").setPosition(OFFSET_X+ELEMENT_X*1, OFFSET_Y+ELEMENT_Y*2).setSize(100, 40);
       if(_POS9.enabled == 1){
-        button_pos9.getController("POS9").setColorBackground(ENABLE_COLOR);
+        button_pos[9].getController("POS9").setColorBackground(ENABLE_COLOR);
       }else{
-        button_pos9.getController("POS9").setColorBackground(UNABLE_COLOR);
+        button_pos[9].getController("POS9").setColorBackground(UNABLE_COLOR);
       }
-      button_pos10.addButton("POS10").setLabel("POS10").setPosition(OFFSET_X+ELEMENT_X*2, OFFSET_Y+ELEMENT_Y*2).setSize(100, 40);
+      button_pos[10].addButton("POS10").setLabel("POS10").setPosition(OFFSET_X+ELEMENT_X*2, OFFSET_Y+ELEMENT_Y*2).setSize(100, 40);
       if(_POS10.enabled == 1){
-        button_pos10.getController("POS10").setColorBackground(ENABLE_COLOR);
+        button_pos[10].getController("POS10").setColorBackground(ENABLE_COLOR);
       }else{
-        button_pos10.getController("POS10").setColorBackground(UNABLE_COLOR);
+        button_pos[10].getController("POS10").setColorBackground(UNABLE_COLOR);
       }
-      button_pos11.addButton("POS11").setLabel("POS11").setPosition(OFFSET_X+ELEMENT_X*3, OFFSET_Y+ELEMENT_Y*2).setSize(100, 40);
+      button_pos[11].addButton("POS11").setLabel("POS11").setPosition(OFFSET_X+ELEMENT_X*3, OFFSET_Y+ELEMENT_Y*2).setSize(100, 40);
       if(_POS11.enabled == 1){
-        button_pos11.getController("POS11").setColorBackground(ENABLE_COLOR);
+        button_pos[11].getController("POS11").setColorBackground(ENABLE_COLOR);
       }else{
-        button_pos11.getController("POS11").setColorBackground(UNABLE_COLOR);
+        button_pos[11].getController("POS11").setColorBackground(UNABLE_COLOR);
       }
-      button_pos12.addButton("POS12").setLabel("POS12").setPosition(OFFSET_X+ELEMENT_X*0, OFFSET_Y+ELEMENT_Y*3).setSize(100, 40);
+      button_pos[12].addButton("POS12").setLabel("POS12").setPosition(OFFSET_X+ELEMENT_X*0, OFFSET_Y+ELEMENT_Y*3).setSize(100, 40);
       if(_POS12.enabled == 1){
-        button_pos12.getController("POS12").setColorBackground(ENABLE_COLOR);
+        button_pos[12].getController("POS12").setColorBackground(ENABLE_COLOR);
       }else{
-        button_pos12.getController("POS12").setColorBackground(UNABLE_COLOR);
+        button_pos[12].getController("POS12").setColorBackground(UNABLE_COLOR);
       }
-      button_pos13.addButton("POS13").setLabel("POS13").setPosition(OFFSET_X+ELEMENT_X*1, OFFSET_Y+ELEMENT_Y*3).setSize(100, 40);
+      button_pos[13].addButton("POS13").setLabel("POS13").setPosition(OFFSET_X+ELEMENT_X*1, OFFSET_Y+ELEMENT_Y*3).setSize(100, 40);
       if(_POS13.enabled == 1){
-        button_pos13.getController("POS13").setColorBackground(ENABLE_COLOR);
+        button_pos[13].getController("POS13").setColorBackground(ENABLE_COLOR);
       }else{
-        button_pos13.getController("POS13").setColorBackground(UNABLE_COLOR);
+        button_pos[13].getController("POS13").setColorBackground(UNABLE_COLOR);
       }
-      button_pos14.addButton("POS14").setLabel("POS14").setPosition(OFFSET_X+ELEMENT_X*2, OFFSET_Y+ELEMENT_Y*3).setSize(100, 40);
+      button_pos[14].addButton("POS14").setLabel("POS14").setPosition(OFFSET_X+ELEMENT_X*2, OFFSET_Y+ELEMENT_Y*3).setSize(100, 40);
       if(_POS14.enabled == 1){
-        button_pos14.getController("POS14").setColorBackground(ENABLE_COLOR);
+        button_pos[14].getController("POS14").setColorBackground(ENABLE_COLOR);
       }else{
-        button_pos14.getController("POS14").setColorBackground(UNABLE_COLOR);
+        button_pos[14].getController("POS14").setColorBackground(UNABLE_COLOR);
       }
-      button_pos15.addButton("POS15").setLabel("POS15").setPosition(OFFSET_X+ELEMENT_X*3, OFFSET_Y+ELEMENT_Y*3).setSize(100, 40);
+      button_pos[15].addButton("POS15").setLabel("POS15").setPosition(OFFSET_X+ELEMENT_X*3, OFFSET_Y+ELEMENT_Y*3).setSize(100, 40);
       if(_POS15.enabled == 1){
-        button_pos15.getController("POS15").setColorBackground(ENABLE_COLOR);
+        button_pos[15].getController("POS15").setColorBackground(ENABLE_COLOR);
       }else{
-        button_pos15.getController("POS15").setColorBackground(UNABLE_COLOR);
+        button_pos[15].getController("POS15").setColorBackground(UNABLE_COLOR);
       }
       flag = 1;
     }
@@ -258,22 +243,22 @@ class MotionState extends State
   
   void setNextState(State s)
   {
-    button_pos0.remove("POS0");
-    button_pos1.remove("POS1");
-    button_pos2.remove("POS2");
-    button_pos3.remove("POS3");
-    button_pos4.remove("POS4");
-    button_pos5.remove("POS5");
-    button_pos6.remove("POS6");
-    button_pos7.remove("POS7");
-    button_pos8.remove("POS8");
-    button_pos9.remove("POS9");
-    button_pos10.remove("POS10");
-    button_pos11.remove("POS11");
-    button_pos12.remove("POS12");
-    button_pos13.remove("POS13");
-    button_pos14.remove("POS14");
-    button_pos15.remove("POS15");
+    button_pos[0].remove("POS0");
+    button_pos[1].remove("POS1");
+    button_pos[2].remove("POS2");
+    button_pos[3].remove("POS3");
+    button_pos[4].remove("POS4");
+    button_pos[5].remove("POS5");
+    button_pos[6].remove("POS6");
+    button_pos[7].remove("POS7");
+    button_pos[8].remove("POS8");
+    button_pos[9].remove("POS9");
+    button_pos[10].remove("POS10");
+    button_pos[11].remove("POS11");
+    button_pos[12].remove("POS12");
+    button_pos[13].remove("POS13");
+    button_pos[14].remove("POS14");
+    button_pos[15].remove("POS15");
     play_motion.remove("PLAY_MOTION");
     exit_button.remove("EXIT_BUTTON");
     pointer = s;

@@ -12,6 +12,8 @@ ControlP5 reset_pos;
 ControlP5 play_motion;
 ControlP5 exit_button;
 ControlP5 enable_button;
+int POS_NUM = 16;
+int SERVO_NUM = 20;
 
 State state;
 MotionState motion_state = new MotionState();
@@ -40,22 +42,10 @@ void setup() {
   size(1600, 900); 
   cf = new ControlFont(createFont("Arial", 20));
   slider = new ControlP5(this);
-  button_pos[0] = new ControlP5(this);
-  button_pos[1]= new ControlP5(this);
-  button_pos[2] = new ControlP5(this);
-  button_pos[3] = new ControlP5(this);
-  button_pos[4] = new ControlP5(this);
-  button_pos[5] = new ControlP5(this);
-  button_pos[6] = new ControlP5(this);
-  button_pos[7] = new ControlP5(this);
-  button_pos[8] = new ControlP5(this);
-  button_pos[9] = new ControlP5(this);
-  button_pos[10]= new ControlP5(this);
-  button_pos[11] = new ControlP5(this);
-  button_pos[12] = new ControlP5(this);
-  button_pos[13] = new ControlP5(this);
-  button_pos[14] = new ControlP5(this);
-  button_pos[15] = new ControlP5(this);
+  for(int i=0;i<POS_NUM;i++)
+  {
+    button_pos[i] = new ControlP5(this);
+  }
   button_back = new ControlP5(this);
   play_pos = new ControlP5(this);
   reset_pos = new ControlP5(this);

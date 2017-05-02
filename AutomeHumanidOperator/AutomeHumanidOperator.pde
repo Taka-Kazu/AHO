@@ -252,7 +252,7 @@ class PositionState extends State
   float CENTER_ANGLE = 90;
   int flag = 0;
   int id = 0;
-  float val[] = new float[20];
+  float val[] = new float[SERVO_NUM];
   int enabled = 0;
   
   State pointer;
@@ -265,30 +265,13 @@ class PositionState extends State
   
   void resetVal()
   {
-    for(int i=0;i<20;i++){
+    for(int i=0;i<SERVO_NUM;i++){
       val[i] = CENTER_ANGLE;
     }
     if(flag==0)return;
-    slider.getController("SERVO0").setValue(CENTER_ANGLE);
-    slider.getController("SERVO1").setValue(CENTER_ANGLE);
-    slider.getController("SERVO2").setValue(CENTER_ANGLE);
-    slider.getController("SERVO3").setValue(CENTER_ANGLE);
-    slider.getController("SERVO4").setValue(CENTER_ANGLE);
-    slider.getController("SERVO5").setValue(CENTER_ANGLE);
-    slider.getController("SERVO6").setValue(CENTER_ANGLE);
-    slider.getController("SERVO7").setValue(CENTER_ANGLE);
-    slider.getController("SERVO8").setValue(CENTER_ANGLE);
-    slider.getController("SERVO9").setValue(CENTER_ANGLE);
-    slider.getController("SERVO10").setValue(CENTER_ANGLE);
-    slider.getController("SERVO11").setValue(CENTER_ANGLE);
-    slider.getController("SERVO12").setValue(CENTER_ANGLE);
-    slider.getController("SERVO13").setValue(CENTER_ANGLE);
-    slider.getController("SERVO14").setValue(CENTER_ANGLE);
-    slider.getController("SERVO15").setValue(CENTER_ANGLE);
-    slider.getController("SERVO16").setValue(CENTER_ANGLE);
-    slider.getController("SERVO17").setValue(CENTER_ANGLE);
-    slider.getController("SERVO18").setValue(CENTER_ANGLE);
-    slider.getController("SERVO19").setValue(CENTER_ANGLE);
+    for(int i=0;i<SERVO_NUM;i++){
+      slider.getController("SERVO"+i).setValue(val[i]);
+    }
     
   }
   int getID()
@@ -373,26 +356,9 @@ class PositionState extends State
     if(readable == 0){
       return;
     }
-    val[0] = slider.getController("SERVO0").getValue();
-    val[1] = slider.getController("SERVO1").getValue();
-    val[2] = slider.getController("SERVO2").getValue();
-    val[3] = slider.getController("SERVO3").getValue();
-    val[4] = slider.getController("SERVO4").getValue();
-    val[5] = slider.getController("SERVO5").getValue();
-    val[6] = slider.getController("SERVO6").getValue();
-    val[7] = slider.getController("SERVO7").getValue();
-    val[8] = slider.getController("SERVO8").getValue();
-    val[9] = slider.getController("SERVO9").getValue();
-    val[10] = slider.getController("SERVO10").getValue();
-    val[11] = slider.getController("SERVO11").getValue();
-    val[12] = slider.getController("SERVO12").getValue();
-    val[13] = slider.getController("SERVO13").getValue();
-    val[14] = slider.getController("SERVO14").getValue();
-    val[15] = slider.getController("SERVO15").getValue();
-    val[16] = slider.getController("SERVO16").getValue();
-    val[17] = slider.getController("SERVO17").getValue();
-    val[18] = slider.getController("SERVO18").getValue();
-    val[19] = slider.getController("SERVO19").getValue();
+    for(int i=0;i<SERVO_NUM;i++){
+      val[i] = slider.getController("SERVO"+i).getValue();
+    }
   }
   
   void setNextState(State s)
@@ -402,26 +368,9 @@ class PositionState extends State
     play_pos.remove("PLAY_POS");
     reset_pos.remove("RESET_POS");
     enable_button.remove("ENABLE");
-    slider.remove("SERVO0");
-    slider.remove("SERVO1");
-    slider.remove("SERVO2");
-    slider.remove("SERVO3");
-    slider.remove("SERVO4");
-    slider.remove("SERVO5");
-    slider.remove("SERVO6");
-    slider.remove("SERVO7");
-    slider.remove("SERVO8");
-    slider.remove("SERVO9");
-    slider.remove("SERVO10");
-    slider.remove("SERVO11");
-    slider.remove("SERVO12");
-    slider.remove("SERVO13");
-    slider.remove("SERVO14");
-    slider.remove("SERVO15");
-    slider.remove("SERVO16");
-    slider.remove("SERVO17");
-    slider.remove("SERVO18");
-    slider.remove("SERVO19");
+    for(int i=0;i<SERVO_NUM;i++){
+      slider.remove("SERVO"+i);
+    }
     pointer = s;
   }
 }

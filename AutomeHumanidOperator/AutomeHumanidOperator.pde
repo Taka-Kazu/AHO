@@ -1,5 +1,8 @@
 import controlP5.*;
 
+ControlFont cf;
+PrintWriter output;
+
 ControlP5 slider;
 ControlP5 button_pos0;
 ControlP5 button_pos1;
@@ -46,7 +49,9 @@ PositionState _POS15 = new PositionState(15);
 int readable = 0;
 
 void setup() {
+  output = createWriter("log.csv");
   size(1600, 900); 
+  cf = new ControlFont(createFont("Arial", 20));
   slider = new ControlP5(this);
   button_pos0 = new ControlP5(this);
   button_pos1 = new ControlP5(this);
@@ -75,6 +80,7 @@ void draw() {
    readable = 0;
    state = state.doState();
    readable = 1;
+   output.close();
 }
 
 abstract class State
@@ -285,7 +291,6 @@ class PositionState extends State
       slider.getController("SERVO18").getValueLabel().align(ControlP5.RIGHT, ControlP5.BOTTOM_OUTSIDE).setPaddingX(-20);
       slider.addSlider("SERVO19").setRange(0, 180).setValue(val[19]).setPosition(OFFSET_X+ELEMENT_X*3, OFFSET_Y+ELEMENT_Y*4).setSize(300, 30);
       slider.getController("SERVO19").getValueLabel().align(ControlP5.RIGHT, ControlP5.BOTTOM_OUTSIDE).setPaddingX(-20);
-
       flag = 1;
     }
   }

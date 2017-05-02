@@ -233,22 +233,10 @@ class MotionState extends State
   
   void setNextState(State s)
   {
-    button_pos[0].remove("POS0");
-    button_pos[1].remove("POS1");
-    button_pos[2].remove("POS2");
-    button_pos[3].remove("POS3");
-    button_pos[4].remove("POS4");
-    button_pos[5].remove("POS5");
-    button_pos[6].remove("POS6");
-    button_pos[7].remove("POS7");
-    button_pos[8].remove("POS8");
-    button_pos[9].remove("POS9");
-    button_pos[10].remove("POS10");
-    button_pos[11].remove("POS11");
-    button_pos[12].remove("POS12");
-    button_pos[13].remove("POS13");
-    button_pos[14].remove("POS14");
-    button_pos[15].remove("POS15");
+    for(int i=0;i<POS_NUM;i++){
+      String name = "POS" + i;
+      button_pos[i].remove(name);
+    }
     play_motion.remove("PLAY_MOTION");
     exit_button.remove("EXIT_BUTTON");
     pointer = s;

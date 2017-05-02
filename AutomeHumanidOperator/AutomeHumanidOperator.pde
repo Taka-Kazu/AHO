@@ -18,22 +18,7 @@ int SERVO_NUM = 20;
 State state;
 MotionState motion_state = new MotionState();
 PositionState current_pos;
-PositionState _POS0 = new PositionState(0);
-PositionState _POS1 = new PositionState(1);
-PositionState _POS2 = new PositionState(2);
-PositionState _POS3 = new PositionState(3);
-PositionState _POS4 = new PositionState(4);
-PositionState _POS5 = new PositionState(5);
-PositionState _POS6 = new PositionState(6);
-PositionState _POS7 = new PositionState(7);
-PositionState _POS8 = new PositionState(8);
-PositionState _POS9 = new PositionState(9);
-PositionState _POS10 = new PositionState(10);
-PositionState _POS11 = new PositionState(11);
-PositionState _POS12 = new PositionState(12);
-PositionState _POS13 = new PositionState(13);
-PositionState _POS14 = new PositionState(14);
-PositionState _POS15 = new PositionState(15);
+PositionState _POS[] = new PositionState[POS_NUM];
 
 int readable = 0;
 
@@ -45,6 +30,7 @@ void setup() {
   for(int i=0;i<POS_NUM;i++)
   {
     button_pos[i] = new ControlP5(this);
+    _POS[i] = new PositionState(i);
   }
   button_back = new ControlP5(this);
   play_pos = new ControlP5(this);
@@ -116,97 +102,97 @@ class MotionState extends State
       play_motion.addButton("PLAY_MOTION").setLabel("PLAY").setPosition(OFFSET_X+ELEMENT_X*4, OFFSET_Y+ELEMENT_Y*(-1)).setSize(100, 40);
       exit_button.addButton("EXIT_BUTTON").setLabel("EXIT").setPosition(OFFSET_X+ELEMENT_X*4.75, OFFSET_Y+ELEMENT_Y*(-1)).setSize(100, 40);
       button_pos[0].addButton("POS0").setLabel("POS0").setPosition(OFFSET_X+ELEMENT_X*0, OFFSET_Y+ELEMENT_Y*0).setSize(100, 40);
-      if(_POS0.enabled == 1){
+      if(_POS[0].enabled == 1){
         button_pos[0].getController("POS0").setColorBackground(ENABLE_COLOR);
       }else{
         button_pos[0].getController("POS0").setColorBackground(UNABLE_COLOR);
       }
       button_pos[1].addButton("POS1").setLabel("POS1").setPosition(OFFSET_X+ELEMENT_X*1, OFFSET_Y+ELEMENT_Y*0).setSize(100, 40);
-      if(_POS1.enabled == 1){
+      if(_POS[1].enabled == 1){
         button_pos[1].getController("POS1").setColorBackground(ENABLE_COLOR);
       }else{
         button_pos[1].getController("POS1").setColorBackground(UNABLE_COLOR);
       }
       button_pos[2].addButton("POS2").setLabel("POS2").setPosition(OFFSET_X+ELEMENT_X*2, OFFSET_Y+ELEMENT_Y*0).setSize(100, 40);
-      if(_POS2.enabled == 1){
+      if(_POS[2].enabled == 1){
         button_pos[2].getController("POS2").setColorBackground(ENABLE_COLOR);
       }else{
         button_pos[2].getController("POS2").setColorBackground(UNABLE_COLOR);
       }
       button_pos[3].addButton("POS3").setLabel("POS3").setPosition(OFFSET_X+ELEMENT_X*3, OFFSET_Y+ELEMENT_Y*0).setSize(100, 40);
-      if(_POS3.enabled == 1){
+      if(_POS[3].enabled == 1){
         button_pos[3].getController("POS3").setColorBackground(ENABLE_COLOR);
       }else{
         button_pos[3].getController("POS3").setColorBackground(UNABLE_COLOR);
       }
       button_pos[4].addButton("POS4").setLabel("POS4").setPosition(OFFSET_X+ELEMENT_X*0, OFFSET_Y+ELEMENT_Y*1).setSize(100, 40);
-      if(_POS4.enabled == 1){
+      if(_POS[4].enabled == 1){
         button_pos[4].getController("POS4").setColorBackground(ENABLE_COLOR);
       }else{
         button_pos[4].getController("POS4").setColorBackground(UNABLE_COLOR);
       }
       button_pos[5].addButton("POS5").setLabel("POS5").setPosition(OFFSET_X+ELEMENT_X*1, OFFSET_Y+ELEMENT_Y*1).setSize(100, 40);
-      if(_POS5.enabled == 1){
+      if(_POS[5].enabled == 1){
         button_pos[5].getController("POS5").setColorBackground(ENABLE_COLOR);
       }else{
         button_pos[5].getController("POS5").setColorBackground(UNABLE_COLOR);
       }
       button_pos[6].addButton("POS6").setLabel("POS6").setPosition(OFFSET_X+ELEMENT_X*2, OFFSET_Y+ELEMENT_Y*1).setSize(100, 40);
-      if(_POS6.enabled == 1){
+      if(_POS[6].enabled == 1){
         button_pos[6].getController("POS6").setColorBackground(ENABLE_COLOR);
       }else{
         button_pos[6].getController("POS6").setColorBackground(UNABLE_COLOR);
       }
       button_pos[7].addButton("POS7").setLabel("POS7").setPosition(OFFSET_X+ELEMENT_X*3, OFFSET_Y+ELEMENT_Y*1).setSize(100, 40);
-      if(_POS7.enabled == 1){
+      if(_POS[7].enabled == 1){
         button_pos[7].getController("POS7").setColorBackground(ENABLE_COLOR);
       }else{
         button_pos[7].getController("POS7").setColorBackground(UNABLE_COLOR);
       }
       button_pos[8].addButton("POS8").setLabel("POS8").setPosition(OFFSET_X+ELEMENT_X*0, OFFSET_Y+ELEMENT_Y*2).setSize(100, 40);
-      if(_POS8.enabled == 1){
+      if(_POS[8].enabled == 1){
         button_pos[8].getController("POS8").setColorBackground(ENABLE_COLOR);
       }else{
         button_pos[8].getController("POS8").setColorBackground(UNABLE_COLOR);
       }
       button_pos[9].addButton("POS9").setLabel("POS9").setPosition(OFFSET_X+ELEMENT_X*1, OFFSET_Y+ELEMENT_Y*2).setSize(100, 40);
-      if(_POS9.enabled == 1){
+      if(_POS[9].enabled == 1){
         button_pos[9].getController("POS9").setColorBackground(ENABLE_COLOR);
       }else{
         button_pos[9].getController("POS9").setColorBackground(UNABLE_COLOR);
       }
       button_pos[10].addButton("POS10").setLabel("POS10").setPosition(OFFSET_X+ELEMENT_X*2, OFFSET_Y+ELEMENT_Y*2).setSize(100, 40);
-      if(_POS10.enabled == 1){
+      if(_POS[10].enabled == 1){
         button_pos[10].getController("POS10").setColorBackground(ENABLE_COLOR);
       }else{
         button_pos[10].getController("POS10").setColorBackground(UNABLE_COLOR);
       }
       button_pos[11].addButton("POS11").setLabel("POS11").setPosition(OFFSET_X+ELEMENT_X*3, OFFSET_Y+ELEMENT_Y*2).setSize(100, 40);
-      if(_POS11.enabled == 1){
+      if(_POS[11].enabled == 1){
         button_pos[11].getController("POS11").setColorBackground(ENABLE_COLOR);
       }else{
         button_pos[11].getController("POS11").setColorBackground(UNABLE_COLOR);
       }
       button_pos[12].addButton("POS12").setLabel("POS12").setPosition(OFFSET_X+ELEMENT_X*0, OFFSET_Y+ELEMENT_Y*3).setSize(100, 40);
-      if(_POS12.enabled == 1){
+      if(_POS[12].enabled == 1){
         button_pos[12].getController("POS12").setColorBackground(ENABLE_COLOR);
       }else{
         button_pos[12].getController("POS12").setColorBackground(UNABLE_COLOR);
       }
       button_pos[13].addButton("POS13").setLabel("POS13").setPosition(OFFSET_X+ELEMENT_X*1, OFFSET_Y+ELEMENT_Y*3).setSize(100, 40);
-      if(_POS13.enabled == 1){
+      if(_POS[13].enabled == 1){
         button_pos[13].getController("POS13").setColorBackground(ENABLE_COLOR);
       }else{
         button_pos[13].getController("POS13").setColorBackground(UNABLE_COLOR);
       }
       button_pos[14].addButton("POS14").setLabel("POS14").setPosition(OFFSET_X+ELEMENT_X*2, OFFSET_Y+ELEMENT_Y*3).setSize(100, 40);
-      if(_POS14.enabled == 1){
+      if(_POS[14].enabled == 1){
         button_pos[14].getController("POS14").setColorBackground(ENABLE_COLOR);
       }else{
         button_pos[14].getController("POS14").setColorBackground(UNABLE_COLOR);
       }
       button_pos[15].addButton("POS15").setLabel("POS15").setPosition(OFFSET_X+ELEMENT_X*3, OFFSET_Y+ELEMENT_Y*3).setSize(100, 40);
-      if(_POS15.enabled == 1){
+      if(_POS[15].enabled == 1){
         button_pos[15].getController("POS15").setColorBackground(ENABLE_COLOR);
       }else{
         button_pos[15].getController("POS15").setColorBackground(UNABLE_COLOR);
@@ -377,135 +363,90 @@ class PositionState extends State
 
 void BACK()
 {
-  switch(current_pos.getID())
-  {
-    case 0:
-    _POS0.setNextState(motion_state);
-    break;
-    case 1:
-    _POS1.setNextState(motion_state);
-    break;
-    case 2:
-    _POS2.setNextState(motion_state);
-    break;
-    case 3:
-    _POS3.setNextState(motion_state);
-    break;
-    case 4:
-    _POS4.setNextState(motion_state);
-    break;
-    case 5:
-    _POS5.setNextState(motion_state);
-    break;
-    case 6:
-    _POS6.setNextState(motion_state);
-    break;
-    case 7:
-    _POS7.setNextState(motion_state);
-    break;
-    case 8:
-    _POS8.setNextState(motion_state);
-    break;
-    case 9:
-    _POS9.setNextState(motion_state);
-    break;
-    case 10:
-    _POS10.setNextState(motion_state);
-    break;
-    case 11:
-    _POS11.setNextState(motion_state);
-    break;
-    case 12:
-    _POS12.setNextState(motion_state);
-    break;
-    case 13:
-    _POS13.setNextState(motion_state);
-    break;
-    case 14:
-    _POS14.setNextState(motion_state);
-    break;
-    case 15:
-    _POS15.setNextState(motion_state);
-    break;
+  for(int i=0;i<POS_NUM;i++){
+    if(current_pos.getID() == i)
+    {
+      _POS[i].setNextState(motion_state);
+    }
   }
 }
 
 void POS0()
 {
-    motion_state.setNextState(_POS0);
+    motion_state.setNextState(_POS[0]);
 }
 
 void POS1()
 {
-    motion_state.setNextState(_POS1);
+    motion_state.setNextState(_POS[1]);
 }
   
 void POS2()
 {
-    motion_state.setNextState(_POS2);
+    motion_state.setNextState(_POS[2]);
 }
 
 void POS3()
 {
-    motion_state.setNextState(_POS3);
+    motion_state.setNextState(_POS[3]);
 }
 
 void POS4()
 {
-    motion_state.setNextState(_POS4);
+    motion_state.setNextState(_POS[4]);
 }
   
 void POS5()
 {
-    motion_state.setNextState(_POS5);
+    motion_state.setNextState(_POS[5]);
 }
 void POS6()
 {
-    motion_state.setNextState(_POS6);
+    motion_state.setNextState(_POS[6]);
 }
 
 void POS7()
 {
-    motion_state.setNextState(_POS7);
+    motion_state.setNextState(_POS[7]);
 }
   
 void POS8()
 {
-    motion_state.setNextState(_POS8);
+    motion_state.setNextState(_POS[8]);
 }
 void POS9()
 {
-    motion_state.setNextState(_POS9);
+    motion_state.setNextState(_POS[9]);
 }
 
 void POS10()
 {
-    motion_state.setNextState(_POS10);
+    motion_state.setNextState(_POS[10]);
 }
   
 void POS11()
 {
-    motion_state.setNextState(_POS11);
+    motion_state.setNextState(_POS[11]);
 }
 
 void POS12()
 {
-    motion_state.setNextState(_POS12);
+    motion_state.setNextState(_POS[12]);
 }
 
 void POS13()
 {
-    motion_state.setNextState(_POS13);
+    motion_state.setNextState(_POS[13]);
 }
   
 void POS14()
 {
-    motion_state.setNextState(_POS14);
+    motion_state.setNextState(_POS[14]);
 }
 
 void POS15()
 {
-    motion_state.setNextState(_POS15);
+    motion_state.setNextState(_POS[15]);
 }
 
 void PLAY_MOTION()

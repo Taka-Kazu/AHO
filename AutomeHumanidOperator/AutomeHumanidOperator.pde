@@ -257,6 +257,40 @@ void BACK()
   }
 }
 
+void PLAY_MOTION()
+{
+  
+}
+
+void PLAY_POS()
+{
+  current_pos.read_val();
+}
+
+void RESET_POS()
+{
+  current_pos.resetVal();
+}
+
+void EXIT_BUTTON()
+{
+  output.close();
+  exit();
+}
+
+void ENABLE()
+{
+  if(current_pos.enabled == 0){
+    current_pos.enabled = 1;
+    enable_button.getController("ENABLE").setColorBackground(0xFFFF0000);
+  }else if(current_pos.enabled == 1){
+    current_pos.enabled = 0;
+    enable_button.getController("ENABLE").setColorBackground(0xFF0000FF);
+  }else{
+    current_pos.enabled = 0;
+  }
+}
+
 void POS0()
 {
     motion_state.setNextState(_POS[0]);
@@ -335,36 +369,167 @@ void POS15()
     motion_state.setNextState(_POS[15]);
 }
 
-void PLAY_MOTION()
+void POS16()
 {
+    motion_state.setNextState(_POS[16]);
+}
+
+void POS17()
+{
+    motion_state.setNextState(_POS[17]);
+}
+
+void POS18()
+{
+    motion_state.setNextState(_POS[18]);
+}
+
+void POS19()
+{
+    motion_state.setNextState(_POS[19]);
+}
+
+void POS20()
+{
+    motion_state.setNextState(_POS[20]);
+}
+
+void POS21()
+{
+    motion_state.setNextState(_POS[21]);
+}
   
+void POS22()
+{
+    motion_state.setNextState(_POS[22]);
 }
 
-void PLAY_POS()
+void POS23()
 {
-  current_pos.read_val();
+    motion_state.setNextState(_POS[23]);
 }
 
-void RESET_POS()
+void POS24()
 {
-  current_pos.resetVal();
+    motion_state.setNextState(_POS[24]);
+}
+  
+void POS25()
+{
+    motion_state.setNextState(_POS[25]);
+}
+void POS26()
+{
+    motion_state.setNextState(_POS[26]);
 }
 
-void EXIT_BUTTON()
+void POS27()
 {
-  output.close();
-  exit();
+    motion_state.setNextState(_POS[27]);
+}
+  
+void POS28()
+{
+    motion_state.setNextState(_POS[28]);
+}
+void POS29()
+{
+    motion_state.setNextState(_POS[29]);
 }
 
-void ENABLE()
+void POS30()
 {
-  if(current_pos.enabled == 0){
-    current_pos.enabled = 1;
-    enable_button.getController("ENABLE").setColorBackground(0xFFFF0000);
-  }else if(current_pos.enabled == 1){
-    current_pos.enabled = 0;
-    enable_button.getController("ENABLE").setColorBackground(0xFF0000FF);
-  }else{
-    current_pos.enabled = 0;
-  }
+    motion_state.setNextState(_POS[30]);
+}
+
+void POS31()
+{
+    motion_state.setNextState(_POS[31]);
+}
+  
+void POS32()
+{
+    motion_state.setNextState(_POS[32]);
+}
+
+void POS33()
+{
+    motion_state.setNextState(_POS[33]);
+}
+
+void POS34()
+{
+    motion_state.setNextState(_POS[34]);
+}
+  
+void POS35()
+{
+    motion_state.setNextState(_POS[35]);
+}
+void POS36()
+{
+    motion_state.setNextState(_POS[36]);
+}
+
+void POS37()
+{
+    motion_state.setNextState(_POS[37]);
+}
+  
+void POS38()
+{
+    motion_state.setNextState(_POS[38]);
+}
+
+void POS39()
+{
+    motion_state.setNextState(_POS[39]);
+}
+
+void POS40()
+{
+    motion_state.setNextState(_POS[40]);
+}
+
+void POS41()
+{
+    motion_state.setNextState(_POS[41]);
+}
+  
+void POS42()
+{
+    motion_state.setNextState(_POS[42]);
+}
+
+void POS43()
+{
+    motion_state.setNextState(_POS[43]);
+}
+
+void POS44()
+{
+    motion_state.setNextState(_POS[44]);
+}
+  
+void POS45()
+{
+    motion_state.setNextState(_POS[45]);
+}
+void POS46()
+{
+    motion_state.setNextState(_POS[46]);
+}
+
+void POS47()
+{
+    motion_state.setNextState(_POS[47]);
+}
+  
+void POS48()
+{
+    motion_state.setNextState(_POS[48]);
+}
+void POS49()
+{
+    motion_state.setNextState(_POS[49]);
 }

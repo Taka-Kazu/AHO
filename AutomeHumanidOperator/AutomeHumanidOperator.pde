@@ -147,94 +147,94 @@ class MotionState extends State
         button_pos0.getController("POS0").setColorBackground(UNABLE_COLOR);
       }
       button_pos1.addButton("POS1").setLabel("POS1").setPosition(OFFSET_X+ELEMENT_X*1, OFFSET_Y+ELEMENT_Y*0).setSize(100, 40);
-      if(_POS0.enabled == 1){
-        button_pos0.getController("POS1").setColorBackground(ENABLE_COLOR);
+      if(_POS1.enabled == 1){
+        button_pos1.getController("POS1").setColorBackground(ENABLE_COLOR);
       }else{
-        button_pos0.getController("POS1").setColorBackground(UNABLE_COLOR);
+        button_pos1.getController("POS1").setColorBackground(UNABLE_COLOR);
       }
       button_pos2.addButton("POS2").setLabel("POS2").setPosition(OFFSET_X+ELEMENT_X*2, OFFSET_Y+ELEMENT_Y*0).setSize(100, 40);
-      if(_POS0.enabled == 1){
-        button_pos0.getController("POS2").setColorBackground(ENABLE_COLOR);
+      if(_POS2.enabled == 1){
+        button_pos2.getController("POS2").setColorBackground(ENABLE_COLOR);
       }else{
-        button_pos0.getController("POS2").setColorBackground(UNABLE_COLOR);
+        button_pos2.getController("POS2").setColorBackground(UNABLE_COLOR);
       }
       button_pos3.addButton("POS3").setLabel("POS3").setPosition(OFFSET_X+ELEMENT_X*3, OFFSET_Y+ELEMENT_Y*0).setSize(100, 40);
-      if(_POS0.enabled == 1){
-        button_pos0.getController("POS3").setColorBackground(ENABLE_COLOR);
+      if(_POS3.enabled == 1){
+        button_pos3.getController("POS3").setColorBackground(ENABLE_COLOR);
       }else{
-        button_pos0.getController("POS3").setColorBackground(UNABLE_COLOR);
+        button_pos3.getController("POS3").setColorBackground(UNABLE_COLOR);
       }
       button_pos4.addButton("POS4").setLabel("POS4").setPosition(OFFSET_X+ELEMENT_X*0, OFFSET_Y+ELEMENT_Y*1).setSize(100, 40);
-      if(_POS0.enabled == 1){
-        button_pos0.getController("POS4").setColorBackground(ENABLE_COLOR);
+      if(_POS4.enabled == 1){
+        button_pos4.getController("POS4").setColorBackground(ENABLE_COLOR);
       }else{
-        button_pos0.getController("POS4").setColorBackground(UNABLE_COLOR);
+        button_pos4.getController("POS4").setColorBackground(UNABLE_COLOR);
       }
       button_pos5.addButton("POS5").setLabel("POS5").setPosition(OFFSET_X+ELEMENT_X*1, OFFSET_Y+ELEMENT_Y*1).setSize(100, 40);
-      if(_POS0.enabled == 1){
-        button_pos0.getController("POS5").setColorBackground(ENABLE_COLOR);
+      if(_POS5.enabled == 1){
+        button_pos5.getController("POS5").setColorBackground(ENABLE_COLOR);
       }else{
-        button_pos0.getController("POS5").setColorBackground(UNABLE_COLOR);
+        button_pos5.getController("POS5").setColorBackground(UNABLE_COLOR);
       }
       button_pos6.addButton("POS6").setLabel("POS6").setPosition(OFFSET_X+ELEMENT_X*2, OFFSET_Y+ELEMENT_Y*1).setSize(100, 40);
-      if(_POS0.enabled == 1){
-        button_pos0.getController("POS6").setColorBackground(ENABLE_COLOR);
+      if(_POS6.enabled == 1){
+        button_pos6.getController("POS6").setColorBackground(ENABLE_COLOR);
       }else{
-        button_pos0.getController("POS6").setColorBackground(UNABLE_COLOR);
+        button_pos6.getController("POS6").setColorBackground(UNABLE_COLOR);
       }
       button_pos7.addButton("POS7").setLabel("POS7").setPosition(OFFSET_X+ELEMENT_X*3, OFFSET_Y+ELEMENT_Y*1).setSize(100, 40);
-      if(_POS0.enabled == 1){
-        button_pos0.getController("POS7").setColorBackground(ENABLE_COLOR);
+      if(_POS7.enabled == 1){
+        button_pos7.getController("POS7").setColorBackground(ENABLE_COLOR);
       }else{
-        button_pos0.getController("POS7").setColorBackground(UNABLE_COLOR);
+        button_pos7.getController("POS7").setColorBackground(UNABLE_COLOR);
       }
       button_pos8.addButton("POS8").setLabel("POS8").setPosition(OFFSET_X+ELEMENT_X*0, OFFSET_Y+ELEMENT_Y*2).setSize(100, 40);
-      if(_POS0.enabled == 1){
-        button_pos0.getController("POS8").setColorBackground(ENABLE_COLOR);
+      if(_POS8.enabled == 1){
+        button_pos8.getController("POS8").setColorBackground(ENABLE_COLOR);
       }else{
-        button_pos0.getController("POS8").setColorBackground(UNABLE_COLOR);
+        button_pos8.getController("POS8").setColorBackground(UNABLE_COLOR);
       }
       button_pos9.addButton("POS9").setLabel("POS9").setPosition(OFFSET_X+ELEMENT_X*1, OFFSET_Y+ELEMENT_Y*2).setSize(100, 40);
-      if(_POS0.enabled == 1){
-        button_pos0.getController("POS9").setColorBackground(ENABLE_COLOR);
+      if(_POS9.enabled == 1){
+        button_pos9.getController("POS9").setColorBackground(ENABLE_COLOR);
       }else{
-        button_pos0.getController("POS9").setColorBackground(UNABLE_COLOR);
+        button_pos9.getController("POS9").setColorBackground(UNABLE_COLOR);
       }
       button_pos10.addButton("POS10").setLabel("POS10").setPosition(OFFSET_X+ELEMENT_X*2, OFFSET_Y+ELEMENT_Y*2).setSize(100, 40);
-      if(_POS0.enabled == 1){
-        button_pos0.getController("POS10").setColorBackground(ENABLE_COLOR);
+      if(_POS10.enabled == 1){
+        button_pos10.getController("POS10").setColorBackground(ENABLE_COLOR);
       }else{
-        button_pos0.getController("POS10").setColorBackground(UNABLE_COLOR);
+        button_pos10.getController("POS10").setColorBackground(UNABLE_COLOR);
       }
       button_pos11.addButton("POS11").setLabel("POS11").setPosition(OFFSET_X+ELEMENT_X*3, OFFSET_Y+ELEMENT_Y*2).setSize(100, 40);
-      if(_POS0.enabled == 1){
-        button_pos0.getController("POS11").setColorBackground(ENABLE_COLOR);
+      if(_POS11.enabled == 1){
+        button_pos11.getController("POS11").setColorBackground(ENABLE_COLOR);
       }else{
-        button_pos0.getController("POS11").setColorBackground(UNABLE_COLOR);
+        button_pos11.getController("POS11").setColorBackground(UNABLE_COLOR);
       }
       button_pos12.addButton("POS12").setLabel("POS12").setPosition(OFFSET_X+ELEMENT_X*0, OFFSET_Y+ELEMENT_Y*3).setSize(100, 40);
-      if(_POS0.enabled == 1){
-        button_pos0.getController("POS12").setColorBackground(ENABLE_COLOR);
+      if(_POS12.enabled == 1){
+        button_pos12.getController("POS12").setColorBackground(ENABLE_COLOR);
       }else{
-        button_pos0.getController("POS12").setColorBackground(UNABLE_COLOR);
+        button_pos12.getController("POS12").setColorBackground(UNABLE_COLOR);
       }
       button_pos13.addButton("POS13").setLabel("POS13").setPosition(OFFSET_X+ELEMENT_X*1, OFFSET_Y+ELEMENT_Y*3).setSize(100, 40);
-      if(_POS0.enabled == 1){
-        button_pos0.getController("POS13").setColorBackground(ENABLE_COLOR);
+      if(_POS13.enabled == 1){
+        button_pos13.getController("POS13").setColorBackground(ENABLE_COLOR);
       }else{
-        button_pos0.getController("POS13").setColorBackground(UNABLE_COLOR);
+        button_pos13.getController("POS13").setColorBackground(UNABLE_COLOR);
       }
       button_pos14.addButton("POS14").setLabel("POS14").setPosition(OFFSET_X+ELEMENT_X*2, OFFSET_Y+ELEMENT_Y*3).setSize(100, 40);
-      if(_POS0.enabled == 1){
-        button_pos0.getController("POS14").setColorBackground(ENABLE_COLOR);
+      if(_POS14.enabled == 1){
+        button_pos14.getController("POS14").setColorBackground(ENABLE_COLOR);
       }else{
-        button_pos0.getController("POS14").setColorBackground(UNABLE_COLOR);
+        button_pos14.getController("POS14").setColorBackground(UNABLE_COLOR);
       }
       button_pos15.addButton("POS15").setLabel("POS15").setPosition(OFFSET_X+ELEMENT_X*3, OFFSET_Y+ELEMENT_Y*3).setSize(100, 40);
-      if(_POS0.enabled == 1){
-        button_pos0.getController("POS15").setColorBackground(ENABLE_COLOR);
+      if(_POS15.enabled == 1){
+        button_pos15.getController("POS15").setColorBackground(ENABLE_COLOR);
       }else{
-        button_pos0.getController("POS15").setColorBackground(UNABLE_COLOR);
+        button_pos15.getController("POS15").setColorBackground(UNABLE_COLOR);
       }
       flag = 1;
     }

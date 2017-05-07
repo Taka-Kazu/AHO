@@ -19,6 +19,7 @@ int SERVO_NUM = 20;
 State state;
 MotionState motion_state = new MotionState();
 PositionState current_pos;
+PositionState buffer_pos;
 PositionState _POS[] = new PositionState[POS_NUM];
 ControlP5 button_pos[] = new ControlP5[POS_NUM];
 
@@ -28,6 +29,7 @@ void setup() {
   output = createWriter("log.csv");
   size(1600, 900); 
   button_font = new ControlFont(createFont("Arial", 12));
+  buffer_pos = new PositionState(100);
   slider = new ControlP5(this);
   for(int i=0;i<POS_NUM;i++)
   {
@@ -185,6 +187,7 @@ class PositionState extends State
     time_ms = 100;
     textbox.get(Textfield.class, "TEXTBOX").setText(time_ms.toString());
   }
+  
   int getID()
   {
     return id;
@@ -277,12 +280,15 @@ void PLAY_MOTION()
 
 void COPY()
 {
-  
+  current_pos.read_val();
+  buffer_pos.val = current_pos.val;
+  buffer_pos.time_ms = current_pos.time_ms;
 }
 
 void PASTE()
 {
-  
+  current_pos.val = buffer_pos.val; //<>//
+  current_pos.time_ms = buffer_pos.time_ms;
 }
 
 void PLAY_POS()

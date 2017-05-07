@@ -11,6 +11,8 @@ ControlP5 reset_pos;
 ControlP5 play_motion;
 ControlP5 exit_button;
 ControlP5 enable_button;
+ControlP5 data_button;
+
 int POS_NUM = 50;
 int SERVO_NUM = 20;
 
@@ -38,6 +40,7 @@ void setup() {
   play_motion = new ControlP5(this);
   exit_button = new ControlP5(this);
   enable_button = new ControlP5(this);
+  data_button = new ControlP5(this);
   state = new StartState(motion_state);
   textbox = new ControlP5(this);
 }
@@ -195,6 +198,8 @@ class PositionState extends State
       reset_pos.addButton("RESET_POS").setLabel("RESET").setPosition(OFFSET_X+ELEMENT_X*3.5, OFFSET_Y+ELEMENT_Y*(-1)).setSize(100, 40).setFont(button_font);
       enable_button.addButton("ENABLE").setLabel("ENABLE").setPosition(OFFSET_X+ELEMENT_X*3, OFFSET_Y+ELEMENT_Y*5).setSize(100, 40).setFont(button_font);
       play_pos.addButton("PLAY_POS").setLabel("PLAY").setPosition(OFFSET_X+ELEMENT_X*3, OFFSET_Y+ELEMENT_Y*(-1)).setSize(100, 40).setFont(button_font);
+      data_button.addButton("COPY").setLabel("COPY").setPosition(OFFSET_X+ELEMENT_X*0, OFFSET_Y+ELEMENT_Y*5).setSize(100, 40).setFont(button_font);
+      data_button.addButton("PASTE").setLabel("PASTE").setPosition(OFFSET_X+ELEMENT_X*0.5, OFFSET_Y+ELEMENT_Y*5).setSize(100, 40).setFont(button_font);
       for(int i=0;i<SERVO_GYOU;i++){
         for(int j=0;j<SERVO_RETU;j++){
           int servo_id = i*SERVO_RETU+j;
@@ -246,6 +251,8 @@ class PositionState extends State
     reset_pos.remove("RESET_POS");
     enable_button.remove("ENABLE");
     textbox.remove("TEXTBOX");
+    data_button.remove("COPY");
+    data_button.remove("PASTE");
     for(int i=0;i<SERVO_NUM;i++){
       slider.remove("SERVO"+i);
     }
@@ -264,6 +271,16 @@ void BACK()
 }
 
 void PLAY_MOTION()
+{
+  
+}
+
+void COPY()
+{
+  
+}
+
+void PASTE()
 {
   
 }

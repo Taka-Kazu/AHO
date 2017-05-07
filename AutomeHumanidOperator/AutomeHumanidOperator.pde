@@ -261,6 +261,14 @@ class PositionState extends State
     }
     pointer = s;
   }
+  
+  void reloadValue()
+  {
+    for(int i=0;i<SERVO_NUM;i++){
+      slider.getController("SERVO"+i).setValue(val[i]);
+    }
+    textbox.get(Textfield.class, "TEXTBOX").setText(time_ms.toString());
+  }
 }
 
 void BACK()
@@ -281,14 +289,19 @@ void PLAY_MOTION()
 void COPY()
 {
   current_pos.read_val();
-  buffer_pos.val = current_pos.val;
+  for(int i=0;i<SERVO_NUM;i++){
+    buffer_pos.val[i] = current_pos.val[i];
+  }
   buffer_pos.time_ms = current_pos.time_ms;
 }
 
 void PASTE()
 {
-  current_pos.val = buffer_pos.val; //<>//
+  for(int i=0;i<SERVO_NUM;i++){
+    current_pos.val[i] = buffer_pos.val[i]; //<>//
+  }
   current_pos.time_ms = buffer_pos.time_ms;
+  current_pos.reloadValue();
 }
 
 void PLAY_POS()

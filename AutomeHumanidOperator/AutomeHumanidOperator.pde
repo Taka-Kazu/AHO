@@ -12,6 +12,7 @@ ControlP5 play_motion;
 ControlP5 exit_button;
 ControlP5 enable_button;
 ControlP5 data_button;
+ControlP5 save_button;
 
 int POS_NUM = 50;
 int SERVO_NUM = 20;
@@ -43,6 +44,7 @@ void setup() {
   exit_button = new ControlP5(this);
   enable_button = new ControlP5(this);
   data_button = new ControlP5(this);
+  save_button = new ControlP5(this);
   state = new StartState(motion_state);
   textbox = new ControlP5(this);
 }
@@ -109,6 +111,7 @@ class MotionState extends State
       pointer = this;
       play_motion.addButton("PLAY_MOTION").setLabel("PLAY").setPosition(OFFSET_X+ELEMENT_X*8, OFFSET_Y+ELEMENT_Y*(-1)).setSize(100, 40).setFont(button_font);
       exit_button.addButton("EXIT_BUTTON").setLabel("EXIT").setPosition(OFFSET_X+ELEMENT_X*9, OFFSET_Y+ELEMENT_Y*(-1)).setSize(100, 40).setFont(button_font);
+      save_button.addButton("SAVE").setLabel("SAVE").setPosition(OFFSET_X+ELEMENT_X*0, OFFSET_Y+ELEMENT_Y*(-1)).setSize(100, 40).setFont(button_font);
       for(int i=0;i<POS_GYOU;i++){
         for(int j=0;j<POS_RETU;j++){
           int pos_id = i*POS_RETU+j;
@@ -148,6 +151,7 @@ class MotionState extends State
     }
     play_motion.remove("PLAY_MOTION");
     exit_button.remove("EXIT_BUTTON");
+    save_button.remove("SAVE");
     pointer = s;
   }
 }
@@ -281,6 +285,11 @@ void BACK()
   }
 }
 
+void SAVE()
+{
+  
+}
+
 void PLAY_MOTION()
 {
   
@@ -289,7 +298,7 @@ void PLAY_MOTION()
 void COPY()
 {
   current_pos.read_val();
-  for(int i=0;i<SERVO_NUM;i++){
+  for(int i=0;i<SERVO_NUM;i++){ //<>//
     buffer_pos.val[i] = current_pos.val[i];
   }
   buffer_pos.time_ms = current_pos.time_ms;
@@ -298,7 +307,7 @@ void COPY()
 void PASTE()
 {
   for(int i=0;i<SERVO_NUM;i++){
-    current_pos.val[i] = buffer_pos.val[i]; //<>//
+    current_pos.val[i] = buffer_pos.val[i];
   }
   current_pos.time_ms = buffer_pos.time_ms;
   current_pos.reloadValue();

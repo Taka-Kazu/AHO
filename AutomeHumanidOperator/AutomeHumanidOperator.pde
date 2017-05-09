@@ -287,18 +287,23 @@ void BACK()
 
 void SAVE()
 {
-  
+  for(int i=0;i<POS_NUM;i++){
+    for(int j=0;j<SERVO_NUM;j++){
+      output.print(_POS[i].val[j]+",");
+    }
+    output.print("\n");
+  }
 }
 
 void PLAY_MOTION()
 {
   
-}
+} //<>//
 
 void COPY()
 {
   current_pos.read_val();
-  for(int i=0;i<SERVO_NUM;i++){ //<>//
+  for(int i=0;i<SERVO_NUM;i++){
     buffer_pos.val[i] = current_pos.val[i];
   }
   buffer_pos.time_ms = current_pos.time_ms;

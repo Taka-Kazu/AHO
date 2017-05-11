@@ -123,12 +123,19 @@ class MotionState extends State
     if(flag == 0){
       pointer = this;
       port_list = port.addListBox("LIST");
-      port_list.setLabel("COM PORT").setPosition(OFFSET_X+ELEMENT_X*2, OFFSET_Y+ELEMENT_Y*(-1)).setSize(200, 100).setFont(button_font);
+      if(selected_port == null){
+        port_list.setLabel("COM PORT").setPosition(OFFSET_X+ELEMENT_X*2, OFFSET_Y+ELEMENT_Y*(-1)).setSize(200, 100).setFont(button_font).setBarHeight(20).setItemHeight(20);
+      }else{
+        port_list.setLabel(selected_port).setPosition(OFFSET_X+ELEMENT_X*2, OFFSET_Y+ELEMENT_Y*(-1)).setSize(200, 100).setFont(button_font).setBarHeight(20).setItemHeight(20);
+      }
       for(int i=0;i<ports.length;i++){
         port_list.addItem(ports[i], i);
       }
       port_list.close();
       connect_button.addButton("CONNECT").setLabel("CONNECT").setPosition(OFFSET_X+ELEMENT_X*4, OFFSET_Y+ELEMENT_Y*(-1)).setSize(100, 40).setFont(button_font);
+      if(connected){
+        connect_button.getController("CONNECT").setColorBackground(ENABLE_COLOR);
+      }
       play_motion.addButton("PLAY_MOTION").setLabel("PLAY").setPosition(OFFSET_X+ELEMENT_X*8, OFFSET_Y+ELEMENT_Y*(-1)).setSize(100, 40).setFont(button_font);
       exit_button.addButton("EXIT_BUTTON").setLabel("EXIT").setPosition(OFFSET_X+ELEMENT_X*9, OFFSET_Y+ELEMENT_Y*(-1)).setSize(100, 40).setFont(button_font);
       save_button.addButton("SAVE").setLabel("SAVE").setPosition(OFFSET_X+ELEMENT_X*0, OFFSET_Y+ELEMENT_Y*(-1)).setSize(100, 40).setFont(button_font);
@@ -640,5 +647,6 @@ void POS49()
 void LIST()
 {
   selected_port = ports[(int)port_list.getValue()];
+  port_list.setLabel(selected_port).close();
   println(selected_port);
 }

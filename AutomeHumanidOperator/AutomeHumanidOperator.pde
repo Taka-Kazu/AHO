@@ -27,7 +27,6 @@ ControlP5 button_pos[] = new ControlP5[POS_NUM];
 int readable = 0;
 
 void setup() {
-  output = createWriter("log.csv");
   size(1600, 900); 
   button_font = new ControlFont(createFont("Arial", 12));
   buffer_pos = new PositionState(100);
@@ -287,12 +286,17 @@ void BACK()
 
 void SAVE()
 {
+  output = createWriter("log.csv");
   for(int i=0;i<POS_NUM;i++){
-    for(int j=0;j<SERVO_NUM;j++){
-      output.print(_POS[i].val[j]+",");
+      if(_POS[i].enabled==1){
+        output.print(_POS[i].time_ms+",");
+        for(int j=0;j<SERVO_NUM;j++){
+          output.print(_POS[i].val[j]+",");
+        }
+      output.print("\n");
     }
-    output.print("\n");
   }
+  output.close();
 }
 
 void PLAY_MOTION()
@@ -330,7 +334,6 @@ void RESET_POS()
 
 void EXIT_BUTTON()
 {
-  output.close();
   exit();
 }
 

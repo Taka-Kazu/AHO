@@ -8,6 +8,7 @@ Serial serial_port;
 String[] ports = {"kuroda", "miyagi", "imokenpi"};
 String selected_port = null;
 boolean connected = false;
+String file_name = "motion.csv";
 
 ControlP5 slider;
 ControlP5 textbox;
@@ -131,6 +132,7 @@ class MotionState extends State
       play_motion.addButton("PLAY_MOTION").setLabel("PLAY").setPosition(OFFSET_X+ELEMENT_X*8, OFFSET_Y+ELEMENT_Y*(-1)).setSize(100, 40).setFont(button_font);
       exit_button.addButton("EXIT_BUTTON").setLabel("EXIT").setPosition(OFFSET_X+ELEMENT_X*9, OFFSET_Y+ELEMENT_Y*(-1)).setSize(100, 40).setFont(button_font);
       save_button.addButton("SAVE").setLabel("SAVE").setPosition(OFFSET_X+ELEMENT_X*0, OFFSET_Y+ELEMENT_Y*(-1)).setSize(100, 40).setFont(button_font);
+      textbox.addTextfield("FILENAME").setLabel("FILENAME").setPosition(OFFSET_X+ELEMENT_X*1, OFFSET_Y+ELEMENT_Y*(-1)).setSize(100, 40).setFont(button_font).setAutoClear(false).setValue(file_name);
       for(int i=0;i<POS_GYOU;i++){
         for(int j=0;j<POS_RETU;j++){
           int pos_id = i*POS_RETU+j;
@@ -173,6 +175,7 @@ class MotionState extends State
     save_button.remove("SAVE");
     port.remove("LIST");
     connect_button.remove("CONNECT");
+    textbox.remove("FILENAME");
     pointer = s;
   }
 }
@@ -309,7 +312,11 @@ void BACK()
 void SAVE()
 {
   try{
-    output = createWriter("log.csv");
+    file_name = textbox.get(Textfield.class, "FILENAME").getText();
+    if(!file_name.endsWith(".csv")){
+      file_name += ".csv";
+    }
+    output = createWriter(file_name);
     for(int i=0;i<POS_NUM;i++){
         if(_POS[i].enabled==1){
           output.print(_POS[i].time_ms+",");

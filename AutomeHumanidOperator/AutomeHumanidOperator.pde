@@ -1,7 +1,13 @@
 import controlP5.*;
+import processing.serial.*;
 
 ControlFont button_font;
 PrintWriter output;
+Serial serial_port;
+//String[] ports = Serial.list();
+String[] ports = {"kuroda", "miyagi", "imokenpi"};
+String selected_port = null;
+boolean connected = false;
 
 ControlP5 slider;
 ControlP5 textbox;
@@ -13,9 +19,13 @@ ControlP5 exit_button;
 ControlP5 enable_button;
 ControlP5 data_button;
 ControlP5 save_button;
+ControlP5 port;
+ControlP5 connect_button;
+ListBox port_list;
 
 int POS_NUM = 50;
 int SERVO_NUM = 20;
+int BAUDRATE = 9600;
 
 State state;
 MotionState motion_state = new MotionState();
@@ -28,6 +38,7 @@ int readable = 0;
 
 void setup() {
   size(1600, 900); 
+  //serial_port = new Serial(this, "COM10", 9600);
   button_font = new ControlFont(createFont("Arial", 12));
   buffer_pos = new PositionState(100);
   slider = new ControlP5(this);
@@ -46,6 +57,8 @@ void setup() {
   save_button = new ControlP5(this);
   state = new StartState(motion_state);
   textbox = new ControlP5(this);
+  port = new ControlP5(this);
+  connect_button = new ControlP5(this);
 }
 
 void draw() {
@@ -108,6 +121,13 @@ class MotionState extends State
   void initialise(){
     if(flag == 0){
       pointer = this;
+      port_list = port.addListBox("LIST");
+      port_list.setLabel("COM PORT").setPosition(OFFSET_X+ELEMENT_X*2, OFFSET_Y+ELEMENT_Y*(-1)).setSize(200, 100).setFont(button_font);
+      for(int i=0;i<ports.length;i++){
+        port_list.addItem(ports[i], i);
+      }
+      port_list.close();
+      connect_button.addButton("CONNECT").setLabel("CONNECT").setPosition(OFFSET_X+ELEMENT_X*4, OFFSET_Y+ELEMENT_Y*(-1)).setSize(100, 40).setFont(button_font);
       play_motion.addButton("PLAY_MOTION").setLabel("PLAY").setPosition(OFFSET_X+ELEMENT_X*8, OFFSET_Y+ELEMENT_Y*(-1)).setSize(100, 40).setFont(button_font);
       exit_button.addButton("EXIT_BUTTON").setLabel("EXIT").setPosition(OFFSET_X+ELEMENT_X*9, OFFSET_Y+ELEMENT_Y*(-1)).setSize(100, 40).setFont(button_font);
       save_button.addButton("SAVE").setLabel("SAVE").setPosition(OFFSET_X+ELEMENT_X*0, OFFSET_Y+ELEMENT_Y*(-1)).setSize(100, 40).setFont(button_font);
@@ -151,6 +171,8 @@ class MotionState extends State
     play_motion.remove("PLAY_MOTION");
     exit_button.remove("EXIT_BUTTON");
     save_button.remove("SAVE");
+    port.remove("LIST");
+    connect_button.remove("CONNECT");
     pointer = s;
   }
 }
@@ -347,6 +369,17 @@ void ENABLE()
     enable_button.getController("ENABLE").setColorBackground(0xFF0000FF);
   }else{
     current_pos.enabled = 0;
+  }
+}
+
+void CONNECT()
+{
+  try{
+    if(connected)return;
+    serial_port = new Serial(this, selected_port, BAUDRATE);
+    connected = true;
+  }catch(Exception ex){
+    println("ERROR:PORT CANNOT OPEN");
   }
 }
 
@@ -591,4 +624,10 @@ void POS48()
 void POS49()
 {
     motion_state.setNextState(_POS[49]);
+}
+
+void LIST()
+{
+  selected_port = ports[(int)port_list.getValue()];
+  println(selected_port);
 }

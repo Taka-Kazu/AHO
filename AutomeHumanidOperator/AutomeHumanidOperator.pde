@@ -308,17 +308,21 @@ void BACK()
 
 void SAVE()
 {
-  output = createWriter("log.csv");
-  for(int i=0;i<POS_NUM;i++){
-      if(_POS[i].enabled==1){
-        output.print(_POS[i].time_ms+",");
-        for(int j=0;j<SERVO_NUM;j++){
-          output.print(_POS[i].val[j]+",");
-        }
-      output.print("\n");
+  try{
+    output = createWriter("log.csv");
+    for(int i=0;i<POS_NUM;i++){
+        if(_POS[i].enabled==1){
+          output.print(_POS[i].time_ms+",");
+          for(int j=0;j<SERVO_NUM;j++){
+            output.print(_POS[i].val[j]+",");
+          }
+        output.print("\n");
+      }
     }
+    output.close();
+  }catch(Exception ex){
+    println("ERROR:FILE CANNOT OPEN");
   }
-  output.close();
 }
 
 void PLAY_MOTION()

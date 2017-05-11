@@ -39,8 +39,7 @@ int readable = 0;
 
 void setup() {
   size(1600, 900); 
-  //serial_port = new Serial(this, "COM10", 9600);
-  button_font = new ControlFont(createFont("Arial", 12));
+  button_font = new ControlFont(createFont("Arial", 15));
   buffer_pos = new PositionState(100);
   slider = new ControlP5(this);
   for(int i=0;i<POS_NUM;i++)
@@ -116,7 +115,7 @@ class MotionState extends State
   float OFFSET_Y = 250;
   float ELEMENT_Y = 100;
   int UNABLE_COLOR = 0xFF0000FF;
-  int ENABLE_COLOR = 0xFFFF00FF;
+  int ENABLE_COLOR = 0xFFFF0000;
   int POS_GYOU = 5;
   int POS_RETU = 10;
   void initialise(){
@@ -124,9 +123,9 @@ class MotionState extends State
       pointer = this;
       port_list = port.addListBox("LIST");
       if(selected_port == null){
-        port_list.setLabel("COM PORT").setPosition(OFFSET_X+ELEMENT_X*2, OFFSET_Y+ELEMENT_Y*(-1)).setSize(200, 100).setFont(button_font).setBarHeight(20).setItemHeight(20);
+        port_list.setLabel("COM PORT").setPosition(OFFSET_X+ELEMENT_X*2, OFFSET_Y+ELEMENT_Y*(-1)).setSize(200, 100).setFont(button_font).setBarHeight(30).setItemHeight(30);
       }else{
-        port_list.setLabel(selected_port).setPosition(OFFSET_X+ELEMENT_X*2, OFFSET_Y+ELEMENT_Y*(-1)).setSize(200, 100).setFont(button_font).setBarHeight(20).setItemHeight(20);
+        port_list.setLabel(selected_port).setPosition(OFFSET_X+ELEMENT_X*2, OFFSET_Y+ELEMENT_Y*(-1)).setSize(200, 100).setFont(button_font).setBarHeight(30).setItemHeight(30);
       }
       for(int i=0;i<ports.length;i++){
         port_list.addItem(ports[i], i);
@@ -241,7 +240,7 @@ class PositionState extends State
       for(int i=0;i<SERVO_GYOU;i++){
         for(int j=0;j<SERVO_RETU;j++){
           int servo_id = i*SERVO_RETU+j;
-          slider.addSlider("SERVO"+servo_id).setRange(0, 180).setValue(val[servo_id]).setPosition(OFFSET_X+ELEMENT_X*j, OFFSET_Y+ELEMENT_Y*i).setSize(300, 30);
+          slider.addSlider("SERVO"+servo_id).setRange(0, 180).setValue(val[servo_id]).setPosition(OFFSET_X+ELEMENT_X*j, OFFSET_Y+ELEMENT_Y*i).setSize(275, 30).setNumberOfTickMarks(181).setFont(button_font);
           slider.getController("SERVO"+servo_id).getValueLabel().align(ControlP5.RIGHT, ControlP5.BOTTOM_OUTSIDE).setPaddingX(-20);
         }
       }

@@ -16,6 +16,7 @@
 #ifndef MBED_RAW_SERIAL_H
 #define MBED_RAW_SERIAL_H
 
+#include "mbed_config.h"
 #include "platform/platform.h"
 
 #if DEVICE_SERIAL

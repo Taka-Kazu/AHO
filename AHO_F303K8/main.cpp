@@ -1,5 +1,5 @@
-#define MBED_CONF_PLATFORM_DEFAULT_SERIAL_BAUD_RATE 9600
 #include "mbed.h"
+#include "PCA9685.h"
 
 DigitalOut myled(LED1);
 

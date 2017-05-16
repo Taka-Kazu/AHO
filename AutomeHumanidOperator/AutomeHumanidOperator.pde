@@ -185,6 +185,7 @@ class MotionState extends State
     port.remove("LIST");
     connect_button.remove("CONNECT");
     textbox.remove("FILENAME");
+    load_button.remove("LOAD");
     pointer = s;
   }
 }
@@ -326,15 +327,17 @@ void SAVE()
       file_name += ".csv";
     }
     output = createWriter(file_name);
+    String data_line = "";
     for(int i=0;i<POS_NUM;i++){
         if(_POS[i].enabled==1){
-          output.print(_POS[i].time_ms+",");
+          data_line += _POS[i].time_ms+",";
           for(int j=0;j<SERVO_NUM;j++){
-            output.print(_POS[i].val[j]+",");
+            data_line += _POS[i].val[j]+",";
           }
-        output.print("\n");
-      }
+          data_line += "\n";
+        }
     }
+    output.print(data_line);
     output.close();
   }catch(Exception ex){
     println("ERROR:FILE CANNOT OPEN");

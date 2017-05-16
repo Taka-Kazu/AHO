@@ -9,6 +9,7 @@ String[] ports = {"kuroda", "miyagi", "imokenpi"};
 String selected_port = null;
 boolean connected = false;
 String file_name = "motion.csv";
+String data_line = "";
 
 ControlP5 slider;
 ControlP5 textbox;
@@ -327,7 +328,7 @@ void SAVE()
       file_name += ".csv";
     }
     output = createWriter(file_name);
-    String data_line = "";
+    data_line = "";
     for(int i=0;i<POS_NUM;i++){
         if(_POS[i].enabled==1){
           data_line += _POS[i].time_ms+",";
@@ -408,7 +409,22 @@ void CONNECT()
 
 void LOAD()
 {
-  
+  BufferedReader reader;
+  reader = createReader(file_name);
+  String line = "";
+  data_line = "";
+  while(true){
+    try{
+      line = reader.readLine();
+    }catch(Exception ex){
+      line = null;
+    }
+    if(line==null){
+      break;
+    }else{
+      data_line +=line + "\n";
+    }
+  }
 }
 
 void POS0()

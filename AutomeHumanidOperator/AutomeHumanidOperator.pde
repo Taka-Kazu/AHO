@@ -147,7 +147,7 @@ class MotionState extends State
         for(int j=0;j<POS_RETU;j++){
           int pos_id = i*POS_RETU+j;
           button_pos[pos_id].addButton("POS"+pos_id).setLabel("POS"+pos_id).setPosition(OFFSET_X+ELEMENT_X*j, OFFSET_Y+ELEMENT_Y*i).setSize(100, 40).setFont(button_font);
-          if(_POS[pos_id].enabled == 1){
+          if(_POS[pos_id].enabled == true){
             button_pos[pos_id].getController("POS"+pos_id).setColorBackground(ENABLE_COLOR);
           }else{
             button_pos[pos_id].getController("POS"+pos_id).setColorBackground(UNABLE_COLOR);
@@ -203,7 +203,7 @@ class PositionState extends State
   int flag = 0;
   int id = 0;
   float val[] = new float[SERVO_NUM];
-  int enabled = 0;
+  boolean enabled = false;
   Integer time_ms = 100;
   
   State pointer;
@@ -249,9 +249,9 @@ class PositionState extends State
           slider.getController("SERVO"+servo_id).getValueLabel().align(ControlP5.RIGHT, ControlP5.BOTTOM_OUTSIDE).setPaddingX(-20);
         }
       }
-      if(current_pos.enabled == 1){
+      if(current_pos.enabled == true){
           enable_button.getController("ENABLE").setColorBackground(0xFFFF0000);
-        }else if(current_pos.enabled == 0){
+        }else if(current_pos.enabled == false){
           enable_button.getController("ENABLE").setColorBackground(0xFF0000FF);
       }
       flag = 1;
@@ -330,7 +330,7 @@ void SAVE()
     output = createWriter(file_name);
     data_line = "";
     for(int i=0;i<POS_NUM;i++){
-        if(_POS[i].enabled==1){
+        if(_POS[i].enabled==true){
           data_line += _POS[i].time_ms+",";
           for(int j=0;j<SERVO_NUM;j++){
             data_line += _POS[i].val[j]+",";
@@ -385,14 +385,14 @@ void EXIT_BUTTON()
 
 void ENABLE()
 {
-  if(current_pos.enabled == 0){
-    current_pos.enabled = 1;
+  if(current_pos.enabled == false){
+    current_pos.enabled = true;
     enable_button.getController("ENABLE").setColorBackground(0xFFFF0000);
-  }else if(current_pos.enabled == 1){
-    current_pos.enabled = 0;
+  }else if(current_pos.enabled == true){
+    current_pos.enabled = false;
     enable_button.getController("ENABLE").setColorBackground(0xFF0000FF);
   }else{
-    current_pos.enabled = 0;
+    current_pos.enabled = false;
   }
 }
 
@@ -423,6 +423,28 @@ void LOAD()
       break;
     }else{
       data_line +=line + "\n";
+    }
+  }
+  String str[] = split(data_line, ",");
+  int pos_cnt = 0;
+  int servo_cnt = -1;
+  
+  for(String buf:str){
+    buf = buf.replaceAll("\n", "");
+    try{
+      if(servo_cnt == -1){
+        _POS[pos_cnt].time_ms = Integer.parseInt(buf);
+      }else{
+        _POS[pos_cnt].enabled = true;
+        _POS[pos_cnt].val[servo_cnt] = Float.parseFloat(buf);
+      }
+    }catch(NumberFormatException ex){
+      return;
+    }
+    servo_cnt++;
+    if(servo_cnt == SERVO_NUM){
+      pos_cnt++;
+      servo_cnt = -1;
     }
   }
 }

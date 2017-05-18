@@ -10,6 +10,7 @@ class Machine
 public:
 	Machine(void);
 
+	Motion motion;
 private:
 	static const PinName SDA = PB_7;
 	static const PinName SCL = PB_6;

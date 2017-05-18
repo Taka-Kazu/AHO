@@ -3,12 +3,12 @@
 
 #include "mbed.h"
 #include "position.h"
-#include <string>
 
 class Motion
 {
 public:
-	Motion(int[][20]);
+	Motion(void);
+	vector<Position> pos;
 private:
 
 };

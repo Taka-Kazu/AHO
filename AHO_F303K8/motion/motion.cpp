@@ -1,6 +1,7 @@
 #include "motion.h"
 
-Motion::Motion(int data[][20])
+Motion::Motion(void)
+:pos(1)
 {
 
 }

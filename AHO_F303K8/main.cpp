@@ -1,10 +1,12 @@
 #include "mbed.h"
-#include "PCA9685.h"
+#include "machine.h"
 
 DigitalOut myled(LED1);
 
 int main() {
     while(1) {
+    	char* str = "a";
+    	Position pos0(str);
         myled = 1; // LED is ON
         wait(0.2); // 200 ms
         myled = 0; // LED is OFF

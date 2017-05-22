@@ -1,7 +1,7 @@
 #include "motion.h"
 
 Motion::Motion(void)
-:pos(1)
+:pos(50)
 {
 
 }

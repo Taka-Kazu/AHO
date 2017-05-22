@@ -5,8 +5,6 @@
 #include <vector>
 #include <string>
 
-using namespace std;
-
 class Position{
 public:
 	Position(void);
@@ -18,7 +16,7 @@ public:
 private:
 	static const int SERVO_NUM = 20;
 	int time_ms;
-	vector<int> servo_angle;
+	std::vector<int> servo_angle;
 };
 
 #endif

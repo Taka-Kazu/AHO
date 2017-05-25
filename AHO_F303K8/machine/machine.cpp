@@ -10,6 +10,20 @@ Machine::Machine(void)
 	servo17.period_ms(PULSE_PERIOD);
 }
 
+void Machine::play_motion(void)
+{
+	for(int i=0;i<POS_NUM;i++)
+	{
+		std::vector<Position>::iterator it;
+		if(it == motion.pos.end())return;
+		for(int j=0;j<SERVO_NUM;j++){
+			move_servo(j, motion.pos[i].get_angle(j));
+		}
+		wait_ms(motion.pos[i].get_time());
+	}
+
+}
+
 void Machine::move_servo(int id, float angle)
 {
 	//Šp“xŽw’è‚Í0‹~180‹

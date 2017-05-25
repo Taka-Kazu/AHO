@@ -12,6 +12,7 @@ public:
 
 	void move_servo(int, float);//id, angle
 	void set_direction(int, bool);
+	void play_motion(void);
 
 	Motion motion;
 
@@ -27,6 +28,7 @@ private:
 	static const int MIN_ANGLE = 0;
 	static const int CENTER_ANGLE = 90;
 	static const int SERVO_NUM = 18;
+	static const int POS_NUM = 50;
 	static const int PCA9685_SERVO_NUM = 16;
 	static const int PULSE_PERIOD = 20;//[ms]
 	static const int PCA9685_RESOLUTION = 4096;

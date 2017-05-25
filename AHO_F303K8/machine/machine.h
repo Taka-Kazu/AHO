@@ -8,13 +8,13 @@
 class Machine
 {
 public:
-	Machine(void);
+	Machine(int);
 
 	void move_servo(int, float);//id, angle
 	void set_direction(int, bool);
-	void play_motion(void);
+	void play_motion(int);
 
-	Motion motion;
+	std::vector<Motion> motion;
 
 private:
 	static const PinName SDA = PB_7;
@@ -32,6 +32,7 @@ private:
 	static const int PCA9685_SERVO_NUM = 16;
 	static const int PULSE_PERIOD = 20;//[ms]
 	static const int PCA9685_RESOLUTION = 4096;
+	const int MOTION_NUM;
 
 	PCA9685 servos;
 	PwmOut servo16;

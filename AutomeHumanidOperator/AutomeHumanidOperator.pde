@@ -698,3 +698,13 @@ void LIST()
   port_list.setLabel(selected_port).close();
   println(selected_port);
 }
+
+void serialEvent(Serial s)
+{
+  while(s.available()>0){
+    String data=s.readString();
+    if(data!=null){
+      print(data);
+    }
+  }
+}

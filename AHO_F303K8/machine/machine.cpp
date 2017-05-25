@@ -54,7 +54,9 @@ void Machine::set_direction(int id, bool cw)
 
 void Machine::set_pca9685_angle(int id, float angle)
 {
-
+	if(!direction[id]){
+			reverse_angle(angle);
+		}
 	int pulse = (angle-CENTER_ANGLE)/(MAX_ANGLE-MIN_ANGLE)*(LONG_PULSE-SHORT_PULSE)+CENTER_PULSE;
 	servos.setPWM(id, 0, pulse/(PULSE_PERIOD)*(PCA9685_RESOLUTION-1));
 }

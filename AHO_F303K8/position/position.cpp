@@ -8,6 +8,7 @@ Position::Position(void)
 
 void Position::set_param(string str)
 {
+	time_ms = 0;
 	string buff("");
 	int servo_num = 0;
 	for(int i=0;i<1000;i++){

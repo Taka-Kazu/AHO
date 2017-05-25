@@ -1,8 +1,8 @@
 #include "machine.h"
 
 Machine::Machine(int motion_num)
-:servos(SDA, SCL), servo16(SERVO16_PIN), servo17(SERVO17_PIN),direction(SERVO_NUM, true)
-, MOTION_NUM(motion_num), motion(MOTION_NUM)
+:motion(MOTION_NUM), MOTION_NUM(motion_num) , servos(SDA, SCL), servo16(SERVO16_PIN), servo17(SERVO17_PIN)
+,direction(SERVO_NUM, true)
 {
 	servos.begin();
 	servos.setPrescale(121);
@@ -16,12 +16,16 @@ void Machine::play_motion(int motion_id)
 	if(motion_id<0||motion_id>MOTION_NUM)
 	for(int i=0;i<POS_NUM;i++)
 	{
+		int time = motion[motion_id].pos[i].get_time();
+		if(time==0){
+			return;
+		}
 		std::vector<Position>::iterator it;
 		if(it == motion[motion_id].pos.end())return;
 		for(int j=0;j<SERVO_NUM;j++){
 			move_servo(j, motion[motion_id].pos[i].get_angle(j));
 		}
-		wait_ms(motion[motion_id].pos[i].get_time());
+		wait_ms(time);
 	}
 
 }

@@ -24,9 +24,25 @@ void AHO::initialize(void)
 
 void AHO::interrupt(void)
 {
-	char c;
-	while(pc->readable()){
-		pc->scanf("%c", &c);
-		pc->printf("%c", c);
+	int i=0;
+	char c[2] = {'c'};
+	string str;
+	while(1){
+		while(!pc->readable());
+		pc->scanf("%c", &c[0]);
+		if(c[0]=='\0'){
+			break;
+		}
+		str+=c;
+		if(c[0]=='\n'){
+			motion->pos[i].set_param(str);
+			i++;
+			str="";
+		}
 	}
+	/*
+	const char* cstr = str.c_str();
+	pc->printf("%s\r\n", cstr);
+	*/
+	pc->printf("end\r\n");
 }

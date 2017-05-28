@@ -4,8 +4,8 @@ import processing.serial.*;
 ControlFont button_font;
 PrintWriter output;
 Serial serial_port;
-//String[] ports = Serial.list();
-String[] ports = {"kuroda", "miyagi", "imokenpi"};
+String[] ports = Serial.list();
+//String[] ports = {"kuroda", "miyagi", "imokenpi"};
 String selected_port = null;
 boolean connected = false;
 String file_name = "motion.csv";
@@ -28,7 +28,7 @@ ControlP5 load_button;
 
 int POS_NUM = 50;
 int SERVO_NUM = 20;
-int BAUDRATE = 9600;
+int BAUDRATE = 115200;
 
 State state;
 MotionState motion_state = new MotionState();
@@ -128,7 +128,7 @@ class MotionState extends State
       if(selected_port == null){
         port_list.setLabel("COM PORT").setPosition(OFFSET_X+ELEMENT_X*3, OFFSET_Y+ELEMENT_Y*(-1)).setSize(200, 100).setFont(button_font).setBarHeight(30).setItemHeight(30);
       }else{
-        port_list.setLabel(selected_port).setPosition(OFFSET_X+ELEMENT_X*2, OFFSET_Y+ELEMENT_Y*(-1)).setSize(200, 100).setFont(button_font).setBarHeight(30).setItemHeight(30);
+        port_list.setLabel(selected_port).setPosition(OFFSET_X+ELEMENT_X*3, OFFSET_Y+ELEMENT_Y*(-1)).setSize(200, 100).setFont(button_font).setBarHeight(30).setItemHeight(30);
       }
       for(int i=0;i<ports.length;i++){
         port_list.addItem(ports[i], i);
@@ -347,7 +347,21 @@ void SAVE()
 
 void PLAY_MOTION()
 {
-  
+  try{
+    data_line = "";
+    for(int i=0;i<POS_NUM;i++){
+        if(_POS[i].enabled==true){
+          data_line += _POS[i].time_ms+",";
+          for(int j=0;j<SERVO_NUM;j++){
+            data_line += _POS[i].val[j]+",";
+          }
+          data_line += "\n";
+        }
+    }
+    serial_port.write(data_line+'\0');
+  }catch(Exception ex){
+    
+  }
 } //<>//
 
 void COPY()
@@ -402,6 +416,7 @@ void CONNECT()
     if(connected)return;
     serial_port = new Serial(this, selected_port, BAUDRATE);
     connected = true;
+    println("CONNECTED TO "+selected_port);
   }catch(Exception ex){
     println("ERROR:PORT CANNOT OPEN");
   }

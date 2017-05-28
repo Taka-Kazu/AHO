@@ -8,6 +8,7 @@ Machine machine(1);
 void set_motions(void);
 
 int main() {
+	printf("High, I'm SHIRO-OBI!\r\n");
 	aho.set_motion(machine.motion[0]);
 
     while(1) {

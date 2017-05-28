@@ -24,5 +24,9 @@ void AHO::initialize(void)
 
 void AHO::interrupt(void)
 {
-
+	char c;
+	while(pc->readable()){
+		pc->scanf("%c", &c);
+		pc->printf("%c", c);
+	}
 }

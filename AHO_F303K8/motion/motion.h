@@ -10,8 +10,6 @@ public:
 	Motion(void);
 	static const int8_t POS_NUM = 50;
 	Position pos[POS_NUM];
-
-
 };
 
 #endif

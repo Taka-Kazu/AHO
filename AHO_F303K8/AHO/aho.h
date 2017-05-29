@@ -17,10 +17,11 @@ private:
 	static const int8_t POS_NUM = 50;
 	Serial* pc;
 	Motion* motion;
-	char str[50][100];// = {0};
+	char str[50][100];
 
 	void initialize(void);
 	void interrupt(void);
+
 };
 
 #endif

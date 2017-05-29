@@ -1,9 +1,10 @@
 #include "machine.h"
 
 Machine::Machine(int motion_num)
-:motion(MOTION_NUM), MOTION_NUM(motion_num) , servos(SDA, SCL), servo16(SERVO16_PIN), servo17(SERVO17_PIN)
+:MOTION_NUM(motion_num) , servos(SDA, SCL), servo16(SERVO16_PIN), servo17(SERVO17_PIN)
 ,direction(SERVO_NUM, true)
 {
+	motion = new Motion[MOTION_NUM];
 	servos.begin();
 	servos.setPrescale(121);
 	servos.frequencyI2C(400000);

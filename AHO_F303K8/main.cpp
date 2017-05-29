@@ -2,8 +2,10 @@
 #include "machine.h"
 #include "aho.h"
 
-AHO aho;
+Serial pc(USBTX, USBRX);
+AHO aho(pc);
 Machine machine(1);
+
 
 void set_motions(void);
 extern "C"

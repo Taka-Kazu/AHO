@@ -43,7 +43,7 @@ void AHO::interrupt(void)
 		pc->scanf("%c", &c);
 		if(c=='\0'){
 			for(int i=0;i<str_k;i++){
-				motion->pos[i].set_param(str[i]);//‚±‚±ƒoƒO
+				motion->pos[i].set_param(str[i]);
 			}
 			break;
 		}

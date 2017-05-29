@@ -16,7 +16,7 @@ public:
 	void set_direction(int, bool);
 	void play_motion(int);
 
-	std::vector<Motion> motion;
+	Motion* motion;
 
 private:
 	static const PinName SDA = PB_7;

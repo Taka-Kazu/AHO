@@ -353,7 +353,7 @@ void PLAY_MOTION()
         if(_POS[i].enabled==true){
           data_line += _POS[i].time_ms+",";
           for(int j=0;j<SERVO_NUM;j++){
-            data_line += _POS[i].val[j]+",";
+            data_line += (int)_POS[i].val[j]+",";
           }
           data_line += "\n";
         }

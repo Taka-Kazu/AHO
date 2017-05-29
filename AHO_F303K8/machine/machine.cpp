@@ -20,8 +20,9 @@ void Machine::play_motion(int motion_id)
 		if(time==0){
 			return;
 		}
-		std::vector<Position>::iterator it;
-		if(it == motion[motion_id].pos.end())return;
+		if(i == (sizeof(motion[motion_id].pos)/sizeof(Position)-1)){
+			return;
+		}
 		for(int j=0;j<SERVO_NUM;j++){
 			move_servo(j, motion[motion_id].pos[i].get_angle(j));
 		}

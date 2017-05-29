@@ -2,21 +2,21 @@
 #define __POSITION_H
 
 #include "mbed.h"
-#include <vector>
-#include <string>
+#include "string.h"
+#include "stdlib.h"
 
 class Position{
 public:
 	Position(void);
 
-	void set_param(string);
+	void set_param(char*);
 	int get_time(void);
 	int get_angle(int);
 
 private:
 	static const int SERVO_NUM = 20;
-	int time_ms;
-	std::vector<int> servo_angle;
+	int16_t time_ms;
+	uint8_t servo_angle[SERVO_NUM];
 };
 
 #endif

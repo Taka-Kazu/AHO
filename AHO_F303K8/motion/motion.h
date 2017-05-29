@@ -8,8 +8,9 @@ class Motion
 {
 public:
 	Motion(void);
-	vector<Position> pos;
-private:
+	static const int8_t POS_NUM = 50;
+	Position pos[POS_NUM];
+
 
 };
 

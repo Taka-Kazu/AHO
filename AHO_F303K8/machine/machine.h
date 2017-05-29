@@ -4,6 +4,8 @@
 #include "mbed.h"
 #include "PCA9685.h"
 #include "motion.h"
+#include <string>
+#include <vector>
 
 class Machine
 {

@@ -57,10 +57,6 @@ void AHO::interrupt(void)
 			str_j=0;
 		}
 	}
-	/*
-	const char* cstr = str.c_str();
-	pc->printf("%s\r\n", cstr);
-	*/
 	pc->printf("%d[us], end\r\n", t.read_us());
 	__enable_irq();
 }

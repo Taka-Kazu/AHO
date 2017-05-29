@@ -4,8 +4,7 @@
 #include "mbed.h"
 #include "PCA9685.h"
 #include "motion.h"
-#include <string>
-#include <vector>
+
 
 class Machine
 {
@@ -16,7 +15,7 @@ public:
 	void set_direction(int, bool);
 	void play_motion(int);
 
-	Motion* motion;
+	Motion motion;
 
 private:
 	static const PinName SDA = PB_7;
@@ -39,7 +38,7 @@ private:
 	PCA9685 servos;
 	PwmOut servo16;
 	PwmOut servo17;
-	std::vector<bool>direction;//true‚Ícw,false‚Íccw
+	bool* direction;//true‚Ícw,false‚Íccw
 
 	void set_pca9685_angle(int, float);//PCA9685—p
 	void set_servo_angle(int, float);//pwmƒsƒ“—p

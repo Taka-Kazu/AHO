@@ -17,7 +17,7 @@ void HardFault_Handler()
 int main() {
 	printf("High, I'm SHIRO-OBI!\r\n");
 	printf("%d, %d, %d, %d\r\n", sizeof(Position), sizeof(Motion), sizeof(AHO), sizeof(Machine));
-	aho.set_motion(machine.motion[0]);
+	aho.set_motion(machine.motion);
 
     while(1) {
     	//machine.play_motion(0);
@@ -26,5 +26,5 @@ int main() {
 
 void set_motions(void)
 {
-	machine.motion[0].pos[0].set_param("100,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90\n");
+	machine.motion.pos[0].set_param("100,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90\n");
 }

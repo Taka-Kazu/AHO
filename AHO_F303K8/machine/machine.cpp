@@ -2,9 +2,11 @@
 
 Machine::Machine(int motion_num)
 :MOTION_NUM(motion_num) , servos(SDA, SCL), servo16(SERVO16_PIN), servo17(SERVO17_PIN)
-,direction(SERVO_NUM, true)
 {
-	motion = new Motion[MOTION_NUM];
+	direction = new bool[SERVO_NUM];
+	for(int i=0;i<SERVO_NUM;i++){
+		direction[i] = true;
+	}
 	servos.begin();
 	servos.setPrescale(121);
 	servos.frequencyI2C(400000);
@@ -14,22 +16,22 @@ Machine::Machine(int motion_num)
 
 void Machine::play_motion(int motion_id)
 {
-	if(motion_id<0||motion_id>MOTION_NUM)
-	for(int i=0;i<POS_NUM;i++)
-	{
-		int time = motion[motion_id].pos[i].get_time();
-		if(time==0){
-			return;
+	if(motion_id<0||motion_id>MOTION_NUM){
+		for(int i=0;i<POS_NUM;i++)
+		{
+			int time = motion.pos[i].get_time();
+			if(time==0){
+				return;
+			}
+			if(i == (sizeof(motion.pos)/sizeof(Position)-1)){
+				return;
+			}
+			for(int j=0;j<SERVO_NUM;j++){
+				move_servo(j, motion.pos[i].get_angle(j));
+			}
+			wait_ms(time);
 		}
-		if(i == (sizeof(motion[motion_id].pos)/sizeof(Position)-1)){
-			return;
-		}
-		for(int j=0;j<SERVO_NUM;j++){
-			move_servo(j, motion[motion_id].pos[i].get_angle(j));
-		}
-		wait_ms(time);
 	}
-
 }
 
 void Machine::move_servo(int id, float angle)

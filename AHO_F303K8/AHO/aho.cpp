@@ -32,7 +32,6 @@ void AHO::interrupt(void)
 	__disable_irq();
 	Timer t;
 	t.start();
-	int pos_i=0;
 	char c;
 	int8_t str_j = 0;//param2
 	int8_t str_k = 0;//param1
@@ -51,9 +50,11 @@ void AHO::interrupt(void)
 		str_j++;
 		if(c=='\n'){
 			str_k++;
+			/*
 			for(int k=0;k<STR_LENGTH;k++){
 				str[str_k][k] = 0;
 			}
+			*/
 			str_j=0;
 		}
 	}

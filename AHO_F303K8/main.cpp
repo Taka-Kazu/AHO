@@ -20,7 +20,9 @@ int main() {
 	aho.set_motion(machine.motion);
 
     while(1) {
-    	//machine.play_motion(0);
+    	if(aho.has_changed()){
+    		machine.play_motion(0);
+    	}
     }
 }
 

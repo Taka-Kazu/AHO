@@ -16,8 +16,16 @@ void AHO::set_motion(Motion& m)
 	motion = &m;
 }
 
+bool AHO::has_changed(void)
+{
+	bool temp = flag;
+	flag = false;
+	return temp;
+}
+
 void AHO::initialize(void)
 {
+	flag = false;
 	pc->baud(BAUDRATE);
 	pc->attach(callback(this, &AHO::interrupt), Serial::RxIrq);
 	for(int i=0;i<POS_NUM;i++){
@@ -59,5 +67,6 @@ void AHO::interrupt(void)
 		}
 	}
 	pc->printf("%d[us], end\r\n", t.read_us());
+	flag = true;
 	__enable_irq();
 }

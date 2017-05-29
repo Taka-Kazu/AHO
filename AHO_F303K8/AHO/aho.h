@@ -11,6 +11,8 @@ public:
 	AHO(Serial&);
 
 	void set_motion(Motion&);
+	bool has_changed(void);
+
 private:
 	static const int BAUDRATE = 115200;
 	static const int8_t STR_LENGTH = 100;
@@ -18,6 +20,7 @@ private:
 	Serial* pc;
 	Motion* motion;
 	char str[POS_NUM][STR_LENGTH];
+	bool flag;//interruptÇé¿çsÇµÇΩÇÁture
 
 	void initialize(void);
 	void interrupt(void);

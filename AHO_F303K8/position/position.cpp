@@ -11,7 +11,6 @@ Position::Position(void)
 
 void Position::set_param(char* str)
 {
-	printf("%s", str);
 	int val = 0;
 	const int8_t BUFF_NUM = 5;
 	char buff[BUFF_NUM] = {0};
@@ -32,7 +31,6 @@ void Position::set_param(char* str)
 					buff[k] = 0;
 				}
 				j=0;
-				printf("time=%d\r\n", time_ms);
 			}else{
 				servo_angle[servo_num] = val;
 				servo_num++;
@@ -40,7 +38,6 @@ void Position::set_param(char* str)
 					buff[k] = 0;
 				}
 				j=0;
-				printf("servo[%d]=%d\r\n", servo_num-1, servo_angle[servo_num-1]);
 			}
 		}
 	}

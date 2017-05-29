@@ -5,6 +5,7 @@
 #include "PCA9685.h"
 #include "motion.h"
 #include "buzzer.h"
+#include "SDFileSystem.h"
 
 
 class Machine
@@ -21,9 +22,13 @@ public:
 private:
 	static const PinName SDA = PB_7;
 	static const PinName SCL = PB_6;
-	static const PinName SERVO16_PIN = PB_4;
-	static const PinName SERVO17_PIN = PB_5;
+	static const PinName SERVO16_PIN = PA_6;
+	static const PinName SERVO17_PIN = PA_7;
 	static const PinName BUZZER_PIN = PA_11;
+	static const PinName MOSI = PB_5;
+	static const PinName MISO = PB_4;
+	static const PinName SCLK = PB_3;
+	static const PinName SELECT_SD = PA_8;
 	static const int LONG_PULSE = 2500;
 	static const int SHORT_PULSE = 500;
 	static const int CENTER_PULSE = 1500;
@@ -42,6 +47,7 @@ private:
 	PwmOut servo17;
 	bool* direction;//true‚Ícw,false‚Íccw
 	Buzzer buzzer;
+	SDFileSystem sd;
 
 	void set_pca9685_angle(int, float);//PCA9685—p
 	void set_servo_angle(int, float);//pwmƒsƒ“—p

@@ -93,7 +93,7 @@
 								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s.889138388" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s"/>
 							</tool>
 							<tool id="fr.ac6.managedbuild.tool.gnu.cross.cpp.compiler.889138388" name="MCU G++ Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.cpp.compiler">
-								<option id="fr.ac6.managedbuild.gnu.cpp.compiler.option.optimization.level.889138388" name="Optimization Level" superClass="fr.ac6.managedbuild.gnu.cpp.compiler.option.optimization.level" useByScannerDiscovery="false"/>
+								<option id="fr.ac6.managedbuild.gnu.cpp.compiler.option.optimization.level.889138388" name="Optimization Level" superClass="fr.ac6.managedbuild.gnu.cpp.compiler.option.optimization.level" useByScannerDiscovery="false" value="fr.ac6.managedbuild.gnu.cpp.optimization.level.size" valueType="enumerated"/>
 								<option id="gnu.cpp.compiler.option.debugging.level.889138388" name="Debug Level" superClass="gnu.cpp.compiler.option.debugging.level" useByScannerDiscovery="false" value="gnu.cpp.compiler.debugging.level.max" valueType="enumerated"/>
 								<option id="gnu.cpp.compiler.option.include.paths.889138388" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/.&quot;"/>
@@ -116,6 +116,9 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/AHO_F303K8/position}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/AHO_F303K8/AHO}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/AHO_F303K8/buzzer}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/AHO_F303K8/SDFileSystem}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/AHO_F303K8/SDFileSystem/FATFileSystem}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/AHO_F303K8/SDFileSystem/FATFileSystem/ChaN}&quot;"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.dialect.std.889138388" name="Language standard" superClass="gnu.cpp.compiler.option.dialect.std" useByScannerDiscovery="true" value="gnu.cpp.compiler.dialect.default" valueType="enumerated"/>
 								<option id="gnu.cpp.compiler.option.preprocessor.def889138388" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" useByScannerDiscovery="false" valueType="definedSymbols">

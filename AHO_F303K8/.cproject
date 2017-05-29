@@ -115,6 +115,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/AHO_F303K8/motion}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/AHO_F303K8/position}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/AHO_F303K8/AHO}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/AHO_F303K8/buzzer}&quot;"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.dialect.std.889138388" name="Language standard" superClass="gnu.cpp.compiler.option.dialect.std" useByScannerDiscovery="true" value="gnu.cpp.compiler.dialect.default" valueType="enumerated"/>
 								<option id="gnu.cpp.compiler.option.preprocessor.def889138388" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" useByScannerDiscovery="false" valueType="definedSymbols">

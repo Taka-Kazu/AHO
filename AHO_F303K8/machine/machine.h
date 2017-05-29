@@ -4,6 +4,7 @@
 #include "mbed.h"
 #include "PCA9685.h"
 #include "motion.h"
+#include "buzzer.h"
 
 
 class Machine
@@ -22,6 +23,7 @@ private:
 	static const PinName SCL = PB_6;
 	static const PinName SERVO16_PIN = PB_4;
 	static const PinName SERVO17_PIN = PB_5;
+	static const PinName BUZZER_PIN = PA_11;
 	static const int LONG_PULSE = 2500;
 	static const int SHORT_PULSE = 500;
 	static const int CENTER_PULSE = 1500;
@@ -39,6 +41,7 @@ private:
 	PwmOut servo16;
 	PwmOut servo17;
 	bool* direction;//true‚Ícw,false‚Íccw
+	Buzzer buzzer;
 
 	void set_pca9685_angle(int, float);//PCA9685—p
 	void set_servo_angle(int, float);//pwmƒsƒ“—p

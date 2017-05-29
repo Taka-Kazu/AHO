@@ -2,6 +2,7 @@
 
 Machine::Machine(int motion_num)
 :MOTION_NUM(motion_num) , servos(SDA, SCL), servo16(SERVO16_PIN), servo17(SERVO17_PIN)
+, buzzer(BUZZER_PIN)
 {
 	direction = new bool[SERVO_NUM];
 	for(int i=0;i<SERVO_NUM;i++){
@@ -16,6 +17,8 @@ Machine::Machine(int motion_num)
 
 void Machine::play_motion(int motion_id)
 {
+	buzzer.alert();
+	wait(0.3);
 	if(motion_id<0||motion_id>MOTION_NUM){
 		for(int i=0;i<POS_NUM;i++)
 		{

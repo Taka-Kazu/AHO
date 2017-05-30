@@ -1,3 +1,5 @@
+#define NDEBUG
+
 #include "mbed.h"
 #include "machine.h"
 #include "aho.h"

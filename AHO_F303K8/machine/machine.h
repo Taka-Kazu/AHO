@@ -16,6 +16,7 @@ public:
 	void move_servo(int, float);//id, angle
 	void set_direction(int, bool);
 	void play_motion(int);
+	void alert(int hz=440);
 
 	Motion motion;
 

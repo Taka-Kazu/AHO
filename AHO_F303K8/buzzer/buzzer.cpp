@@ -8,6 +8,10 @@ Buzzer::Buzzer(PinName pin)
 
 void Buzzer::alert(int hz)
 {
-	buzzer.period(1.0f/hz);
-	buzzer.write(0.5f);
+	if(hz<=0.0){
+		buzzer.write(0);
+	}else{
+		buzzer.period(1.0f/hz);
+		buzzer.write(0.5f);
+	}
 }

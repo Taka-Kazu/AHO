@@ -17,7 +17,7 @@ Machine::Machine(int motion_num)
 
 void Machine::play_motion(int motion_id)
 {
-	buzzer.alert();
+	alert();
 	wait(0.3);
 	if(motion_id<0||motion_id>MOTION_NUM){
 		for(int i=0;i<POS_NUM;i++)
@@ -99,4 +99,9 @@ void Machine::set_servo_angle(int id, float angle)
 void Machine::reverse_angle(float &angle)
 {
 	angle = MAX_ANGLE - angle;
+}
+
+void Machine::alert(int hz)
+{
+	buzzer.alert(hz);
 }

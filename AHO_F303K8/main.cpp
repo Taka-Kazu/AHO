@@ -20,13 +20,15 @@ int main() {
 	machine.alert(1760);
 	wait(0.5);
 	machine.alert(0);
-	printf("High, I'm SHIRO-OBI!\r\n");
+	machine.power_on();
+	printf("Hi, I'm SHIRO-OBI!\r\n");
 	printf("%d, %d, %d, %d\r\n", sizeof(Position), sizeof(Motion), sizeof(AHO), sizeof(Machine));
 	aho.set_motion(machine.motion);
 
     while(1) {
-    	if(aho.has_changed()){
-    		machine.play_motion(0);
+    	for(int i=0;i<180;i++){
+    		machine.move_servo(0, i);
+    		wait(0.5);
     	}
     }
 }

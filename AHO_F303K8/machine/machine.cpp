@@ -2,7 +2,7 @@
 
 Machine::Machine(int motion_num)
 :MOTION_NUM(motion_num) , servos(SDA, SCL), servo16(SERVO16_PIN), servo17(SERVO17_PIN)
-, buzzer(BUZZER_PIN), sd(MOSI, MISO, SCLK, SELECT_SD, "sd"), power(POWER_PIN)
+, buzzer(BUZZER_PIN), power(POWER_PIN)
 {
 	power_off();
 	direction = new bool[SERVO_NUM];
@@ -71,8 +71,10 @@ void Machine::set_pca9685_angle(int id, float angle)
 	if(!direction[id]){
 			reverse_angle(angle);
 		}
-	int pulse = (angle-CENTER_ANGLE)/(MAX_ANGLE-MIN_ANGLE)*(LONG_PULSE-SHORT_PULSE)+CENTER_PULSE;
-	servos.setPWM(id, 0, pulse/(PULSE_PERIOD)*(PCA9685_RESOLUTION-1));
+	float pulse = (angle-CENTER_ANGLE)/(MAX_ANGLE-MIN_ANGLE)*(LONG_PULSE-SHORT_PULSE)+CENTER_PULSE;
+	int off = pulse/(PULSE_PERIOD)*(PCA9685_RESOLUTION-1);
+	servos.setPWM(id, 0, off);
+	printf("id=%d, off=%d\r\n", id, off);
 }
 
 void Machine::set_servo_angle(int id, float angle)
@@ -109,10 +111,10 @@ void Machine::alert(int hz)
 
 void Machine::power_on(void)
 {
-	power = 0;
+	power = 1;
 }
 
 void Machine::power_off(void)
 {
-	power = 1;
+	power = 0;
 }

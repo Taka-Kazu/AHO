@@ -17,6 +17,9 @@ void HardFault_Handler()
 }
 
 int main() {
+	machine.alert(1760);
+	wait(0.5);
+	machine.alert(0);
 	printf("High, I'm SHIRO-OBI!\r\n");
 	printf("%d, %d, %d, %d\r\n", sizeof(Position), sizeof(Motion), sizeof(AHO), sizeof(Machine));
 	aho.set_motion(machine.motion);

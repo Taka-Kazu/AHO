@@ -17,6 +17,8 @@ public:
 	void set_direction(int, bool);
 	void play_motion(int);
 	void alert(int hz=440);
+	void power_on(void);
+	void power_off(void);
 
 	Motion motion;
 
@@ -25,11 +27,12 @@ private:
 	static const PinName SCL = PB_6;
 	static const PinName SERVO16_PIN = PA_6;
 	static const PinName SERVO17_PIN = PA_7;
-	static const PinName BUZZER_PIN = PA_11;
+	static const PinName BUZZER_PIN = PA_8;
 	static const PinName MOSI = PB_5;
 	static const PinName MISO = PB_4;
 	static const PinName SCLK = PB_3;
-	static const PinName SELECT_SD = PA_8;
+	static const PinName SELECT_SD = PA_11;
+	static const PinName POWER_PIN = PA_12;
 	static const int LONG_PULSE = 2500;
 	static const int SHORT_PULSE = 500;
 	static const int CENTER_PULSE = 1500;
@@ -49,6 +52,7 @@ private:
 	bool* direction;//true‚Ícw,false‚Íccw
 	Buzzer buzzer;
 	SDFileSystem sd;
+	DigitalOut power;
 
 	void set_pca9685_angle(int, float);//PCA9685—p
 	void set_servo_angle(int, float);//pwmƒsƒ“—p

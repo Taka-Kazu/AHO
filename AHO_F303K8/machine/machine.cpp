@@ -2,7 +2,7 @@
 
 Machine::Machine(int motion_num)
 :MOTION_NUM(motion_num) , servos(SDA, SCL)
-, buzzer(BUZZER_PIN), power(POWER_PIN)
+, buzzer(BUZZER_PIN), power(POWER_PIN), servo16(SERVO16_PIN), servo17(SERVO17_PIN)
 {
 	power_off();
 	direction = new bool[SERVO_NUM];

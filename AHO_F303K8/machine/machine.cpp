@@ -1,7 +1,7 @@
 #include "machine.h"
 
 Machine::Machine(int motion_num)
-:MOTION_NUM(motion_num) , servos(SDA, SCL), servo16(SERVO16_PIN), servo17(SERVO17_PIN)
+:MOTION_NUM(motion_num) , servos(SDA, SCL)
 , buzzer(BUZZER_PIN), power(POWER_PIN)
 {
 	power_off();
@@ -12,8 +12,6 @@ Machine::Machine(int motion_num)
 	servos.begin();
 	servos.setPrescale(121);
 	servos.frequencyI2C(400000);
-	servo16.period_ms(PULSE_PERIOD);
-	servo17.period_ms(PULSE_PERIOD);
 }
 
 void Machine::play_motion(int motion_id)
@@ -79,24 +77,7 @@ void Machine::set_pca9685_angle(int id, float angle)
 
 void Machine::set_servo_angle(int id, float angle)
 {
-	if(!direction[id]){
-		reverse_angle(angle);
-	}
-	int pulse = (angle-CENTER_ANGLE)/(MAX_ANGLE-MIN_ANGLE)*(LONG_PULSE-SHORT_PULSE)+CENTER_PULSE;
-	switch(id){
-	case 16:
-	{
-		servo16.pulsewidth_ms(pulse);
-		break;
-	}
-	case 17:
-	{
-		servo17.pulsewidth_ms(pulse);
-		break;
-	}
-	default:
-		break;
-	}
+
 }
 
 void Machine::reverse_angle(float &angle)

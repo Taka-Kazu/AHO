@@ -24,8 +24,6 @@ public:
 private:
 	static const PinName SDA = PB_7;
 	static const PinName SCL = PB_6;
-	static const PinName SERVO16_PIN = PA_6;
-	static const PinName SERVO17_PIN = PA_7;
 	static const PinName BUZZER_PIN = PA_8;
 	static const PinName MOSI = PB_5;
 	static const PinName MISO = PB_4;
@@ -45,8 +43,6 @@ private:
 	const int MOTION_NUM;
 
 	PCA9685 servos;
-	PwmOut servo16;
-	PwmOut servo17;
 	bool* direction;//true‚Ícw,false‚Íccw
 	Buzzer buzzer;
 	DigitalOut power;

@@ -385,6 +385,20 @@ void PASTE()
 void PLAY_POS()
 {
   current_pos.read_val();
+  try{
+    data_line = "";
+    if(current_pos.enabled==true){
+      data_line += current_pos.time_ms+",";
+      for(int j=0;j<SERVO_NUM;j++){
+        data_line += (int)current_pos.val[j]+",";
+      }
+      data_line += "\n";
+    }
+    println(data_line);
+    serial_port.write(data_line+'\0');
+  }catch(Exception ex){
+    
+  }
 }
 
 void RESET_POS()

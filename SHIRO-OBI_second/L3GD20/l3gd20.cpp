@@ -23,7 +23,7 @@ L3GD20::L3GD20(SPI& _spi, PinName cs_pin)
 {
 	spi->frequency(1000000);
 	spi->format(8, 3);
-	if(read(L3GD20_WHO_AM_I) == 0xD4)
+	if(read(L3GD20_WHO_AM_I) != 0xD4)
 	{
 		printf("L3GD20_ERROR!\r\n");
 	}

@@ -2,10 +2,11 @@
 #define __MACHINE_H
 
 #include "mbed.h"
-#include "../AHO_F303K8/PCA9685/PCA9685.h"
-#include "../AHO_F303K8/motion/motion.h"
-#include "../AHO_F303K8/buzzer/buzzer.h"
+#include "PCA9685.h"
+#include "motion.h"
+#include "buzzer.h"
 #include "SDFileSystem.h"
+#include "l3gd20.h"
 
 
 class Machine
@@ -33,6 +34,7 @@ private:
 	static const PinName SCLK = PB_3;
 	static const PinName SELECT_SD = PA_11;
 	static const PinName POWER_PIN = PA_12;
+	static const PinName SELECT_GYRO = PF_0;
 	static const float LONG_PULSE = 2.5;
 	static const float SHORT_PULSE = 0.5;
 	static const float CENTER_PULSE = 1.5;
@@ -51,8 +53,10 @@ private:
 	PwmOut servo17;
 	bool* direction;//true‚Ícw,false‚Íccw
 	Buzzer buzzer;
+	SPI spi;
 	SDFileSystem sd;
 	DigitalOut power;
+	L3GD20 gyro;
 
 	void set_pca9685_angle(int, float);//PCA9685—p
 	void set_servo_angle(int, float);//pwmƒsƒ“—p

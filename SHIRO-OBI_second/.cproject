@@ -118,6 +118,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/SHIRO-OBI_second/motion}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/SHIRO-OBI_second/PCA9685}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/SHIRO-OBI_second/position}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/SHIRO-OBI_second/L3GD20}&quot;"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.dialect.std.342383666" name="Language standard" superClass="gnu.cpp.compiler.option.dialect.std" useByScannerDiscovery="true" value="gnu.cpp.compiler.dialect.default" valueType="enumerated"/>
 								<option id="gnu.cpp.compiler.option.preprocessor.def342383666" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" useByScannerDiscovery="false" valueType="definedSymbols">

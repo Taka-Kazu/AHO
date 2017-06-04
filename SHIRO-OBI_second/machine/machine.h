@@ -25,8 +25,8 @@ public:
 private:
 	static const PinName SDA = PB_7;
 	static const PinName SCL = PB_6;
-	static const PinName SERVO16_PIN = PA_6;
-	static const PinName SERVO17_PIN = PA_7;
+	static const PinName SERVO16_PIN = PA_3;
+	static const PinName SERVO17_PIN = PA_4;
 	static const PinName BUZZER_PIN = PA_8;
 	static const PinName MOSI = PB_5;
 	static const PinName MISO = PB_4;

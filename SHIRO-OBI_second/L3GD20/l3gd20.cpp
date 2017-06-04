@@ -34,17 +34,20 @@ L3GD20::L3GD20(SPI& _spi, PinName cs_pin)
 
 float L3GD20::get_x_angular_velocity(void)
 {
-	return ((read(L3GD20_OUT_X_H)<<8) + read(L3GD20_OUT_X_L));
+	float angular_velocity = ((read(L3GD20_OUT_X_H)<<8) + read(L3GD20_OUT_X_L))*L3GD20_RESOLUTION;
+	return angular_velocity;
 }
 
 float L3GD20::get_y_angular_velocity(void)
 {
-	return ((read(L3GD20_OUT_X_H)<<8) + read(L3GD20_OUT_X_L));
+	float angular_velocity = ((read(L3GD20_OUT_Y_H)<<8) + read(L3GD20_OUT_Y_L))*L3GD20_RESOLUTION;
+	return angular_velocity;
 }
 
 float L3GD20::get_z_angular_velocity(void)
 {
-	return ((read(L3GD20_OUT_X_H)<<8) + read(L3GD20_OUT_X_L));
+	float angular_velocity = ((read(L3GD20_OUT_Z_H)<<8) + read(L3GD20_OUT_Z_L))*L3GD20_RESOLUTION;
+	return angular_velocity;
 }
 
 void L3GD20::write(uint16_t reg, uint16_t val)

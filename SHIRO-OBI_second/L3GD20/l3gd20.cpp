@@ -39,8 +39,8 @@ L3GD20::L3GD20(SPI& _spi, PinName cs_pin)
 float L3GD20::get_x_angular_velocity(void)
 {
 	int val = ((read(L3GD20_OUT_X_H)<<8) + read(L3GD20_OUT_X_L));
-	float angular_velocity = 12;//*L3GD20_RESOLUTION;
-	printf("av = %lf\r\n", angular_velocity);
+	float angular_velocity = 12.0f;//*L3GD20_RESOLUTION;
+	printf("a = %f\r\n", angular_velocity);
 	return angular_velocity;
 }
 

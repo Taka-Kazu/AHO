@@ -15,8 +15,8 @@ private:
 	SPI* spi;
 	DigitalOut cs;
 
-	void write(uint16_t, uint16_t);
-	uint8_t read(uint16_t);
+	void write(uint8_t, uint8_t);
+	int read(uint8_t);
 };
 
 #endif

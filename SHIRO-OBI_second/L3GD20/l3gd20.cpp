@@ -21,20 +21,26 @@
 L3GD20::L3GD20(SPI& _spi, PinName cs_pin)
 :spi(&_spi), cs(cs_pin)
 {
+	cs = 1;
 	spi->frequency(1000000);
 	spi->format(8, 3);
-	if(read(L3GD20_WHO_AM_I) != 0xD4)
+	cs = 0;
+	int val = read(L3GD20_WHO_AM_I);
+	cs = 1;
+	printf("val = %d\r\n", val);
+	if(val != 0xD4)
 	{
 		printf("L3GD20_ERROR!\r\n");
 	}
 	write(L3GD20_CTRL_REG1, 0x0f);
 	write(L3GD20_CTRL_REG4, 0x00);
-	cs=1;
 }
 
 float L3GD20::get_x_angular_velocity(void)
 {
-	float angular_velocity = ((read(L3GD20_OUT_X_H)<<8) + read(L3GD20_OUT_X_L))*L3GD20_RESOLUTION;
+	int val = ((read(L3GD20_OUT_X_H)<<8) + read(L3GD20_OUT_X_L));
+	float angular_velocity = 12;//*L3GD20_RESOLUTION;
+	printf("av = %lf\r\n", angular_velocity);
 	return angular_velocity;
 }
 
@@ -50,24 +56,21 @@ float L3GD20::get_z_angular_velocity(void)
 	return angular_velocity;
 }
 
-void L3GD20::write(uint16_t reg, uint16_t val)
+void L3GD20::write(uint8_t reg, uint8_t val)
 {
 	cs=0;
 	spi->write(reg);
-	cs=1;
-	cs=0;
 	spi->write(val);
 	cs=1;
 }
 
-uint8_t L3GD20::read(uint16_t reg)
+int L3GD20::read(uint8_t reg)
 {
-	cs=0;
+	printf("read val from reg 0x%X\r\n", reg);
+	cs = 0;
 	spi->write(reg);
-	cs=1;
-	wait_us(10);
-	cs=0;
 	uint8_t data = spi->write(0);
-	cs=1;
+	cs = 1;
+	printf("got val 0x%X\r\n", data);
 	return data;
 }

@@ -2,8 +2,8 @@
 
 Machine::Machine(int motion_num)
 :MOTION_NUM(motion_num) , servos(SDA, SCL), servo16(SERVO16_PIN), servo17(SERVO17_PIN)
-, buzzer(BUZZER_PIN), sd(MOSI, MISO, SCLK, SELECT_SD, "sd"), power(POWER_PIN), spi(MOSI, MISO, SCLK)
-, gyro(spi, SELECT_GYRO)
+, buzzer(BUZZER_PIN), power(POWER_PIN), spi(MOSI, MISO, SCLK)
+, gyro(spi, SELECT_GYRO), sd(MOSI, MISO, SCLK, SELECT_SD, "sd")
 {
 	power_off();
 	direction = new bool[SERVO_NUM];
@@ -118,4 +118,11 @@ void Machine::power_on(void)
 void Machine::power_off(void)
 {
 	power = 0;
+}
+
+float Machine::get_angle_x(void)
+{
+	float val = 0;
+	val =  gyro.get_x_angular_velocity();
+	return val;
 }

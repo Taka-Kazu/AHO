@@ -20,6 +20,7 @@ public:
 	void alert(int hz=440);
 	void power_on(void);
 	void power_off(void);
+	float get_angle_x(void);
 
 	Motion motion;
 

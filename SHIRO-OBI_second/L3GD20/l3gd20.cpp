@@ -27,7 +27,6 @@ L3GD20::L3GD20(SPI& _spi, PinName cs_pin)
 	cs = 0;
 	int val = read(L3GD20_WHO_AM_I);
 	cs = 1;
-	printf("val = %d\r\n", val);
 	if(val != 0xD4)
 	{
 		printf("L3GD20_ERROR!\r\n");
@@ -38,9 +37,7 @@ L3GD20::L3GD20(SPI& _spi, PinName cs_pin)
 
 float L3GD20::get_x_angular_velocity(void)
 {
-	int val = ((read(L3GD20_OUT_X_H)<<8) + read(L3GD20_OUT_X_L));
-	float angular_velocity = 12.0f;//*L3GD20_RESOLUTION;
-	printf("a = %f\r\n", angular_velocity);
+	float angular_velocity = ((read(L3GD20_OUT_X_H)<<8) + read(L3GD20_OUT_X_L))*L3GD20_RESOLUTION;
 	return angular_velocity;
 }
 
@@ -68,7 +65,7 @@ int L3GD20::read(uint8_t reg)
 {
 	printf("read val from reg 0x%X\r\n", reg);
 	cs = 0;
-	spi->write(reg);
+	spi->write(reg | 0x80);
 	uint8_t data = spi->write(0);
 	cs = 1;
 	printf("got val 0x%X\r\n", data);

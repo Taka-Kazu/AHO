@@ -3,9 +3,11 @@
 #include "mbed.h"
 #include "machine.h"
 
-SPI spi(PB_5, PB_4, PB_3);
-L3GD20 gyro(spi, PF_0);
+Serial pc(USBTX, USBRX);
+Machine machine(1);
 
+
+void set_motions(void);
 extern "C"
 void HardFault_Handler()
 {
@@ -13,20 +15,22 @@ void HardFault_Handler()
 }
 
 int main() {
-
-	DigitalOut a(PF_1);
-	a=1;
-	DigitalOut s(PA_11);
-	s = 1;
-	wait(1);
-
+	//machine.alert(1760);
+	wait(0.5);
+	machine.alert(0);
+	machine.power_on();
 	printf("Hi, I'm SHIRO-OBI!\r\n");
-	//printf("%d, %d, %d\r\n", sizeof(Position), sizeof(Motion), sizeof(Machine));
-	wait(1);
-    while(1) {
-    	int val = gyro.get_x_angular_velocity();
+	printf("%d, %d, %d\r\n", sizeof(Position), sizeof(Motion), sizeof(Machine));
 
-    	printf("v = %d\r\n", val);
-    	wait(1.0);
+    while(1) {
+    	for(int i=0;i<180;i++){
+    		machine.move_servo(0, i);
+    		wait(0.5);
+    	}
     }
+}
+
+void set_motions(void)
+{
+	machine.motion.pos[0].set_param("100,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90\n");
 }

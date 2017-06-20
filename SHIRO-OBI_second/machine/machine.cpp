@@ -3,7 +3,7 @@
 Machine::Machine(int motion_num)
 :MOTION_NUM(motion_num) , servos(SDA, SCL), servo16(SERVO16_PIN), servo17(SERVO17_PIN)
 , buzzer(BUZZER_PIN), power(POWER_PIN), spi(MOSI, MISO, SCLK)
-, gyro(spi, SELECT_GYRO), sd(MOSI, MISO, SCLK, SELECT_SD, "sd")
+, gyro(spi, SELECT_GYRO), sd_card(MOSI, MISO, SCLK, SELECT_SD, "sd")
 , accelerometer(spi, SELECT_ACCELEROMETER)
 {
 	power_off();
@@ -23,6 +23,7 @@ void Machine::play_motion(int motion_id)
 	alert();
 	wait(0.3);
 	if(motion_id<0||motion_id>MOTION_NUM){
+		FILE* fp = fopen("/sd/mydir/motion.csv", "wt");
 		for(int i=0;i<POS_NUM;i++)
 		{
 			int time = motion.pos[i].get_time();
@@ -37,6 +38,7 @@ void Machine::play_motion(int motion_id)
 			}
 			wait_ms(time);
 		}
+		fclose(fp);
 	}
 }
 

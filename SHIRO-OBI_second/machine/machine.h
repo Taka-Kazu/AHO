@@ -57,7 +57,7 @@ private:
 	bool* direction;//true‚Ícw,false‚Íccw
 	Buzzer buzzer;
 	SPI spi;
-	SDFileSystem sd;
+	SDFileSystem sd_card;
 	DigitalOut power;
 	L3GD20 gyro;
 	ADXL345 accelerometer;

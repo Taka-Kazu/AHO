@@ -180,7 +180,7 @@
 							</tool>
 							<tool id="fr.ac6.managedbuild.tool.gnu.cross.cpp.linker.342383666" name="MCU G++ Linker" superClass="fr.ac6.managedbuild.tool.gnu.cross.cpp.linker">
 								<option id="fr.ac6.managedbuild.tool.gnu.cross.cpp.linker.script.342383666" name="Linker Script (-T)" superClass="fr.ac6.managedbuild.tool.gnu.cross.cpp.linker.script" value="${workspace_loc:/${ProjName}/mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_GCC_ARM/STM32F303X8.ld}" valueType="string"/>
-								<option id="gnu.cpp.link.option.flags.342383666" name="Linker flags" superClass="gnu.cpp.link.option.flags" value="--specs=nano.specs" valueType="string"/>
+								<option id="gnu.cpp.link.option.flags.342383666" name="Linker flags" superClass="gnu.cpp.link.option.flags" value="--specs=nano.specs -specs=nosys.specs -u_printf_float" valueType="string"/>
 								<option id="gnu.cpp.link.option.userobjs.342383666" name="Other objects" superClass="gnu.cpp.link.option.userobjs" valueType="userObjs">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_GCC_ARM/stm32f3xx_hal_smartcard.o}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_GCC_ARM/PeripheralPins.o}&quot;"/>

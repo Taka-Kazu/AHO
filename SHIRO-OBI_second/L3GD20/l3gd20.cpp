@@ -13,10 +13,10 @@
 #define L3GD20_STATUS_REG 0x28
 #define L3GD20_OUT_X_L 0x28
 #define L3GD20_OUT_X_H 0x29
-#define L3GD20_OUT_Y_H 0x2A
-#define L3GD20_OUT_Y_L 0x2B
-#define L3GD20_OUT_Z_H 0x2C
-#define L3GD20_OUT_Z_L 0x2D
+#define L3GD20_OUT_Y_L 0x2A
+#define L3GD20_OUT_Y_H 0x2B
+#define L3GD20_OUT_Z_L 0x2C
+#define L3GD20_OUT_Z_H 0x2D
 
 L3GD20::L3GD20(SPI& _spi, PinName cs_pin)
 :spi(&_spi), cs(cs_pin)
@@ -37,19 +37,19 @@ L3GD20::L3GD20(SPI& _spi, PinName cs_pin)
 
 float L3GD20::get_x_angular_velocity(void)
 {
-	float angular_velocity = ((read(L3GD20_OUT_X_H)<<8) + read(L3GD20_OUT_X_L))*L3GD20_RESOLUTION;
+	float angular_velocity = ((int16_t)(read(L3GD20_OUT_X_H)<<8) + read(L3GD20_OUT_X_L))*L3GD20_RESOLUTION;
 	return angular_velocity;
 }
 
 float L3GD20::get_y_angular_velocity(void)
 {
-	float angular_velocity = ((read(L3GD20_OUT_Y_H)<<8) + read(L3GD20_OUT_Y_L))*L3GD20_RESOLUTION;
+	float angular_velocity = ((int16_t)(read(L3GD20_OUT_Y_H)<<8) + read(L3GD20_OUT_Y_L))*L3GD20_RESOLUTION;
 	return angular_velocity;
 }
 
 float L3GD20::get_z_angular_velocity(void)
 {
-	float angular_velocity = ((read(L3GD20_OUT_Z_H)<<8) + read(L3GD20_OUT_Z_L))*L3GD20_RESOLUTION;
+	float angular_velocity = ((int16_t)(read(L3GD20_OUT_Z_H)<<8) + read(L3GD20_OUT_Z_L))*L3GD20_RESOLUTION;
 	return angular_velocity;
 }
 

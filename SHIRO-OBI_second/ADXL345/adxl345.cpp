@@ -47,19 +47,19 @@ ADXL345::ADXL345(SPI& _spi, PinName cs_pin)
 
 float ADXL345::get_x_acceleration(void)
 {
-	float acceleration = ((read(ADXL345_DATAX1)<<8) + read(ADXL345_DATAX0)) * ADXL345_MG_LSB;
+	float acceleration = ((int16_t)(read(ADXL345_DATAX1)<<8) + read(ADXL345_DATAX0)) * ADXL345_MG_LSB / 8.0f;
 	return acceleration;
 }
 
 float ADXL345::get_y_acceleration(void)
 {
-	float acceleration = ((read(ADXL345_DATAY1)<<8) + read(ADXL345_DATAY0)) * ADXL345_MG_LSB;
+	float acceleration = ((int16_t)(read(ADXL345_DATAY1)<<8) + read(ADXL345_DATAY0)) * ADXL345_MG_LSB / 8.0f;
 	return acceleration;
 }
 
 float ADXL345::get_z_acceleration(void)
 {
-	float acceleration = ((read(ADXL345_DATAZ1)<<8) + read(ADXL345_DATAZ0)) * ADXL345_MG_LSB;
+	float acceleration = ((int16_t)(read(ADXL345_DATAZ1)<<8) + read(ADXL345_DATAZ0)) * ADXL345_MG_LSB / 8.0f;
 	return acceleration;
 }
 
@@ -73,11 +73,11 @@ void ADXL345::write(uint8_t reg, uint8_t val)
 
 int ADXL345::read(uint8_t reg)
 {
-	printf("read val from reg 0x%X\r\n", reg);
+	//printf("read val from reg 0x%X\r\n", reg);
 	cs = 0;
 	spi->write(reg | 0x80);
 	uint8_t data = spi->write(0);
 	cs = 1;
-	printf("got val 0x%X\r\n", data);
+	//printf("got val 0x%X\r\n", data);
 	return data;
 }

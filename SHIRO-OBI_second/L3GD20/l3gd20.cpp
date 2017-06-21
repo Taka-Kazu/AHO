@@ -21,6 +21,9 @@
 L3GD20::L3GD20(SPI& _spi, PinName cs_pin)
 :spi(&_spi), cs(cs_pin)
 {
+	offset_x = 0;
+	offset_y = 0;
+	offset_z = 0;
 	cs = 1;
 	spi->frequency(1000000);
 	spi->format(8, 3);
@@ -37,20 +40,37 @@ L3GD20::L3GD20(SPI& _spi, PinName cs_pin)
 
 float L3GD20::get_x_angular_velocity(void)
 {
-	float angular_velocity = ((int16_t)(read(L3GD20_OUT_X_H)<<8) + read(L3GD20_OUT_X_L))*L3GD20_RESOLUTION*M_PI/180.0f;
+	float angular_velocity = ((int16_t)(read(L3GD20_OUT_X_H)<<8) + read(L3GD20_OUT_X_L))*L3GD20_RESOLUTION*M_PI/180.0f - offset_x;
 	return angular_velocity;
 }
 
 float L3GD20::get_y_angular_velocity(void)
 {
-	float angular_velocity = ((int16_t)(read(L3GD20_OUT_Y_H)<<8) + read(L3GD20_OUT_Y_L))*L3GD20_RESOLUTION*M_PI/180.0f;
+	float angular_velocity = ((int16_t)(read(L3GD20_OUT_Y_H)<<8) + read(L3GD20_OUT_Y_L))*L3GD20_RESOLUTION*M_PI/180.0f - offset_y;
 	return angular_velocity;
 }
 
 float L3GD20::get_z_angular_velocity(void)
 {
-	float angular_velocity = ((int16_t)(read(L3GD20_OUT_Z_H)<<8) + read(L3GD20_OUT_Z_L))*L3GD20_RESOLUTION*M_PI/180.0f;
+	float angular_velocity = ((int16_t)(read(L3GD20_OUT_Z_H)<<8) + read(L3GD20_OUT_Z_L))*L3GD20_RESOLUTION*M_PI/180.0f - offset_z;
 	return angular_velocity;
+}
+
+void L3GD20::calibrate(uint16_t n)
+{
+	offset_x=offset_y=offset_z=0;
+	float sum_x = 0;
+	float sum_y = 0;
+	float sum_z = 0;
+	for(int i=0;i<n;i++){
+		sum_x += get_x_angular_velocity();
+		sum_y += get_y_angular_velocity();
+		sum_z += get_z_angular_velocity();
+	}
+	offset_x = sum_x/n;
+	offset_y = sum_y/n;
+	offset_z = sum_z/n;
+	//printf("x = %f, y = %f, z = %f\r\n", offset_x, offset_y, offset_z);
 }
 
 void L3GD20::write(uint8_t reg, uint8_t val)
@@ -63,11 +83,11 @@ void L3GD20::write(uint8_t reg, uint8_t val)
 
 int L3GD20::read(uint8_t reg)
 {
-	printf("read val from reg 0x%X\r\n", reg);
+	//printf("read val from reg 0x%X\r\n", reg);
 	cs = 0;
 	spi->write(reg | 0x80);
 	uint8_t data = spi->write(0);
 	cs = 1;
-	printf("got val 0x%X\r\n", data);
+	//printf("got val 0x%X\r\n", data);
 	return data;
 }

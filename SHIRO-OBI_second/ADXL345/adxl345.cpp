@@ -31,10 +31,14 @@
 #define ADXL345_FIFO_CTL 0x38
 #define ADXL345_FIFO_STATUS 0x39
 #define ADXL345_MG_LSB 0.03125
+#define GRAVITY 9.81
 
 ADXL345::ADXL345(SPI& _spi, PinName cs_pin)
 :spi(&_spi), cs(cs_pin)
 {
+	offset_x = 0;
+	offset_y = 0;
+	offset_z = 0;
 	cs = 1;
 	spi->format(8, 3);
 	spi->frequency(1000000);
@@ -47,20 +51,37 @@ ADXL345::ADXL345(SPI& _spi, PinName cs_pin)
 
 float ADXL345::get_x_acceleration(void)
 {
-	float acceleration = ((int16_t)(read(ADXL345_DATAX1)<<8) + read(ADXL345_DATAX0)) * ADXL345_MG_LSB / 8.0f;
+	float acceleration = ((int16_t)(read(ADXL345_DATAX1)<<8) + read(ADXL345_DATAX0)) * ADXL345_MG_LSB / 8.0f * GRAVITY- offset_x;
 	return acceleration;
 }
 
 float ADXL345::get_y_acceleration(void)
 {
-	float acceleration = ((int16_t)(read(ADXL345_DATAY1)<<8) + read(ADXL345_DATAY0)) * ADXL345_MG_LSB / 8.0f;
+	float acceleration = ((int16_t)(read(ADXL345_DATAY1)<<8) + read(ADXL345_DATAY0)) * ADXL345_MG_LSB / 8.0f * GRAVITY - offset_y;
 	return acceleration;
 }
 
 float ADXL345::get_z_acceleration(void)
 {
-	float acceleration = ((int16_t)(read(ADXL345_DATAZ1)<<8) + read(ADXL345_DATAZ0)) * ADXL345_MG_LSB / 8.0f;
+	float acceleration = (((int16_t)(read(ADXL345_DATAZ1)<<8) + read(ADXL345_DATAZ0)) * ADXL345_MG_LSB / 8.0f) * GRAVITY - offset_z;
 	return acceleration;
+}
+
+void ADXL345::calibrate(uint16_t n)
+{
+	offset_x=offset_y=offset_z=0;
+	float sum_x = 0;
+	float sum_y = 0;
+	float sum_z = 0;
+	for(int i=0;i<n;i++){
+		sum_x += get_x_acceleration();
+		sum_y += get_y_acceleration();
+		sum_z += get_z_acceleration();
+	}
+	offset_x = sum_x/n;
+	offset_y = sum_y/n;
+	offset_z = sum_z/n - GRAVITY;
+	//printf("x = %f, y = %f, z = %f\r\n", offset_x, offset_y, offset_z);
 }
 
 void ADXL345::write(uint8_t reg, uint8_t val)

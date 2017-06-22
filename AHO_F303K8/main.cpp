@@ -26,10 +26,7 @@ int main() {
 	aho.set_motion(machine.motion);
 
     while(1) {
-    	for(int i=0;i<180;i++){
-    		machine.move_servo(0, i);
-    		wait(0.5);
-    	}
+    	machine.play_motion(0);
     }
 }
 

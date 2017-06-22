@@ -394,7 +394,7 @@ void PLAY_POS()
       }
       data_line += "\n";
     }
-    println(data_line);
+    //println(data_line);
     serial_port.write(data_line+'\0');
   }catch(Exception ex){
     

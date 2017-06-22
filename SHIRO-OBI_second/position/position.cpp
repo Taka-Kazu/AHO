@@ -45,7 +45,9 @@ void Position::set_param(char* str)
 
 int Position::get_time(void)
 {
-	return time_ms;
+	int temp = time_ms;
+	time_ms = 0;
+	return temp;
 }
 
 int Position::get_angle(int id)

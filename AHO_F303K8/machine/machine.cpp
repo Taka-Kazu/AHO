@@ -16,13 +16,14 @@ Machine::Machine(int motion_num)
 
 void Machine::play_motion(int motion_id)
 {
-	alert();
+	//alert();
 	wait(0.3);
-	if(motion_id<0||motion_id>MOTION_NUM){
+	if(motion_id>=0||motion_id<=MOTION_NUM){
 		for(int i=0;i<POS_NUM;i++)
 		{
 			int time = motion.pos[i].get_time();
 			if(time==0){
+				//printf("%d, time == 0!\r\n", i);
 				return;
 			}
 			if(i == (sizeof(motion.pos)/sizeof(Position)-1)){
@@ -30,7 +31,9 @@ void Machine::play_motion(int motion_id)
 			}
 			for(int j=0;j<SERVO_NUM;j++){
 				move_servo(j, motion.pos[i].get_angle(j));
+				//printf("%d, %d, %d[deg]\r\n", i, j, motion.pos[i].get_angle(j));
 			}
+			//printf("%d, time == %d, %d[deg]\r\n", i, motion.pos[i].get_time(), motion.pos[i].get_angle(0));
 			wait_ms(time);
 		}
 	}
@@ -72,7 +75,7 @@ void Machine::set_pca9685_angle(int id, float angle)
 	float pulse = (angle-CENTER_ANGLE)/(MAX_ANGLE-MIN_ANGLE)*(LONG_PULSE-SHORT_PULSE)+CENTER_PULSE;
 	int off = pulse/(PULSE_PERIOD)*(PCA9685_RESOLUTION-1);
 	servos.setPWM(id, 0, off);
-	printf("id=%d, off=%d\r\n", id, off);
+	//printf("id=%d, off=%d\r\n", id, off);
 }
 
 void Machine::set_servo_angle(int id, float angle)

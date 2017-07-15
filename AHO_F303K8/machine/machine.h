@@ -1,6 +1,10 @@
 #ifndef __MACHINE_H
 #define __MACHINE_H
 
+/*
+ * ‰ñ˜H‚Ì‘€ì‚ğ‚Ü‚Æ‚ß‚éƒNƒ‰ƒX
+ */
+
 #include "mbed.h"
 #include "PCA9685.h"
 #include "motion.h"

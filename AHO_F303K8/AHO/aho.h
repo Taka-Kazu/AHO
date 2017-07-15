@@ -1,6 +1,10 @@
 #ifndef __AHO_H
 #define __AHO_H
 
+/*
+ * PCとの通信用クラス
+ */
+
 #include "mbed.h"
 #include "motion.h"
 

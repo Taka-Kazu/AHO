@@ -46,6 +46,7 @@ public:
      * Opens a file on the filesystem
      */
     virtual FileHandle *open(const char* name, int flags);
+    virtual int open(FileHandle **file, const char *name, int flags);
     
     /**
      * Removes a file path
@@ -66,6 +67,7 @@ public:
      * Opens a directory on the filesystem
      */
     virtual DirHandle *opendir(const char *name);
+    virtual int open(DirHandle **dir, const char *name);
     
     /**
      * Creates a directory path

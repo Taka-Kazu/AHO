@@ -110,16 +110,16 @@
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/mbed/hal&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/mbed/platform&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/SHIRO-OBI_second/machine}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/SHIRO-OBI_second/SDFileSystem}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/SHIRO-OBI_second/SDFileSystem/FATFileSystem}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/SHIRO-OBI_second/SDFileSystem/FATFileSystem/ChaN}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/SHIRO-OBI_second/buzzer}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/SHIRO-OBI_second/motion}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/SHIRO-OBI_second/PCA9685}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/SHIRO-OBI_second/position}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/SHIRO-OBI_second/L3GD20}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/SHIRO-OBI_second/ADXL345}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/SHIRO-OBI_second/SDFileSystem}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/SHIRO-OBI_second/SDFileSystem/FATFileSystem/ChaN}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/SHIRO-OBI_second/SDFileSystem/FATFileSystem}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/SHIRO-OBI_second/machine}&quot;"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.dialect.std.342383666" name="Language standard" superClass="gnu.cpp.compiler.option.dialect.std" useByScannerDiscovery="true" value="gnu.cpp.compiler.dialect.default" valueType="enumerated"/>
 								<option id="gnu.cpp.compiler.option.preprocessor.def342383666" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" useByScannerDiscovery="false" valueType="definedSymbols">

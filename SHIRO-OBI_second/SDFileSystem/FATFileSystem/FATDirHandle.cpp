@@ -77,3 +77,13 @@ void FATDirHandle::seekdir(off_t location) {
     dir.index = location;
 }
 
+ssize_t FATDirHandle::read(struct dirent *ent) {
+    struct dirent *temp = readdir();
+    if (!temp) {
+        return 0;
+    }
+    
+    memcpy(ent, temp, sizeof(*ent));
+    return 1;
+}
+

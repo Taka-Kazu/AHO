@@ -100,6 +100,16 @@ FileHandle *FATFileSystem::open(const char* name, int flags) {
     return new FATFileHandle(fh);
 }
 
+int FATFileSystem::open(FileHandle **file, const char *name, int flags) {
+    FileHandle *temp = open(name, flags);
+    if (!temp) {
+        return -1;
+    }
+    
+    *file = temp;
+    return 0;
+}
+
 int FATFileSystem::remove(const char *filename) {
     FRESULT res = f_unlink(filename);
     if (res) {
@@ -134,6 +144,16 @@ DirHandle *FATFileSystem::opendir(const char *name) {
         return NULL;
     }
     return new FATDirHandle(dir);
+}
+
+int FATFileSystem::open(DirHandle **dir, const char *name) {
+    DirHandle *temp = opendir(name);
+    if (!temp) {
+        return -1;
+    }
+    
+    *dir = temp;
+    return 0;
 }
 
 int FATFileSystem::mkdir(const char *name, mode_t mode) {

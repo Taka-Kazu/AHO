@@ -20,7 +20,6 @@ int main() {
 	machine.alert(0);
 	machine.power_on();
 	printf("Hi, I'm SHIRO-OBI!\r\n");
-	printf("%d, %d, %d\r\n", sizeof(Position), sizeof(Motion), sizeof(Machine));
 
     while(1) {
     	for(int i=0;i<180;i++){
@@ -33,4 +32,7 @@ int main() {
 void set_motions(void)
 {
 	machine.motion.pos[0].set_param("100,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90\n");
+}
+
+void error(const char* format, ...) {
 }

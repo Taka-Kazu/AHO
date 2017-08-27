@@ -20,10 +20,37 @@ Machine::Machine(int motion_num)
 
 void Machine::play_motion(int motion_id)
 {
-	alert();
+	//alert();
+	char c;
+	int8_t str_j = 0;//param2
+	int8_t str_k = 0;//param1
+	char str[50][100];
+
 	wait(0.3);
-	if(motion_id<0||motion_id>MOTION_NUM){
-		FILE* fp = fopen("/sd/mydir/motion.csv", "wt");
+	if(!(motion_id<0||motion_id>MOTION_NUM)){
+		FILE* fp = fopen("/sd/mydir/motion.csv", "r");
+		if(fp == NULL){
+			printf("SD card error!\r\n");
+			return;
+		}
+
+		while(1){
+			fscanf(fp, "%c", &c);
+			if(c=='\0'){
+				for(int i=0;i<str_k;i++){
+					motion.pos[i].set_param(str[i]);
+					//printf("%s\r\n", str[i]);
+				}
+				break;
+			}
+			str[str_k][str_j] = c;
+			str_j++;
+			if(c=='\n'){
+				str_k++;
+				str_j=0;
+			}
+		}
+
 		for(int i=0;i<POS_NUM;i++)
 		{
 			int time = motion.pos[i].get_time();

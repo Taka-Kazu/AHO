@@ -3,6 +3,10 @@
 
 #include "mbed.h"
 
+#ifndef M_PI
+#define M_PI 3.1415927
+#endif
+
 class L3GD20
 {
 public:

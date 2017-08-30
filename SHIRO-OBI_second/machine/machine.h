@@ -54,16 +54,16 @@ private:
 	PCA9685 servos;
 	PwmOut servo16;
 	PwmOut servo17;
-	bool* direction;//true‚Ícw,false‚Íccw
+	bool* direction;//trueï¿½ï¿½cw,falseï¿½ï¿½ccw
 	Buzzer buzzer;
-	SPI spi;
-	SDFileSystem sd_card;
 	DigitalOut power;
+	SPI spi;
 	L3GD20 gyro;
 	ADXL345 accelerometer;
+	SDFileSystem sd_card;
 
-	void set_pca9685_angle(int, float);//PCA9685—p
-	void set_servo_angle(int, float);//pwmƒsƒ“—p
+	void set_pca9685_angle(int, float);//PCA9685ï¿½p
+	void set_servo_angle(int, float);//pwmï¿½sï¿½ï¿½ï¿½p
 	void reverse_angle(float&);
 };
 

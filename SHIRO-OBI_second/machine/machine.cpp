@@ -3,8 +3,9 @@
 Machine::Machine(int motion_num)
 :MOTION_NUM(motion_num) , servos(SDA, SCL), servo16(SERVO16_PIN), servo17(SERVO17_PIN)
 , buzzer(BUZZER_PIN), power(POWER_PIN), spi(MOSI, MISO, SCLK)
-, gyro(spi, SELECT_GYRO), sd_card(MOSI, MISO, SCLK, SELECT_SD, "sd")
+, gyro(spi, SELECT_GYRO)
 , accelerometer(spi, SELECT_ACCELEROMETER)
+, sd_card(MOSI, MISO, SCLK, SELECT_SD, "sd")
 {
 	power_off();
 	direction = new bool[SERVO_NUM];
@@ -32,6 +33,7 @@ void Machine::play_motion(int motion_id)
 
 		FILE *fp = fopen("/sd/mydir/motion.csv", "r");
 		printf("0x%X, 0x%X\r\n", &fp, fp);
+		printf("&spi = 0x%X\r\n", &sd_card);
 		if(fp == NULL){
 			printf("SD card error!\r\n");
 			return;

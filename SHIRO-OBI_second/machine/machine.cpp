@@ -25,9 +25,15 @@ void Machine::play_motion(int motion_id)
 	char c;
 	int8_t str_j = 0;//param2
 	int8_t str_k = 0;//param1
-	char str[25][100];
+	char str[20][110];
 	bool flag = true;
 
+	for(int i=0;i<20;i++){
+		for(int j=0;j<110;j++){
+			str[i][j] = 0;
+		}
+	}
+	//printf("size of str = %d\r\n", sizeof(str));
 	wait(0.3);
 	if(!(motion_id<0||motion_id>MOTION_NUM)){
 		mkdir("/sd/mydir", 0777);
@@ -43,7 +49,7 @@ void Machine::play_motion(int motion_id)
 			//printf("%c", c);
 			if(c=='\n'){
 				if(flag==false){
-					c = 0;
+					c = '\0';
 				}
 				flag = false;
 			}else{
@@ -52,11 +58,15 @@ void Machine::play_motion(int motion_id)
 			if(c=='\0'){
 				for(int i=0;i<str_k;i++){
 					motion.pos[i].set_param(str[i]);
-					printf("%s\r\n", str[i]);
+					printf("str[%d] = %s\r\n", i, str[i]);
 				}
 				break;
 			}
 			str[str_k][str_j] = c;
+			if(c == '\n'){
+				str[str_k][str_j] = '\0';
+			}
+			//printf("str[%d][%d] = 0x%X\r\n", str_k, str_j, str[str_k][str_j]);
 			str_j++;
 			if(c=='\n'){
 				str_k++;

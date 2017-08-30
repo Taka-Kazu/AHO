@@ -24,11 +24,14 @@ void Machine::play_motion(int motion_id)
 	char c;
 	int8_t str_j = 0;//param2
 	int8_t str_k = 0;//param1
-	char str[50][100];
+	char str[25][100];
 
 	wait(0.3);
 	if(!(motion_id<0||motion_id>MOTION_NUM)){
-		FILE* fp = fopen("/sd/mydir/motion.csv", "r");
+		mkdir("/sd/mydir", 0777);
+
+		FILE *fp = fopen("/sd/mydir/motion.csv", "r");
+		printf("0x%X, 0x%X\r\n", &fp, fp);
 		if(fp == NULL){
 			printf("SD card error!\r\n");
 			return;
@@ -36,6 +39,7 @@ void Machine::play_motion(int motion_id)
 
 		while(1){
 			fscanf(fp, "%c", &c);
+			printf("%c", c);
 			if(c=='\0'){
 				for(int i=0;i<str_k;i++){
 					motion.pos[i].set_param(str[i]);

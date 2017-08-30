@@ -26,26 +26,33 @@ void Machine::play_motion(int motion_id)
 	int8_t str_j = 0;//param2
 	int8_t str_k = 0;//param1
 	char str[25][100];
+	bool flag = true;
 
 	wait(0.3);
 	if(!(motion_id<0||motion_id>MOTION_NUM)){
 		mkdir("/sd/mydir", 0777);
 
 		FILE *fp = fopen("/sd/mydir/motion.csv", "r");
-		printf("0x%X, 0x%X\r\n", &fp, fp);
-		printf("&spi = 0x%X\r\n", &sd_card);
 		if(fp == NULL){
 			printf("SD card error!\r\n");
 			return;
 		}
-
+    	printf("file opend!\r\n");
 		while(1){
 			fscanf(fp, "%c", &c);
-			printf("%c", c);
+			//printf("%c", c);
+			if(c=='\n'){
+				if(flag==false){
+					c = 0;
+				}
+				flag = false;
+			}else{
+				flag = true;
+			}
 			if(c=='\0'){
 				for(int i=0;i<str_k;i++){
 					motion.pos[i].set_param(str[i]);
-					//printf("%s\r\n", str[i]);
+					printf("%s\r\n", str[i]);
 				}
 				break;
 			}
@@ -56,15 +63,14 @@ void Machine::play_motion(int motion_id)
 				str_j=0;
 			}
 		}
-
 		for(int i=0;i<POS_NUM;i++)
 		{
 			int time = motion.pos[i].get_time();
 			if(time==0){
-				return;
+				break;
 			}
 			if(i == (sizeof(motion.pos)/sizeof(Position)-1)){
-				return;
+				break;
 			}
 			for(int j=0;j<SERVO_NUM;j++){
 				move_servo(j, motion.pos[i].get_angle(j));
@@ -72,6 +78,7 @@ void Machine::play_motion(int motion_id)
 			wait_ms(time);
 		}
 		fclose(fp);
+		printf("file closed!\r\n");
 	}
 }
 
@@ -111,7 +118,7 @@ void Machine::set_pca9685_angle(int id, float angle)
 	float pulse = (angle-CENTER_ANGLE)/(MAX_ANGLE-MIN_ANGLE)*(LONG_PULSE-SHORT_PULSE)+CENTER_PULSE;
 	int off = pulse/(PULSE_PERIOD)*(PCA9685_RESOLUTION-1);
 	servos.setPWM(id, 0, off);
-	printf("id=%d, off=%d\r\n", id, off);
+	//printf("id=%d, off=%d\r\n", id, off);
 }
 
 void Machine::set_servo_angle(int id, float angle)

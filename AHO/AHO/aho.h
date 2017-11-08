@@ -20,7 +20,7 @@ private:
 	Serial* pc;
 	Motion* motion;
 	char str[POS_NUM][STR_LENGTH];
-	bool flag;//interrupt‚ğÀs‚µ‚½‚çture
+	bool flag;//interruptï¿½ï¿½ï¿½ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ture
 
 	void initialize(void);
 	void interrupt(void);

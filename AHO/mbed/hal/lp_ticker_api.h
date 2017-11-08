@@ -74,12 +74,6 @@ void lp_ticker_disable_interrupt(void);
  */
 void lp_ticker_clear_interrupt(void);
 
-/** Set pending interrupt that should be fired right away.
- * 
- * The ticker should be initialized prior calling this function.
- */
-void lp_ticker_fire_interrupt(void);
-
 /**@}*/
 
 #ifdef __cplusplus

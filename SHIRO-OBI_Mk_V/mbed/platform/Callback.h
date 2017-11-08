@@ -77,7 +77,7 @@ public:
      */
     Callback(R (*func)() = 0) {
         if (!func) {
-            memset(this, 0, sizeof(Callback));
+            _ops = 0;
         } else {
             generate(func);
         }
@@ -590,7 +590,6 @@ private:
 
         MBED_STATIC_ASSERT(sizeof(Callback) - sizeof(_ops) >= sizeof(F),
                 "Type F must not exceed the size of the Callback class");
-        memset(this, 0, sizeof(Callback));
         new (this) F(f);
         _ops = &ops;
     }
@@ -652,7 +651,7 @@ public:
      */
     Callback(R (*func)(A0) = 0) {
         if (!func) {
-            memset(this, 0, sizeof(Callback));
+            _ops = 0;
         } else {
             generate(func);
         }
@@ -1166,7 +1165,6 @@ private:
 
         MBED_STATIC_ASSERT(sizeof(Callback) - sizeof(_ops) >= sizeof(F),
                 "Type F must not exceed the size of the Callback class");
-        memset(this, 0, sizeof(Callback));
         new (this) F(f);
         _ops = &ops;
     }
@@ -1228,7 +1226,7 @@ public:
      */
     Callback(R (*func)(A0, A1) = 0) {
         if (!func) {
-            memset(this, 0, sizeof(Callback));
+            _ops = 0;
         } else {
             generate(func);
         }
@@ -1743,7 +1741,6 @@ private:
 
         MBED_STATIC_ASSERT(sizeof(Callback) - sizeof(_ops) >= sizeof(F),
                 "Type F must not exceed the size of the Callback class");
-        memset(this, 0, sizeof(Callback));
         new (this) F(f);
         _ops = &ops;
     }
@@ -1805,7 +1802,7 @@ public:
      */
     Callback(R (*func)(A0, A1, A2) = 0) {
         if (!func) {
-            memset(this, 0, sizeof(Callback));
+            _ops = 0;
         } else {
             generate(func);
         }
@@ -2321,7 +2318,6 @@ private:
 
         MBED_STATIC_ASSERT(sizeof(Callback) - sizeof(_ops) >= sizeof(F),
                 "Type F must not exceed the size of the Callback class");
-        memset(this, 0, sizeof(Callback));
         new (this) F(f);
         _ops = &ops;
     }
@@ -2383,7 +2379,7 @@ public:
      */
     Callback(R (*func)(A0, A1, A2, A3) = 0) {
         if (!func) {
-            memset(this, 0, sizeof(Callback));
+            _ops = 0;
         } else {
             generate(func);
         }
@@ -2900,7 +2896,6 @@ private:
 
         MBED_STATIC_ASSERT(sizeof(Callback) - sizeof(_ops) >= sizeof(F),
                 "Type F must not exceed the size of the Callback class");
-        memset(this, 0, sizeof(Callback));
         new (this) F(f);
         _ops = &ops;
     }
@@ -2962,7 +2957,7 @@ public:
      */
     Callback(R (*func)(A0, A1, A2, A3, A4) = 0) {
         if (!func) {
-            memset(this, 0, sizeof(Callback));
+            _ops = 0;
         } else {
             generate(func);
         }
@@ -3480,7 +3475,6 @@ private:
 
         MBED_STATIC_ASSERT(sizeof(Callback) - sizeof(_ops) >= sizeof(F),
                 "Type F must not exceed the size of the Callback class");
-        memset(this, 0, sizeof(Callback));
         new (this) F(f);
         _ops = &ops;
     }

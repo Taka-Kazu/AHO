@@ -102,14 +102,12 @@ SDFileSystem/SDCRC.o: ../SDFileSystem/SDCRC.cpp ../mbed_config.h \
  ../mbed/./hal/analogin_api.h ../mbed/./platform/SingletonPtr.h \
  ../mbed/./platform/mbed_assert.h ../mbed/./drivers/AnalogOut.h \
  ../mbed/./hal/analogout_api.h ../mbed/./drivers/PwmOut.h \
- ../mbed/./hal/pwmout_api.h ../mbed/./platform/mbed_sleep.h \
- ../mbed/hal/sleep_api.h ../mbed/./platform/mbed_toolchain.h \
- ../mbed/./drivers/Serial.h ../mbed/platform/Stream.h \
- ../mbed/./platform/FileLike.h ../mbed/./platform/FileBase.h \
- ../mbed/./platform/FileHandle.h ../mbed/./platform/Callback.h \
- ../mbed/./platform/mbed_poll.h ../mbed/./drivers/SerialBase.h \
- ../mbed/platform/Callback.h ../mbed/hal/serial_api.h \
- ../mbed/./hal/buffer.h ../mbed/./hal/dma_api.h \
+ ../mbed/./hal/pwmout_api.h ../mbed/./drivers/Serial.h \
+ ../mbed/platform/Stream.h ../mbed/./platform/FileLike.h \
+ ../mbed/./platform/FileBase.h ../mbed/./platform/FileHandle.h \
+ ../mbed/./platform/Callback.h ../mbed/./platform/mbed_poll.h \
+ ../mbed/./drivers/SerialBase.h ../mbed/platform/Callback.h \
+ ../mbed/hal/serial_api.h ../mbed/./hal/buffer.h ../mbed/./hal/dma_api.h \
  ../mbed/platform/mbed_toolchain.h ../mbed/platform/PlatformMutex.h \
  ../mbed/./drivers/SPI.h ../mbed/./hal/spi_api.h \
  ../mbed/./platform/CThunk.h ../mbed/./platform/CircularBuffer.h \
@@ -126,16 +124,15 @@ SDFileSystem/SDCRC.o: ../SDFileSystem/SDCRC.cpp ../mbed_config.h \
  ../mbed/hal/flash_api.h ../mbed/./drivers/Timer.h \
  ../mbed/./hal/ticker_api.h ../mbed/./drivers/Ticker.h \
  ../mbed/./drivers/TimerEvent.h ../mbed/./hal/us_ticker_api.h \
- ../mbed/./hal/lp_ticker_api.h ../mbed/./drivers/Timeout.h \
- ../mbed/./drivers/Ticker.h ../mbed/./drivers/LowPowerTimeout.h \
+ ../mbed/./drivers/Timeout.h ../mbed/./drivers/Ticker.h \
+ ../mbed/./drivers/LowPowerTimeout.h ../mbed/./hal/lp_ticker_api.h \
  ../mbed/./drivers/LowPowerTicker.h ../mbed/./drivers/LowPowerTicker.h \
  ../mbed/./drivers/LowPowerTimer.h ../mbed/./drivers/Timer.h \
  ../mbed/./platform/LocalFileSystem.h ../mbed/./drivers/InterruptIn.h \
  ../mbed/./platform/mbed_wait_api.h ../mbed/./hal/sleep_api.h \
- ../mbed/./platform/mbed_sleep.h ../mbed/./platform/mbed_rtc_time.h \
- ../mbed/./platform/mbed_poll.h ../mbed/./platform/ATCmdParser.h \
- ../mbed/./platform/FileSystemHandle.h ../mbed/./platform/DirHandle.h \
- ../mbed/./platform/FileHandle.h ../mbed/./platform/DirHandle.h \
- ../mbed/./platform/CriticalSectionLock.h \
- ../mbed/./platform/DeepSleepLock.h ../mbed/./platform/Callback.h \
+ ../mbed/./platform/mbed_sleep.h ../mbed/hal/sleep_api.h \
+ ../mbed/./platform/mbed_rtc_time.h ../mbed/./platform/mbed_poll.h \
+ ../mbed/./platform/ATCmdParser.h ../mbed/./platform/FileSystemHandle.h \
+ ../mbed/./platform/DirHandle.h ../mbed/./platform/FileHandle.h \
+ ../mbed/./platform/DirHandle.h ../mbed/./platform/Callback.h \
  ../mbed/./platform/FunctionPointer.h

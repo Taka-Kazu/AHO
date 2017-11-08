@@ -18,12 +18,10 @@ int main() {
     machine.alert(0);
     machine.power_on();
     printf("Hi, I'm SHIRO-OBI!\r\n");
-    printf("%d, %d, %d, %d\r\n", sizeof(Position), sizeof(Motion), sizeof(AHO), sizeof(Machine));
-    /*
+    printf("Welcome to AHO system\r\n");
     aho.set_motion(machine.motion);
 
     while(1) {
         machine.play_motion(0);
     }
-    */
 }

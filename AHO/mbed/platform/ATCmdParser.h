@@ -288,16 +288,6 @@ public:
      * recv operation.
      */
     void abort();
-    
-    /**
-    * Process out-of-band data
-    *
-    * Process out-of-band data in the receive buffer. This function
-    * returns immediately if there is no data to process.
-    *
-    * @return true if oob data processed, false otherwise
-    */
-    bool process_oob(void);
 };
 } //namespace mbed
 

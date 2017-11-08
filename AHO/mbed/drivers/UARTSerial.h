@@ -56,12 +56,6 @@ public:
      */
     virtual short poll(short events) const;
 
-    /* Resolve ambiguities versus our private SerialBase
-     * (for writable, spelling differs, but just in case)
-     */
-    using FileHandle::readable;
-    using FileHandle::writable;
-
     /** Write the contents of a buffer to a file
      *
      *  @param buffer   The buffer to write from
@@ -165,8 +159,6 @@ public:
     void set_baud(int baud);
 
 private:
-
-    void wait_ms(uint32_t millisec);
 
     /** SerialBase lock override */
     virtual void lock(void);

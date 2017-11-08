@@ -237,8 +237,8 @@ C_FLAGS += -DDEVICE_LOWPOWERTIMER=1
 C_FLAGS += -DDEVICE_RTC=1
 C_FLAGS += -DTOOLCHAIN_object
 C_FLAGS += -D__CMSIS_RTOS
+C_FLAGS += -DTARGET_LIKE_MBED
 C_FLAGS += -DTOOLCHAIN_GCC
-C_FLAGS += -DMBED_BUILD_TIMESTAMP=1510114955.98
 C_FLAGS += -DDEVICE_CAN=1
 C_FLAGS += -DTARGET_CORTEX_M
 C_FLAGS += -DDEVICE_I2C_ASYNCH=1
@@ -263,7 +263,7 @@ C_FLAGS += -DTARGET_STM
 C_FLAGS += -DTARGET_STM32L432KC
 C_FLAGS += -DDEVICE_SERIAL_FC=1
 C_FLAGS += -DDEVICE_TRNG=1
-C_FLAGS += -DTARGET_LIKE_MBED
+C_FLAGS += -DMBED_BUILD_TIMESTAMP=1510117278.55
 C_FLAGS += -D__MBED_CMSIS_RTOS_CM
 C_FLAGS += -DDEVICE_SLEEP=1
 C_FLAGS += -DTOOLCHAIN_GCC_ARM
@@ -291,8 +291,8 @@ CXX_FLAGS += -DDEVICE_LOWPOWERTIMER=1
 CXX_FLAGS += -DDEVICE_RTC=1
 CXX_FLAGS += -DTOOLCHAIN_object
 CXX_FLAGS += -D__CMSIS_RTOS
+CXX_FLAGS += -DTARGET_LIKE_MBED
 CXX_FLAGS += -DTOOLCHAIN_GCC
-CXX_FLAGS += -DMBED_BUILD_TIMESTAMP=1510114955.98
 CXX_FLAGS += -DDEVICE_CAN=1
 CXX_FLAGS += -DTARGET_CORTEX_M
 CXX_FLAGS += -DDEVICE_I2C_ASYNCH=1
@@ -317,7 +317,7 @@ CXX_FLAGS += -DTARGET_STM
 CXX_FLAGS += -DTARGET_STM32L432KC
 CXX_FLAGS += -DDEVICE_SERIAL_FC=1
 CXX_FLAGS += -DDEVICE_TRNG=1
-CXX_FLAGS += -DTARGET_LIKE_MBED
+CXX_FLAGS += -DMBED_BUILD_TIMESTAMP=1510117278.55
 CXX_FLAGS += -D__MBED_CMSIS_RTOS_CM
 CXX_FLAGS += -DDEVICE_SLEEP=1
 CXX_FLAGS += -DTOOLCHAIN_GCC_ARM
@@ -366,7 +366,7 @@ ASM_FLAGS += -Imbed/hal
 ASM_FLAGS += -Imbed/platform
 
 
-LD_FLAGS :=-Wl,--gc-sections -Wl,--wrap,main -Wl,--wrap,_memalign_r -Wl,--wrap,_calloc_r -Wl,--wrap,exit -Wl,--wrap,atexit -Wl,-n -mcpu=cortex-m4 -mthumb -mfpu=fpv4-sp-d16 -mfloat-abi=softfp 
+LD_FLAGS :=-Wl,--gc-sections -Wl,--wrap,main -Wl,--wrap,_malloc_r -Wl,--wrap,_free_r -Wl,--wrap,_realloc_r -Wl,--wrap,_memalign_r -Wl,--wrap,_calloc_r -Wl,--wrap,exit -Wl,--wrap,atexit -Wl,-n -mcpu=cortex-m4 -mthumb -mfpu=fpv4-sp-d16 -mfloat-abi=softfp 
 LD_SYS_LIBS :=-Wl,--start-group -lstdc++ -lsupc++ -lm -lc -lgcc -lnosys -lmbed -Wl,--end-group
 
 # Tools and Flags

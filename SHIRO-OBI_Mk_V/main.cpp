@@ -15,6 +15,7 @@ int main() {
     machine.power_on();
     printf("Hi, I'm SHIRO-OBI!\r\n");
     
+
     while(1) {
         machine.play_motion(0);
         printf("kuroda\r\n");

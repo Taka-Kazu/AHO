@@ -17,6 +17,12 @@ Machine::Machine(int motion_num)
 	servos.frequencyI2C(400000);
 	servo16.period_ms(PULSE_PERIOD);
 	servo17.period_ms(PULSE_PERIOD);
+	for(int i=0;i<16;i++){
+		servos.setPWM(i, 0, 0);
+	}
+	servo16 = 0;
+	servo17 = 0;
+	wait(0.5);
 }
 
 void Machine::play_motion(int motion_id)
@@ -25,11 +31,11 @@ void Machine::play_motion(int motion_id)
 	char c;
 	int8_t str_j = 0;//param2
 	int8_t str_k = 0;//param1
-	char str[20][110];
+	char str[POS_NUM][200];
 	bool flag = true;
 
-	for(int i=0;i<20;i++){
-		for(int j=0;j<110;j++){
+	for(int i=0;i<POS_NUM;i++){
+		for(int j=0;j<200;j++){
 			str[i][j] = 0;
 		}
 	}
@@ -37,7 +43,7 @@ void Machine::play_motion(int motion_id)
 	wait(0.3);
 	if(!(motion_id<0||motion_id>MOTION_NUM)){
 		mkdir("/sd/mydir", 0777);
-
+		//motion_id„Å´„Çà„Å£„Å¶open„Åô„Çã„Éï„Ç°„Ç§„É´„ÇíÂ§â„Åà„Çã
 		FILE *fp = fopen("/sd/mydir/motion.csv", "r");
 		if(fp == NULL){
 			printf("SD card error!\r\n");
@@ -89,19 +95,34 @@ void Machine::play_motion(int motion_id)
 		}
 		fclose(fp);
 		printf("file closed!\r\n");
+	}else if(motion_id == 0){//for AHO
+		for(int i=0;i<POS_NUM;i++)
+		{
+			int time = motion.pos[i].get_time();
+			if(time==0){
+				break;
+			}
+			if(i == (sizeof(motion.pos)/sizeof(Position)-1)){
+				break;
+			}
+			for(int j=0;j<SERVO_NUM;j++){
+				move_servo(j, motion.pos[i].get_angle(j));
+			}
+			wait_ms(time);
+		}
 	}
 }
 
 void Machine::move_servo(int id, float angle)
 {
-	//äpìxéwíËÇÕ0Åã~180Åã
+	//ÔøΩpÔøΩxÔøΩwÔøΩÔøΩÔøΩ0ÔøΩÔøΩ~180ÔøΩÔøΩ
 	if(angle>=180.0f){
 		angle = 180.0f;
 	}else if(angle<0.0f){
 		angle = 0.0f;
 	}
 	if(id<0 || id>SERVO_NUM - 1){
-		//ñ≥å¯Ç»íl
+		//ÔøΩÔøΩÔøΩÔøΩÔøΩ»íl
 		return;
 	}
 	if(id<PCA9685_SERVO_NUM){
@@ -114,7 +135,7 @@ void Machine::move_servo(int id, float angle)
 void Machine::set_direction(int id, bool cw)
 {
 	if(id<0 || id>SERVO_NUM - 1){
-		//ñ≥å¯Ç»íl
+		//ÔøΩÔøΩÔøΩÔøΩÔøΩ»íl
 		return;
 	}
 	direction[id] = cw;
@@ -124,7 +145,7 @@ void Machine::set_pca9685_angle(int id, float angle)
 {
 	if(!direction[id]){
 			reverse_angle(angle);
-		}
+	}
 	float pulse = (angle-CENTER_ANGLE)/(MAX_ANGLE-MIN_ANGLE)*(LONG_PULSE-SHORT_PULSE)+CENTER_PULSE;
 	int off = pulse/(PULSE_PERIOD)*(PCA9685_RESOLUTION-1);
 	servos.setPWM(id, 0, off);

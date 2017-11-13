@@ -41,7 +41,7 @@ void Machine::play_motion(int motion_id)
 	}
 	//printf("size of str = %d\r\n", sizeof(str));
 	wait(0.3);
-	if(!(motion_id<0||motion_id>MOTION_NUM)){
+	if(!(motion_id<=0||motion_id>MOTION_NUM)){//motion_id=0はAHO専用
 		mkdir("/sd/mydir", 0777);
 		//motion_idによってopenするファイルを変える
 		FILE *fp = fopen("/sd/mydir/motion.csv", "r");

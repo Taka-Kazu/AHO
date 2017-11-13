@@ -17,6 +17,7 @@ int main() {
     wait(0.5);
     machine.alert(0);
     machine.power_on();
+    wait(0.5);
     printf("Hi, I'm SHIRO-OBI!\r\n");
     printf("Welcome to AHO system\r\n");
     aho.set_motion(machine.motion);

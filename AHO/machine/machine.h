@@ -36,8 +36,8 @@ private:
 	static const PinName SCLK = PB_3;
 	static const PinName SELECT_SD = PA_11;
 	static const PinName POWER_PIN = PA_12;
-	static const PinName SELECT_GYRO = PA_6;//PF_0;
-	static const PinName SELECT_ACCELEROMETER = PA_7;//PF_1;
+	static const PinName SELECT_GYRO = PA_7;//PF_0;
+	static const PinName SELECT_ACCELEROMETER = PA_6;//PF_1;
 	static const float LONG_PULSE = 2.3;
 	static const float SHORT_PULSE = 0.7;
 	static const float CENTER_PULSE = 1.5;

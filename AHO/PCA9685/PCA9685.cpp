@@ -52,15 +52,18 @@ void PCA9685::setPWMFreq(float freq)
 
 void PCA9685::setPWM(uint8_t num, uint16_t on, uint16_t off)
 {
+    __disable_irq();
     char cmd[5];
     cmd[0] = LED0_ON_L + 4 * num;
     cmd[1] = on;
     cmd[2] = on >> 8;
     cmd[3] = off;
     cmd[4] = off >> 8;
+    //printf("%d, %d, %d, %d, %d\r\n", cmd[0], cmd[1], cmd[2], cmd[3], cmd[4]);
     i2c.write(_i2caddr, cmd, 5);
-
+    //printf("num:%d, on:%d, off:%d\r\n", num, on, off);
     wait_us(100);
+    /*
     int a = read8(6);
     wait_us(100);
     int b = read8(7);
@@ -69,6 +72,8 @@ void PCA9685::setPWM(uint8_t num, uint16_t on, uint16_t off)
     wait_us(100);
     int d = read8(9);
     printf("%d, %d, %d, %d\r\n", a, b, c, d);
+    */
+    __enable_irq();
 }
 
 

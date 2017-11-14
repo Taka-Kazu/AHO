@@ -49,6 +49,7 @@ void AHO::interrupt(void)
 		if(c=='\0'){
 			for(int i=0;i<str_k;i++){
 				motion->pos[i].set_param(str[i]);
+				//printf("%s\r\n", str[i]);
 			}
 			break;
 		}

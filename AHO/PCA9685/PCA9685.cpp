@@ -68,7 +68,7 @@ void PCA9685::setPWM(uint8_t num, uint16_t on, uint16_t off)
     int c = read8(8);
     wait_us(100);
     int d = read8(9);
-    //printf("%d, %d, %d, %d\r\n", a, b, c, d);
+    printf("%d, %d, %d, %d\r\n", a, b, c, d);
 }
 
 

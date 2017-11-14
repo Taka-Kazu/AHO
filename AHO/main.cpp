@@ -14,15 +14,16 @@ void HardFault_Handler()
 
 int main() {
     machine.alert(1760);
-    wait(0.5);
+    wait(0.3);
     machine.alert(0);
     machine.power_on();
     wait(0.5);
     printf("Hi, I'm SHIRO-OBI!\r\n");
     printf("Welcome to AHO system\r\n");
-    aho.set_motion(machine.motion);
+    //aho.set_motion(machine.motion);
 
+    machine.move_servo(0, 90);
     while(1) {
-        machine.play_motion(0);
+        //machine.play_motion(0);
     }
 }

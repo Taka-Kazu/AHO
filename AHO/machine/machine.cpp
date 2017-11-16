@@ -13,16 +13,23 @@ Machine::Machine(int motion_num)
 		direction[i] = true;
 	}
 	servos.begin();
-	servos.setPrescale(121);
+	servos.setPrescale(121);//50Hz
+	//servos.setPrescale(102);//60Hz
 	servos.frequencyI2C(400000);
 	servo16.period_ms(PULSE_PERIOD);
 	servo17.period_ms(PULSE_PERIOD);
+	alert(1760);
+    wait(0.3);
+    alert(0);
 	for(int i=0;i<16;i++){
 		servos.setPWM(i, 0, 0);
 	}
 	servo16 = 0;
 	servo17 = 0;
 	wait(0.5);
+    power_on();
+	wait(1.0);
+	printf("Machine is ready\r\n");
 }
 
 void Machine::play_motion(int motion_id)

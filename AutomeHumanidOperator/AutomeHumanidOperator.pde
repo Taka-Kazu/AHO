@@ -327,18 +327,35 @@ void SAVE()
     if(!file_name.endsWith(".csv")){
       file_name += ".csv";
     }
+    int values[][];
+    values = new int[50][22];
     output = createWriter(file_name);
     data_line = "";
     for(int i=0;i<POS_NUM;i++){
         if(_POS[i].enabled==true){
-          data_line += _POS[i].time_ms+",";
+          values[i][0] = 0xFF;
+          //data_line += _POS[i].time_ms+",";
+          values[i][1] = _POS[i].time_ms;
           for(int j=0;j<SERVO_NUM;j++){
-            data_line += _POS[i].val[j]+",";
+            //data_line += _POS[i].val[j]+",";
+            values[i][j+2] = (int)_POS[i].val[j];
           }
-          data_line += "\n";
+          //data_line += "\n";
         }
     }
-    output.print(data_line);
+    for(int i=0;i<POS_NUM;i++){
+      if(values[i][0] != 0xFF){
+        continue;
+      }
+      for(int j=0;j<SERVO_NUM+2;j++){
+        //print(values[i][j] + ",");
+        data_line += values[i][j] + ",";
+      }
+      //print("\n");
+      data_line += "\n";
+    }
+    print(data_line);
+    //output.print(data_line);
     output.close();
   }catch(Exception ex){
     println("ERROR:FILE CANNOT OPEN");

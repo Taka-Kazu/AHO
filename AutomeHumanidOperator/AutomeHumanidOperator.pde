@@ -204,7 +204,7 @@ class PositionState extends State
   int id = 0;
   float val[] = new float[SERVO_NUM];
   boolean enabled = false;
-  Integer time_ms = 100;
+  Integer time_ms = 1000;
   
   State pointer;
   
@@ -245,7 +245,7 @@ class PositionState extends State
       for(int i=0;i<SERVO_GYOU;i++){
         for(int j=0;j<SERVO_RETU;j++){
           int servo_id = i*SERVO_RETU+j;
-          slider.addSlider("SERVO"+servo_id).setRange(0, 270).setValue(val[servo_id]).setPosition(OFFSET_X+ELEMENT_X*j, OFFSET_Y+ELEMENT_Y*i).setSize(275, 30).setNumberOfTickMarks(181).setFont(button_font);
+          slider.addSlider("SERVO"+servo_id).setRange(0, 270).setValue(val[servo_id]).setPosition(OFFSET_X+ELEMENT_X*j, OFFSET_Y+ELEMENT_Y*i).setSize(275, 30).setNumberOfTickMarks(271).setFont(button_font);
           slider.getController("SERVO"+servo_id).getValueLabel().align(ControlP5.RIGHT, ControlP5.BOTTOM_OUTSIDE).setPaddingX(-20);
         }
       }

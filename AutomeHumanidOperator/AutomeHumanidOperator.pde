@@ -197,7 +197,7 @@ class PositionState extends State
   float ELEMENT_X =350;
   float OFFSET_Y = 250;
   float ELEMENT_Y = 100;
-  float CENTER_ANGLE = 90;
+  float CENTER_ANGLE = 135;
   int SERVO_GYOU = 5;
   int SERVO_RETU = 4;
   int flag = 0;
@@ -245,7 +245,7 @@ class PositionState extends State
       for(int i=0;i<SERVO_GYOU;i++){
         for(int j=0;j<SERVO_RETU;j++){
           int servo_id = i*SERVO_RETU+j;
-          slider.addSlider("SERVO"+servo_id).setRange(0, 180).setValue(val[servo_id]).setPosition(OFFSET_X+ELEMENT_X*j, OFFSET_Y+ELEMENT_Y*i).setSize(275, 30).setNumberOfTickMarks(181).setFont(button_font);
+          slider.addSlider("SERVO"+servo_id).setRange(0, 270).setValue(val[servo_id]).setPosition(OFFSET_X+ELEMENT_X*j, OFFSET_Y+ELEMENT_Y*i).setSize(275, 30).setNumberOfTickMarks(181).setFont(button_font);
           slider.getController("SERVO"+servo_id).getValueLabel().align(ControlP5.RIGHT, ControlP5.BOTTOM_OUTSIDE).setPaddingX(-20);
         }
       }

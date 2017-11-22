@@ -355,7 +355,7 @@ void SAVE()
       data_line += "\n";
     }
     print(data_line);
-    //output.print(data_line);
+    output.print(data_line);
     output.close();
   }catch(Exception ex){
     println("ERROR:FILE CANNOT OPEN");

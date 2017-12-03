@@ -102,8 +102,9 @@ public:
 private:
     void write8(uint8_t address, uint8_t data);
     char read8(char address);
-    int _i2caddr;
     I2C i2c;
+    int _i2caddr;
+    
 };
 
 #endif

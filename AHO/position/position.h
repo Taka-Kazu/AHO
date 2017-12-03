@@ -16,7 +16,7 @@ public:
 private:
 	static const int SERVO_NUM = 20;
 	int16_t time_ms;
-	uint8_t*  servo_angle;
+	uint16_t*  servo_angle;
 };
 
 #endif

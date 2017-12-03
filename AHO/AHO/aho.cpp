@@ -45,11 +45,13 @@ void AHO::interrupt(void)
 		while(!pc->readable())
 		{
 		}
-		pc->scanf("%c", &c);
+		//pc->scanf("%c", &c);
+		c = pc->getc();
+		//pc->printf("%c", c);
 		if(c=='\0'){
 			for(int i=0;i<str_k;i++){
 				motion->pos[i].set_param(str[i]);
-				//printf("%s\r\n", str[i]);
+				//pc->printf("%s\r\n", str[i]);
 			}
 			break;
 		}

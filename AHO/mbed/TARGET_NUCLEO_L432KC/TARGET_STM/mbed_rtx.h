@@ -37,7 +37,6 @@
 #define INITIAL_SP              (0x20004000UL)
 
 #elif (defined(TARGET_STM32F103RB) ||\
-       defined(TARGET_STM32F103C8) ||\
        defined(TARGET_STM32L072CZ) ||\
        defined(TARGET_STM32L073RZ))
 #define INITIAL_SP              (0x20005000UL)

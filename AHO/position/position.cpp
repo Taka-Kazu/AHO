@@ -3,7 +3,7 @@
 Position::Position(void)
 {
 	time_ms = 0;
-	servo_angle = new uint8_t[SERVO_NUM];
+	servo_angle = new uint16_t[SERVO_NUM];
 	for(int i=0;i<SERVO_NUM;i++){
 		servo_angle[i] = 90;
 	}
@@ -27,12 +27,14 @@ void Position::set_param(char* str)
 			val = atoi(buff);
 			if(time_ms == 0){
 				time_ms = val;
+				//printf("time = %d\r\n", time_ms);
 				for(int k=0;k<BUFF_NUM;k++){
 					buff[k] = 0;
 				}
 				j=0;
 			}else{
 				servo_angle[servo_num] = val;
+				//printf("servo[%d] = %d\r\n", servo_num, servo_angle[servo_num]);
 				servo_num++;
 				for(int k=0;k<BUFF_NUM;k++){
 					buff[k] = 0;

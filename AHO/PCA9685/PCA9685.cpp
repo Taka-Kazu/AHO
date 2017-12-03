@@ -66,7 +66,7 @@ void PCA9685::setPWM(uint8_t num, uint16_t on, uint16_t off)
     i2c.write(_i2caddr, cmd, 5);
     //printf("num:%d, on:%d, off:%d\r\n", num, on, off);
     wait_us(100);
-
+    
     int a = read8(6);
     wait_us(100);
     int b = read8(7);

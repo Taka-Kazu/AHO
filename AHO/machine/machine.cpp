@@ -1,34 +1,53 @@
 #include "machine.h"
 
 Machine::Machine(int motion_num)
-:MOTION_NUM(motion_num) , servos(SDA, SCL), servo16(SERVO16_PIN), servo17(SERVO17_PIN)
-, buzzer(BUZZER_PIN), power(POWER_PIN), spi(MOSI, MISO, SCLK)
+:MOTION_NUM(motion_num)
+, ics(ICS_TX, ICS_RX)
+, servos(ics, ICS_ENABLE)
+, buzzer(BUZZER_PIN), spi(MOSI, MISO, SCLK)
 , gyro(spi, SELECT_GYRO)
 , accelerometer(spi, SELECT_ACCELEROMETER)
 , sd_card(MOSI, MISO, SCLK, SELECT_SD, "sd")
 {
-	power_off();
 	direction = new bool[SERVO_NUM];
 	for(int i=0;i<SERVO_NUM;i++){
 		direction[i] = true;
 	}
-	servos.begin();
-	servos.setPrescale(121);//50Hz
-	//servos.setPrescale(102);//60Hz
-	servos.frequencyI2C(400000);
-	servo16.period_ms(PULSE_PERIOD);
-	servo17.period_ms(PULSE_PERIOD);
-	alert(1760);
-    wait(0.3);
-    alert(0);
-	for(int i=0;i<16;i++){
-		servos.setPWM(i, 0, 0);
+	neutral_angle = new float[SERVO_NUM];
+	min_angle = new float[SERVO_NUM];
+	max_angle = new float[SERVO_NUM];
+	neutral_angle[0] = 114;min_angle[0] = 96;max_angle[0] = 187;
+	neutral_angle[1] = 104;min_angle[1] = 48;max_angle[1] = 104;
+	neutral_angle[2] = 105;min_angle[2] = 105;max_angle[2] = 169;
+	neutral_angle[3] = 122;min_angle[3] = 122;max_angle[3] = 216;
+	neutral_angle[4] = 132;min_angle[4] = 91;max_angle[4] = 174;
+	neutral_angle[5] = 131;min_angle[5] = 64;max_angle[5] = 146;
+	neutral_angle[6] = 137;min_angle[6] = 137;max_angle[6] = 213;
+	neutral_angle[7] = 143;min_angle[7] = 74;max_angle[7] = 143;
+	neutral_angle[8] = 123;min_angle[8] = 32;max_angle[8] = 123;
+	neutral_angle[9] = 137;min_angle[9] = 137;max_angle[9] = 185;
+	neutral_angle[10] = 180;min_angle[10] = 0;max_angle[10] = 180;
+	neutral_angle[11] = 135;min_angle[11] = 16;max_angle[11] = 135;
+	neutral_angle[12] = 16;min_angle[12] = 16;max_angle[12] = 196;
+	neutral_angle[13] = 52;min_angle[13] = 52;max_angle[13] = 144;
+	neutral_angle[14] = 132;min_angle[14] = 45;max_angle[14] = 227;
+	
+	current_angle = new float[SERVO_NUM];
+	target_angle = new float[SERVO_NUM];
+	for(int i=0;i<SERVO_NUM;i++){
+		current_angle[i] = target_angle[i] = neutral_angle[i];
 	}
-	servo16 = 0;
-	servo17 = 0;
+	
+	alert(1760);
+    wait(0.5);
+    alert(0);
 	wait(0.5);
-    power_on();
-	wait(1.0);
+	
+	//_thread = new Thread(&Machine::thread_starter, this);
+	for(int i=0;i<SERVO_NUM;i++){
+		move_servo(i, neutral_angle[i]);
+		//printf("hello\r\n");
+	}
 	printf("Machine is ready\r\n");
 }
 
@@ -86,8 +105,11 @@ void Machine::play_motion(int motion_id)
 				str_j=0;
 			}
 		}
+		fclose(fp);
+		printf("file closed!\r\n");
 		for(int i=0;i<POS_NUM;i++)
 		{
+			const int DT = 100;//[ms]
 			int time = motion.pos[i].get_time();
 			if(time==0){
 				break;
@@ -95,16 +117,27 @@ void Machine::play_motion(int motion_id)
 			if(i == (sizeof(motion.pos)/sizeof(Position)-1)){
 				break;
 			}
+			////////////////////////////////////////////////////////
+			const int LOOP = time / DT;
+			float d_theta[SERVO_NUM];
 			for(int j=0;j<SERVO_NUM;j++){
-				move_servo(j, motion.pos[i].get_angle(j));
+				d_theta[j] = (motion.pos[i].get_angle(j) - current_angle[j]) / LOOP;
 			}
-			wait_ms(time);
+			for(int j=0;j<LOOP;j++){
+				for(int k=0;k<SERVO_NUM;k++){
+					move_servo(k, current_angle[k] + d_theta[k] * j);
+				}
+				wait_ms(DT);
+			}
+			for(int j=0;j<SERVO_NUM;j++){
+				current_angle[j] = motion.pos[i].get_angle(j);
+			}
 		}
-		fclose(fp);
-		printf("file closed!\r\n");
+		
 	}else if(motion_id == 0){//for AHO
 		for(int i=0;i<POS_NUM;i++)
 		{
+			const int DT = 100;//[ms]
 			int time = motion.pos[i].get_time();
 			if(time==0){
 				break;
@@ -112,30 +145,45 @@ void Machine::play_motion(int motion_id)
 			if(i == (sizeof(motion.pos)/sizeof(Position)-1)){
 				break;
 			}
+			////////////////////////////////////////////////////////
+			const int LOOP = time / DT;
+			float d_theta[SERVO_NUM];
 			for(int j=0;j<SERVO_NUM;j++){
-				move_servo(j, motion.pos[i].get_angle(j));
+				d_theta[j] = (motion.pos[i].get_angle(j) - current_angle[j]) / LOOP;
 			}
-			wait_ms(time);
+			for(int j=0;j<LOOP;j++){
+				for(int k=0;k<SERVO_NUM;k++){
+					move_servo(k, current_angle[k] + d_theta[k] * j);
+				}
+				wait_ms(DT);
+			}
+			for(int j=0;j<SERVO_NUM;j++){
+				current_angle[j] = motion.pos[i].get_angle(j);
+			}
 		}
 	}
 }
 
 void Machine::move_servo(int id, float angle)
 {
-	//�p�x�w���0��~180��
-	if(angle>=180.0f){
-		angle = 180.0f;
-	}else if(angle<0.0f){
-		angle = 0.0f;
-	}
 	if(id<0 || id>SERVO_NUM - 1){
-		//�����Ȓl
 		return;
 	}
-	if(id<PCA9685_SERVO_NUM){
-		set_pca9685_angle(id, angle);
-	}else{
-		set_servo_angle(id, angle);
+	printf("id:%d, angle:%.0f\r\n", id, angle);
+	if(angle >= max_angle[id]){
+		angle = max_angle[id];
+	}else if(angle < min_angle[id]){
+		angle = min_angle[id];
+	}
+	
+	if((id!=0) || (id!=5)){
+		servos.move(id, angle);
+	}else if(id==0){
+		//right ankle
+		servos.move(id, angle);
+	}else if(id==5){
+		//left ankle
+		servos.move(id, angle);
 	}
 }
 
@@ -148,38 +196,7 @@ void Machine::set_direction(int id, bool cw)
 	direction[id] = cw;
 }
 
-void Machine::set_pca9685_angle(int id, float angle)
-{
-	if(!direction[id]){
-			reverse_angle(angle);
-	}
-	float pulse = (angle-CENTER_ANGLE)/(MAX_ANGLE-MIN_ANGLE)*(LONG_PULSE-SHORT_PULSE)+CENTER_PULSE;
-	int off = pulse/(PULSE_PERIOD)*(PCA9685_RESOLUTION-1);
-	servos.setPWM(id, 0, off);
-	//printf("id=%d, off=%d\r\n", id, off);
-}
 
-void Machine::set_servo_angle(int id, float angle)
-{
-	if(!direction[id]){
-		reverse_angle(angle);
-	}
-	int pulse = (angle-CENTER_ANGLE)/(MAX_ANGLE-MIN_ANGLE)*(LONG_PULSE-SHORT_PULSE)+CENTER_PULSE;
-	switch(id){
-	case 16:
-	{
-		servo16.pulsewidth_ms(pulse);
-		break;
-	}
-	case 17:
-	{
-		servo17.pulsewidth_ms(pulse);
-		break;
-	}
-	default:
-		break;
-	}
-}
 
 void Machine::reverse_angle(float &angle)
 {
@@ -193,12 +210,12 @@ void Machine::alert(int hz)
 
 void Machine::power_on(void)
 {
-	power = 1;
+	
 }
 
 void Machine::power_off(void)
 {
-	power = 0;
+	
 }
 
 float Machine::get_angle_x(void)
@@ -208,4 +225,13 @@ float Machine::get_angle_x(void)
 	return val;
 }
 
+void Machine::thread_starter(void *p)
+{
+	Machine *instance = (Machine*)p;
+  	instance->servo_controller();
+}
 
+void Machine::servo_controller(void)
+{
+	Thread::wait(INTERVAL);
+}

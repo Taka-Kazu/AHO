@@ -61,3 +61,12 @@ int Position::get_angle(int id)
 	}
 }
 
+void Position::set_angle(int id, int angle)
+{
+	servo_angle[id] = angle;
+}
+
+void Position::set_time(int time)
+{
+	time_ms = time;
+}

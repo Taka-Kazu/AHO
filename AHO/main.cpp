@@ -14,8 +14,8 @@ void HardFault_Handler() {
 
 
 int main() {
-    //printf("Hi, I'm SHIRO-OBI!\r\n");
-    //printf("Welcome to AHO system\r\n");
+    printf("Hi, I'm SHIRO-OBI!\r\n");
+    printf("Welcome to AHO system\r\n");
     wait(1);
     //aho.set_motion(machine.motion);
     while(1) {

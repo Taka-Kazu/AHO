@@ -38,29 +38,31 @@ void AHO::initialize(void)
 void AHO::interrupt(void)
 {
 	__disable_irq();
-	char c;
-	int8_t str_j = 0;//param2
-	int8_t str_k = 0;//param1
+	uint8_t c[2] = {0};
+	int data_count = 0;
+	int pos_count = 0;
+
 	while(1){
+		int count = 0;
 		while(!pc->readable())
 		{
+			count++;
+			if(count == 1000000){
+				return;
+			}
 		}
-		//pc->scanf("%c", &c);
-		c = pc->getc();
-		//pc->printf("%c", c);
-		if(c=='\0'){
-			for(int i=0;i<str_k;i++){
-				motion->pos[i].set_param(str[i]);
-				//pc->printf("%s\r\n", str[i]);
+		c[0] = pc->getc();
+		c[1] = pc->getc();
+		data[data_count] = (c[0]<<8) + c[1];
+		data_count++;
+		if(data_count == DATA_LENGTH){
+			motion->pos[pos_count].set_time(data[0]);
+			for(int i=0;i<DATA_LENGTH;i++){
+				motion->pos[pos_count].set_angle(i, data[i+1]);
 			}
 			break;
 		}
-		str[str_k][str_j] = c;
-		str_j++;
-		if(c=='\n'){
-			str_k++;
-			str_j=0;
-		}
+		pos_count++;
 	}
 	flag = true;
 	__enable_irq();

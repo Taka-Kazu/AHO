@@ -12,6 +12,8 @@ public:
 	void set_param(char*);
 	int get_time(void);
 	int get_angle(int);
+	void set_time(int);
+	void set_angle(int, int);
 
 private:
 	static const int SERVO_NUM = 20;

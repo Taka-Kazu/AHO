@@ -32,7 +32,7 @@ L3GD20::L3GD20(SPI& _spi, PinName cs_pin)
 	cs = 1;
 	if(val != 0xD4)
 	{
-		printf("L3GD20_ERROR!\r\n");
+		//printf("L3GD20_ERROR!\r\n");
 	}
 	write(L3GD20_CTRL_REG1, 0x0f);
 	write(L3GD20_CTRL_REG4, 0x00);

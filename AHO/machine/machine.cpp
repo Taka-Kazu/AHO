@@ -169,7 +169,7 @@ void Machine::move_servo(int id, float angle)
 	if(id<0 || id>SERVO_NUM - 1){
 		return;
 	}
-	printf("id:%d, angle:%.0f\r\n", id, angle);
+	//printf("id:%d, angle:%.0f\r\n", id, angle);
 	if(angle >= max_angle[id]){
 		angle = max_angle[id];
 	}else if(angle < min_angle[id]){

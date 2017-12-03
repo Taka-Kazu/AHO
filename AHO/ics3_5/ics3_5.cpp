@@ -27,6 +27,9 @@ void ICS3_5::move(int id, float degree)
     cmd[2] = (deg_val & 0b01111111);
     output();
     //printf("degree = %.1f, deg_val = %d\r\n", degree, deg_val);
+    while(serial->writeable()){
+
+    }
     for(int i=0;i<3;i++){
         serial->putc(cmd[i]);
         //printf("send:0x%X\r\n", cmd[i]);

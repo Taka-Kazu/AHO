@@ -31,7 +31,6 @@ Machine::Machine(int motion_num)
 	neutral_angle[12] = 16;min_angle[12] = 16;max_angle[12] = 196;
 	neutral_angle[13] = 52;min_angle[13] = 52;max_angle[13] = 144;
 	neutral_angle[14] = 132;min_angle[14] = 45;max_angle[14] = 227;
-	
 	current_angle = new float[SERVO_NUM];
 	target_angle = new float[SERVO_NUM];
 	for(int i=0;i<SERVO_NUM;i++){
@@ -42,10 +41,10 @@ Machine::Machine(int motion_num)
     wait(0.5);
     alert(0);
 	wait(0.5);
-	
+
 	//_thread = new Thread(&Machine::thread_starter, this);
 	for(int i=0;i<SERVO_NUM;i++){
-		move_servo(i, neutral_angle[i]);
+		//move_servo(i, neutral_angle[i]);
 		//printf("hello\r\n");
 	}
 	printf("Machine is ready\r\n");

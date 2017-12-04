@@ -1,17 +1,19 @@
 #include "ics3_5.h"
 
-ICS3_5::ICS3_5(RawSerial& _serial, PinName _enpin)
+ICS3_5::ICS3_5(Serial& _serial, PinName _enpin)
 :serial(&_serial), enable_pin(_enpin)
 {
     serial->format(8, Serial::Even, 1);
     serial->baud(115200);
     input();
     wait(0.5);
+    //debug
+    output();
 }
 
 void ICS3_5::move(int id, float degree)
 {
-    input();
+    //input();
     while(serial->readable()){
         printf("readable:0x%X\r\n", serial->getc());
     }
@@ -26,19 +28,19 @@ void ICS3_5::move(int id, float degree)
     cmd[1] = ((deg_val >> 7) & 0b01111111);
     cmd[2] = (deg_val & 0b01111111);
     output();
+    wait_us(50);
     //printf("degree = %.1f, deg_val = %d\r\n", degree, deg_val);
-    while(serial->writeable()){
-
-    }
+    //while(serial->writeable()){}
     for(int i=0;i<3;i++){
         serial->putc(cmd[i]);
         //printf("send:0x%X\r\n", cmd[i]);
     }
-    input();
+    //wait_us(50);
+    //input();
     while(serial->readable()){
         printf("readable:0x%X\r\n", serial->getc());
     }
-    wait_ms(1);
+    wait_us(50);
 }
 
 void ICS3_5::output(void)

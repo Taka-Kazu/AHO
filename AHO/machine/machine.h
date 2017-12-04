@@ -52,7 +52,7 @@ private:
 	const int MOTION_NUM;
 
 	bool* direction;//true��cw,false��ccw
-	RawSerial ics;
+	Serial ics;
 	ICS3_5 servos;
 	Buzzer buzzer;
 	SPI spi;

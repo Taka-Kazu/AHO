@@ -6,7 +6,7 @@
 class ICS3_5
 {
 public:
-    ICS3_5(RawSerial&, PinName);
+    ICS3_5(Serial&, PinName);
     
     void move(int, float);
 private:
@@ -17,7 +17,7 @@ private:
     static const int CENTER_VAL = 7500;
     static const int MAX_VAL = 11500;
 
-    RawSerial* serial;
+    Serial* serial;
     DigitalOut enable_pin;
     
     void output(void);

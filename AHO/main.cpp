@@ -19,9 +19,15 @@ int main() {
     wait(1);
     //aho.set_motion(machine.motion);
     while(1) {
-        if(aho.has_changed()){
-            machine.play_motion(0);
-        }
-        
+            for(int i=0;i<270;i++){
+            	machine.move_servo(1, i);
+            	machine.move_servo(2, i);
+            	wait(0.025);
+            }
+            for(int i=270;i>0;i--){
+            	machine.move_servo(1, i);
+            	machine.move_servo(2, i);
+                wait(0.025);
+            }
     }
 }

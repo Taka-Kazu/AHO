@@ -36,7 +36,7 @@ Machine::Machine(int motion_num)
 	for(int i=0;i<SERVO_NUM;i++){
 		current_angle[i] = target_angle[i] = neutral_angle[i];
 	}
-	
+
 	alert(1760);
     wait(0.5);
     alert(0);
@@ -132,11 +132,11 @@ void Machine::play_motion(int motion_id)
 				current_angle[j] = motion.pos[i].get_angle(j);
 			}
 		}
-		
+
 	}else if(motion_id == 0){//for AHO
 		for(int i=0;i<POS_NUM;i++)
 		{
-			const int DT = 100;//[ms]
+			const int DT = 25;//[ms]
 			int time = motion.pos[i].get_time();
 			if(time==0){
 				break;
@@ -174,7 +174,7 @@ void Machine::move_servo(int id, float angle)
 	}else if(angle < min_angle[id]){
 		angle = min_angle[id];
 	}
-	
+
 	if((id!=0) || (id!=5)){
 		servos.move(id, angle);
 	}else if(id==0){
@@ -209,12 +209,12 @@ void Machine::alert(int hz)
 
 void Machine::power_on(void)
 {
-	
+
 }
 
 void Machine::power_off(void)
 {
-	
+
 }
 
 float Machine::get_angle_x(void)

@@ -8,7 +8,7 @@ class Motion
 {
 public:
 	Motion(void);
-	static const int8_t POS_NUM = 50;
+	static const int8_t POS_NUM = 20;
 	Position pos[POS_NUM];
 };
 

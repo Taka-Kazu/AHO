@@ -3,7 +3,7 @@
 #include "aho.h"
 
 Serial pc(USBTX, USBRX);
-AHO aho(pc);
+//AHO aho(pc);
 Machine machine(1);
 
 extern "C"
@@ -18,16 +18,12 @@ int main() {
     printf("Welcome to AHO system\r\n");
     wait(1);
     //aho.set_motion(machine.motion);
+    machine.motion.pos[0].set_time(2000);
+    machine.motion.pos[0].set_angle(0, 0);
+    machine.motion.pos[1].set_time(2000);
+    machine.motion.pos[1].set_angle(0, 270);
+    machine.play_motion(0);
     while(1) {
-            for(int i=0;i<270;i++){
-            	machine.move_servo(1, i);
-            	machine.move_servo(2, i);
-            	wait(0.025);
-            }
-            for(int i=270;i>0;i--){
-            	machine.move_servo(1, i);
-            	machine.move_servo(2, i);
-                wait(0.025);
-            }
+
     }
 }

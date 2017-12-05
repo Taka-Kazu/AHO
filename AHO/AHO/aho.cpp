@@ -33,34 +33,53 @@ void AHO::initialize(void)
 			str[i][j] = 0;
 		}
 	}
+	for(int i=0;i<DATA_LENGTH;i++){
+		data[i] = 0;
+	}
 }
 
 void AHO::interrupt(void)
 {
 	__disable_irq();
 	uint8_t c[2] = {0};
-	int data_count = 0;
 	int pos_count = 0;
-
 	while(1){
-		int count = 0;
-		while(!pc->readable())
-		{
-			count++;
-			if(count == 1000000){
-				return;
+		int data_count = 0;
+		while(1){
+			int loop_count = 0;
+			while(!pc->readable())
+			{
+				loop_count++;
+				if(loop_count == 100000){
+					flag = true;
+					return;
+				}
 			}
-		}
-		c[0] = pc->getc();
-		c[1] = pc->getc();
-		data[data_count] = (c[0]<<8) + c[1];
-		data_count++;
-		if(data_count == DATA_LENGTH){
-			motion->pos[pos_count].set_time(data[0]);
-			for(int i=0;i<DATA_LENGTH;i++){
-				motion->pos[pos_count].set_angle(i, data[i+1]);
+			c[0] = pc->getc();
+
+			while(!pc->readable())
+			{
+				loop_count++;
+				if(loop_count == 100000){
+					flag = true;
+					return;
+				}
 			}
-			break;
+			c[1] = pc->getc();
+
+			data[data_count] = (c[0]<<8) + c[1];
+			data_count++;
+			if(data_count == DATA_LENGTH){
+				motion->pos[pos_count].set_time(data[0]);
+				if(data[0] == 0){
+					flag = true;
+					return;
+				}
+				for(int i=0;i<DATA_LENGTH;i++){
+					motion->pos[pos_count].set_angle(i, data[i+1]);
+				}
+				break;
+			}
 		}
 		pos_count++;
 	}

@@ -16,7 +16,7 @@ public:
 private:
 	static const int BAUDRATE = 115200;
 	static const int8_t STR_LENGTH = 120;
-	static const int8_t POS_NUM = 50;
+	static const int8_t POS_NUM = 20;
 	static const int8_t DATA_LENGTH = 17;
 	Serial* pc;
 	Motion* motion;

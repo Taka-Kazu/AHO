@@ -19,9 +19,9 @@ int main() {
     wait(1);
     //aho.set_motion(machine.motion);
     machine.motion.pos[0].set_time(2000);
-    machine.motion.pos[0].set_angle(0, 0);
-    machine.motion.pos[1].set_time(2000);
-    machine.motion.pos[1].set_angle(0, 270);
+    machine.motion.pos[0].set_angle(0, 96);
+    machine.motion.pos[1].set_time(5000);
+    machine.motion.pos[1].set_angle(0, 187);
     machine.play_motion(0);
     while(1) {
 

@@ -44,7 +44,7 @@ Machine::Machine(int motion_num)
 
 	//_thread = new Thread(&Machine::thread_starter, this);
 	for(int i=0;i<SERVO_NUM;i++){
-		//move_servo(i, neutral_angle[i]);
+		move_servo(i, neutral_angle[i]);
 		//printf("hello\r\n");
 	}
 	printf("Machine is ready\r\n");
@@ -108,7 +108,7 @@ void Machine::play_motion(int motion_id)
 		printf("file closed!\r\n");
 		for(int i=0;i<POS_NUM;i++)
 		{
-			const int DT = 100;//[ms]
+			const int DT = 25;//[ms]
 			int time = motion.pos[i].get_time();
 			if(time==0){
 				break;

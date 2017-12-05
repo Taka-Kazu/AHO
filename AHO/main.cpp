@@ -22,6 +22,5 @@ int main() {
         if(aho.has_changed()){
             machine.play_motion(0);
         }
-
     }
 }

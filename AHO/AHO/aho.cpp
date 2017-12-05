@@ -52,6 +52,7 @@ void AHO::interrupt(void)
 				loop_count++;
 				if(loop_count == 100000){
 					flag = true;
+					__enable_irq();
 					return;
 				}
 			}
@@ -62,6 +63,7 @@ void AHO::interrupt(void)
 				loop_count++;
 				if(loop_count == 100000){
 					flag = true;
+					__enable_irq();
 					return;
 				}
 			}
@@ -73,6 +75,7 @@ void AHO::interrupt(void)
 				motion->pos[pos_count].set_time(data[0]);
 				if(data[0] == 0){
 					flag = true;
+					__enable_irq();
 					return;
 				}
 				for(int i=0;i<DATA_LENGTH;i++){

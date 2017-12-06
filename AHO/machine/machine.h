@@ -72,6 +72,7 @@ private:
 	static void thread_starter(void *p);
 	void servo_controller(void);
 	void play();
+	void read_from_sd(char*);
 };
 
 #endif

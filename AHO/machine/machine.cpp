@@ -53,61 +53,25 @@ Machine::Machine(int motion_num)
 void Machine::play_motion(int motion_id)
 {
 	//alert();
-	char c;
-	int8_t str_j = 0;//param2
-	int8_t str_k = 0;//param1
-	char str[POS_NUM][200];
-	bool flag = true;
-
-	for(int i=0;i<POS_NUM;i++){
-		for(int j=0;j<200;j++){
-			str[i][j] = 0;
-		}
-	}
-	//printf("size of str = %d\r\n", sizeof(str));
 	wait(0.3);
-	if(!(motion_id<=0||motion_id>MOTION_NUM)){//motion_id=0はAHO専用
-		mkdir("/sd/mydir", 0777);
-		//motion_idによってopenするファイルを変える
-		FILE *fp = fopen("/sd/mydir/motion.csv", "r");
-		if(fp == NULL){
-			printf("SD card error!\r\n");
-			return;
-		}
-    	printf("file opend!\r\n");
-		while(1){
-			fscanf(fp, "%c", &c);
-			//printf("%c", c);
-			if(c=='\n'){
-				if(flag==false){
-					c = '\0';
-				}
-				flag = false;
-			}else{
-				flag = true;
-			}
-			if(c=='\0'){
-				for(int i=0;i<str_k;i++){
-					motion.pos[i].set_param(str[i]);
-					printf("str[%d] = %s\r\n", i, str[i]);
-				}
+	if(!(motion_id<0||motion_id>MOTION_NUM)){
+		switch (motion_id) {
+			case 0:
+				//for AHO only
+				//nothing to do here
 				break;
-			}
-			str[str_k][str_j] = c;
-			if(c == '\n'){
-				str[str_k][str_j] = '\0';
-			}
-			//printf("str[%d][%d] = 0x%X\r\n", str_k, str_j, str[str_k][str_j]);
-			str_j++;
-			if(c=='\n'){
-				str_k++;
-				str_j=0;
-			}
+			case 1:
+				read_from_sd((char*)"/sd/mydir/default.csv");
+				break;
+			case 2:
+				read_from_sd((char*)"/sd/mydir/punch.csv");
+				break;
+			case 3:
+				read_from_sd((char*)"/sd/mydir/motion.csv");
+				break;
+			default:
+				break;
 		}
-		fclose(fp);
-		printf("file closed!\r\n");
-		play();
-	}else if(motion_id == 0){//for AHO
 		play();
 	}
 }
@@ -209,4 +173,58 @@ void Machine::play(void)
 			current_angle[j] = motion.pos[i].get_angle(j);
 		}
 	}
+}
+
+void Machine::read_from_sd(char* file_name)
+{
+	char c;
+	int8_t str_j = 0;//param2
+	int8_t str_k = 0;//param1
+	char str[POS_NUM][200];
+	bool flag = true;
+	for(int i=0;i<POS_NUM;i++){
+		for(int j=0;j<200;j++){
+			str[i][j] = 0;
+		}
+	}
+	mkdir("/sd/mydir", 0777);
+	//motion_idによってopenするファイルを変える
+	FILE *fp = fopen("/sd/mydir/motion.csv", "r");
+	if(fp == NULL){
+		printf("SD card error!\r\n");
+		return;
+	}
+	printf("file opend!\r\n");
+	while(1){
+		fscanf(fp, "%c", &c);
+		//printf("%c", c);
+		if(c=='\n'){
+			if(flag==false){
+				c = '\0';
+			}
+			flag = false;
+		}else{
+			flag = true;
+		}
+		if(c=='\0'){
+			for(int i=0;i<str_k;i++){
+				//set data
+				motion.pos[i].set_param(str[i]);
+				printf("str[%d] = %s\r\n", i, str[i]);
+			}
+			break;
+		}
+		str[str_k][str_j] = c;
+		if(c == '\n'){
+			str[str_k][str_j] = '\0';
+		}
+		//printf("str[%d][%d] = 0x%X\r\n", str_k, str_j, str[str_k][str_j]);
+		str_j++;
+		if(c=='\n'){
+			str_k++;
+			str_j=0;
+		}
+	}
+	fclose(fp);
+	printf("file closed!\r\n");
 }

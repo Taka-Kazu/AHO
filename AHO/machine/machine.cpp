@@ -30,7 +30,7 @@ Machine::Machine(int motion_num)
 	neutral_angle[11] = 135;min_angle[11] = 16;max_angle[11] = 135;
 	neutral_angle[12] = 16;min_angle[12] = 16;max_angle[12] = 196;
 	neutral_angle[13] = 52;min_angle[13] = 52;max_angle[13] = 144;
-	neutral_angle[14] = 132;min_angle[14] = 45;max_angle[14] = 227;
+	neutral_angle[14] = 106;min_angle[14] = 45;max_angle[14] = 227;
 	current_angle = new float[SERVO_NUM];
 	target_angle = new float[SERVO_NUM];
 	for(int i=0;i<SERVO_NUM;i++){

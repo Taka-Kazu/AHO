@@ -14,9 +14,13 @@ public:
 	int get_angle(int);
 	void set_time(int);
 	void set_angle(int, int);
+	void reset();
+
 
 private:
-	static const int SERVO_NUM = 20;
+	static const uint8_t SERVO_NUM = 16;
+	static const uint16_t CENTER = 135;
+
 	int16_t time_ms;
 	uint16_t*  servo_angle;
 };

@@ -73,6 +73,7 @@ void Machine::play_motion(int motion_id)
 				break;
 		}
 		play();
+		motion.reset();
 	}
 }
 

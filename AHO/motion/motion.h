@@ -8,6 +8,9 @@ class Motion
 {
 public:
 	Motion(void);
+
+	void reset(void);
+
 	static const int8_t POS_NUM = 20;
 	Position pos[POS_NUM];
 };

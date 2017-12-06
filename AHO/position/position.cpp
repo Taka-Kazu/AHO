@@ -2,11 +2,8 @@
 
 Position::Position(void)
 {
-	time_ms = 0;
 	servo_angle = new uint16_t[SERVO_NUM];
-	for(int i=0;i<SERVO_NUM;i++){
-		servo_angle[i] = 90;
-	}
+	reset();
 }
 
 void Position::set_param(char* str)
@@ -69,4 +66,12 @@ void Position::set_angle(int id, int angle)
 void Position::set_time(int time)
 {
 	time_ms = time;
+}
+
+void Position::reset(void)
+{
+	time_ms = 0;
+	for(int i=0;i<SERVO_NUM;i++){
+		servo_angle[i] = CENTER;
+	}
 }

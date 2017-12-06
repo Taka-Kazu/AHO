@@ -106,60 +106,9 @@ void Machine::play_motion(int motion_id)
 		}
 		fclose(fp);
 		printf("file closed!\r\n");
-		for(int i=0;i<POS_NUM;i++)
-		{
-			const int DT = 25;//[ms]
-			int time = motion.pos[i].get_time();
-			if(time==0){
-				break;
-			}
-			if(i == (sizeof(motion.pos)/sizeof(Position)-1)){
-				break;
-			}
-			////////////////////////////////////////////////////////
-			const int LOOP = time / DT;
-			float d_theta[SERVO_NUM];
-			for(int j=0;j<SERVO_NUM;j++){
-				d_theta[j] = (motion.pos[i].get_angle(j) - current_angle[j]) / LOOP;
-			}
-			for(int j=0;j<LOOP;j++){
-				for(int k=0;k<SERVO_NUM;k++){
-					move_servo(k, current_angle[k] + d_theta[k] * j);
-				}
-				wait_ms(DT);
-			}
-			for(int j=0;j<SERVO_NUM;j++){
-				current_angle[j] = motion.pos[i].get_angle(j);
-			}
-		}
-
+		play();
 	}else if(motion_id == 0){//for AHO
-		for(int i=0;i<POS_NUM;i++)
-		{
-			const int DT = 25;//[ms]
-			int time = motion.pos[i].get_time();
-			if(time==0){
-				break;
-			}
-			if(i == (sizeof(motion.pos)/sizeof(Position)-1)){
-				break;
-			}
-			////////////////////////////////////////////////////////
-			const int LOOP = time / DT;
-			float d_theta[SERVO_NUM];
-			for(int j=0;j<SERVO_NUM;j++){
-				d_theta[j] = (motion.pos[i].get_angle(j) - current_angle[j]) / LOOP;
-			}
-			for(int j=0;j<LOOP;j++){
-				for(int k=0;k<SERVO_NUM;k++){
-					move_servo(k, current_angle[k] + d_theta[k] * j);
-				}
-				wait_ms(DT);
-			}
-			for(int j=0;j<SERVO_NUM;j++){
-				current_angle[j] = motion.pos[i].get_angle(j);
-			}
-		}
+		play();
 	}
 }
 
@@ -233,4 +182,31 @@ void Machine::thread_starter(void *p)
 void Machine::servo_controller(void)
 {
 	Thread::wait(INTERVAL);
+}
+
+void Machine::play(void)
+{
+	for(int i=0;i<POS_NUM;i++)
+	{
+		if(motion.pos[i].get_time()  == 0){
+			break;
+		}
+		if(i == (sizeof(motion.pos)/sizeof(Position)-1)){
+			break;
+		}
+		const int LOOP = motion.pos[i].get_time() / FRAME;
+		float d_theta[SERVO_NUM];
+		for(int j=0;j<SERVO_NUM;j++){
+			d_theta[j] = (motion.pos[i].get_angle(j) - current_angle[j]) / LOOP;
+		}
+		for(int j=0;j<LOOP;j++){
+			for(int k=0;k<SERVO_NUM;k++){
+				move_servo(k, current_angle[k] + d_theta[k] * j);
+			}
+			wait_ms(FRAME);
+		}
+		for(int j=0;j<SERVO_NUM;j++){
+			current_angle[j] = motion.pos[i].get_angle(j);
+		}
+	}
 }

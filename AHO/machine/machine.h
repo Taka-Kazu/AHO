@@ -49,6 +49,7 @@ private:
 	static const int SERVO_NUM = 15;
 	static const int POS_NUM = 50;
 	static const int INTERVAL = 10;//[ms]
+	static const int FRAME = 25;//[ms]
 	const int MOTION_NUM;
 
 	bool* direction;//true��cw,false��ccw
@@ -70,6 +71,7 @@ private:
 	void reverse_angle(float&);
 	static void thread_starter(void *p);
 	void servo_controller(void);
+	void play();
 };
 
 #endif

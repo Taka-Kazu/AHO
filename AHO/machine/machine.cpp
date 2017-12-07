@@ -83,14 +83,15 @@ void Machine::move_servo(int id, float angle)
 	if(id<0 || id>SERVO_NUM - 1){
 		return;
 	}
-	//printf("id:%d, angle:%.0f\r\n", id, angle);
 	if(angle >= max_angle[id]){
 		angle = max_angle[id];
 	}else if(angle < min_angle[id]){
 		angle = min_angle[id];
 	}
-	float omega = gyro.get_y_angular_velocity();
+	//printf("id:%d, angle:%f\r\n", id, angle);
+	float omega =0;//= gyro.get_y_angular_velocity();
 	float k=2;
+	//printf("omega = %f\r\n", omega);
 	if((id!=0) || (id!=5)){
 		servos.move(id, angle);
 	}else if(id==0){
@@ -164,19 +165,16 @@ void Machine::play(void)
 	led = 0;
 	for(int i=0;i<POS_NUM;i++)
 	{
-		if(motion.pos[i].get_time()  == 0){
-			for(int k=0;k<i;k++){
-				led = 1;
-				wait(0.5);
-				led = 0;
-				wait(0.5);
-			}
+		const int DT = 25;//[ms]
+		int time = motion.pos[i].get_time();
+		if(time==0){
 			break;
 		}
 		if(i == (sizeof(motion.pos)/sizeof(Position)-1)){
 			break;
 		}
-		const int LOOP = motion.pos[i].get_time() / FRAME;
+		////////////////////////////////////////////////////////
+		const int LOOP = time / DT;
 		float d_theta[SERVO_NUM];
 		for(int j=0;j<SERVO_NUM;j++){
 			d_theta[j] = (motion.pos[i].get_angle(j) - current_angle[j]) / LOOP;
@@ -185,12 +183,13 @@ void Machine::play(void)
 			for(int k=0;k<SERVO_NUM;k++){
 				move_servo(k, current_angle[k] + d_theta[k] * j);
 			}
-			wait_ms(FRAME);
+			wait_ms(DT);
 		}
 		for(int j=0;j<SERVO_NUM;j++){
 			current_angle[j] = motion.pos[i].get_angle(j);
 		}
 	}
+	led = 1;
 }
 
 void Machine::read_from_sd(char* file_name)

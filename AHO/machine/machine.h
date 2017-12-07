@@ -22,7 +22,8 @@ public:
 	void alert(int hz=440);
 	void power_on(void);
 	void power_off(void);
-	float get_angle_x(void);
+	float get_angular_velocity_x(void);
+	float get_angular_velocity_y(void);
 
 	Motion motion;
 
@@ -71,7 +72,7 @@ private:
 	void reverse_angle(float&);
 	static void thread_starter(void *p);
 	void servo_controller(void);
-	void play();
+	void play(void);
 	void read_from_sd(char*);
 };
 

@@ -47,6 +47,7 @@ Machine::Machine(int motion_num)
 		move_servo(i, neutral_angle[i]);
 		//printf("hello\r\n");
 	}
+	gyro.calibrate(100);
 	printf("Machine is ready\r\n");
 }
 
@@ -88,15 +89,16 @@ void Machine::move_servo(int id, float angle)
 	}else if(angle < min_angle[id]){
 		angle = min_angle[id];
 	}
-
+	float omega = gyro.get_y_angular_velocity();
+	float k=2;
 	if((id!=0) || (id!=5)){
 		servos.move(id, angle);
 	}else if(id==0){
 		//right ankle
-		servos.move(id, angle);
+		servos.move(id, angle-omega*k);
 	}else if(id==5){
 		//left ankle
-		servos.move(id, angle);
+		servos.move(id, angle-omega*k);
 	}
 }
 
@@ -131,10 +133,17 @@ void Machine::power_off(void)
 
 }
 
-float Machine::get_angle_x(void)
+float Machine::get_angular_velocity_x(void)
 {
 	float val = 0;
 	val =  gyro.get_x_angular_velocity();
+	return val;
+}
+
+float Machine::get_angular_velocity_y(void)
+{
+	float val = 0;
+	val =  gyro.get_y_angular_velocity();
 	return val;
 }
 
@@ -151,9 +160,17 @@ void Machine::servo_controller(void)
 
 void Machine::play(void)
 {
+	DigitalOut led(LED1);
+	led = 0;
 	for(int i=0;i<POS_NUM;i++)
 	{
 		if(motion.pos[i].get_time()  == 0){
+			for(int k=0;k<i;k++){
+				led = 1;
+				wait(0.5);
+				led = 0;
+				wait(0.5);
+			}
 			break;
 		}
 		if(i == (sizeof(motion.pos)/sizeof(Position)-1)){

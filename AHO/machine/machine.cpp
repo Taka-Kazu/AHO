@@ -89,7 +89,7 @@ void Machine::move_servo(int id, float angle)
 		angle = min_angle[id];
 	}
 	//printf("id:%d, angle:%f\r\n", id, angle);
-	float omega =0;//= gyro.get_y_angular_velocity();
+	float omega = gyro.get_y_angular_velocity();
 	float k=2;
 	//printf("omega = %f\r\n", omega);
 	if((id!=0) || (id!=5)){
@@ -161,8 +161,8 @@ void Machine::servo_controller(void)
 
 void Machine::play(void)
 {
-	DigitalOut led(LED1);
-	led = 0;
+	//DigitalOut led(LED1);
+	//led = 0;
 	for(int i=0;i<POS_NUM;i++)
 	{
 		const int DT = 25;//[ms]
@@ -189,7 +189,7 @@ void Machine::play(void)
 			current_angle[j] = motion.pos[i].get_angle(j);
 		}
 	}
-	led = 1;
+	//led = 1;
 }
 
 void Machine::read_from_sd(char* file_name)

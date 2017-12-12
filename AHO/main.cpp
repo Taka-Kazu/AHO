@@ -4,7 +4,7 @@
 
 Serial pc(USBTX, USBRX);
 AHO aho(pc);
-Machine machine(1);
+Machine machine(10);
 
 extern "C"
 void HardFault_Handler() {
@@ -14,13 +14,17 @@ void HardFault_Handler() {
 
 
 int main() {
-    //printf("Hi, I'm SHIRO-OBI!\r\n");
+    printf("Hi, I'm SHIRO-OBI!\r\n");
     //printf("Welcome to AHO system\r\n");
     wait(1);
-    aho.set_motion(machine.motion);
+    //aho.set_motion(machine.motion);
+    machine.play_motion(2);
     while(1) {
+    	/*
         if(aho.has_changed()){
             machine.play_motion(0);
         }
+        */
+
     }
 }

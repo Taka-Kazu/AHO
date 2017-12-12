@@ -1,4 +1,5 @@
-main.o: ../main.cpp ../mbed_config.h ../mbed/./mbed.h \
+dualshock3/dualshock3.o: ../dualshock3/dualshock3.cpp ../mbed_config.h \
+ ../dualshock3/dualshock3.h ../mbed/./mbed.h \
  ../mbed/./platform/mbed_toolchain.h \
  ../mbed/./platform/mbed_preprocessor.h ../mbed/./platform/platform.h \
  ../mbed/./platform/mbed_retarget.h ../mbed/./platform/mbed_toolchain.h \
@@ -134,18 +135,4 @@ main.o: ../main.cpp ../mbed_config.h ../mbed/./mbed.h \
  ../mbed/./platform/ATCmdParser.h ../mbed/./platform/FileSystemHandle.h \
  ../mbed/./platform/DirHandle.h ../mbed/./platform/FileHandle.h \
  ../mbed/./platform/DirHandle.h ../mbed/./platform/Callback.h \
- ../mbed/./platform/FunctionPointer.h ../machine/machine.h \
- ../motion/motion.h ../position/position.h ../buzzer/buzzer.h \
- ../SDFileSystem/SDFileSystem.h \
- ../SDFileSystem/FATFileSystem/FATFileSystem.h \
- ../mbed/platform/FileSystemLike.h ../mbed/./platform/FileSystemHandle.h \
- ../SDFileSystem/FATFileSystem/ChaN/ff.h \
- ../SDFileSystem/FATFileSystem/ChaN/integer.h \
- ../SDFileSystem/FATFileSystem/ChaN/ffconf.h ../L3GD20/l3gd20.h \
- ../ADXL345/adxl345.h ../ics3_5/ics3_5.h ../mbed-rtos/rtos/rtos.h \
- ../mbed-rtos/rtos/Thread.h ../mbed-rtos/rtx/TARGET_CORTEX_M/cmsis_os.h \
- ../mbed/./platform/toolchain.h ../mbed-rtos/rtos/Semaphore.h \
- ../mbed-rtos/rtos/Mutex.h ../mbed-rtos/rtos/RtosTimer.h \
- ../mbed-rtos/rtos/Mail.h ../mbed-rtos/rtos/MemoryPool.h \
- ../mbed-rtos/rtos/Queue.h ../mbed/./platform/mbed_error.h ../AHO/aho.h \
- ../dualshock3/dualshock3.h
+ ../mbed/./platform/FunctionPointer.h

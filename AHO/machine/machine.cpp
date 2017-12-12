@@ -48,7 +48,7 @@ Machine::Machine(int motion_num)
 		//printf("hello\r\n");
 	}
 	gyro.calibrate(100);
-	printf("Machine is ready\r\n");
+	//printf("Machine is ready\r\n");
 }
 
 void Machine::play_motion(int motion_id)

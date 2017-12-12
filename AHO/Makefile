@@ -46,6 +46,7 @@ PROJECT := AHO
 ###############################################################################
 # Objects and Paths
 
+OBJECTS += dualshock3/dualshock3.o
 OBJECTS += ADXL345/adxl345.o
 OBJECTS += AHO/aho.o
 OBJECTS += L3GD20/l3gd20.o
@@ -242,6 +243,7 @@ INCLUDE_PATHS += -I../mbed/hal
 INCLUDE_PATHS += -I../mbed/platform
 INCLUDE_PATHS += -I../motion
 INCLUDE_PATHS += -I../position
+INCLUDE_PATHS += -I../dualshock3
 
 LIBRARY_PATHS := -L../mbed/TARGET_NUCLEO_L432KC/TOOLCHAIN_GCC_ARM 
 LIBRARIES := -lmbed 

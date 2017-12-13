@@ -52,3 +52,29 @@ void ICS3_5::input(void)
 {
     enable_pin = 0;
 }
+
+void ICS3_5::free(int id)
+{
+	//input();
+	while(serial->readable()){
+		printf("readable:0x%X\r\n", serial->getc());
+	}
+	uint8_t cmd[3];
+	cmd[0] = (0x80 | id);
+	cmd[1] = (0 & 0b01111111);
+	cmd[2] = (0 & 0b01111111);
+	output();
+	wait_us(50);
+	//printf("degree = %.1f, deg_val = %d\r\n", degree, deg_val);
+	//while(serial->writeable()){}
+	for(int i=0;i<3;i++){
+		serial->putc(cmd[i]);
+		//printf("send:0x%X\r\n", cmd[i]);
+	}
+	//wait_us(50);
+	//input();
+	while(serial->readable()){
+		printf("readable:0x%X\r\n", serial->getc());
+	}
+	wait_us(50);
+}

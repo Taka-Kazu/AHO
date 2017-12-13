@@ -66,10 +66,15 @@ void Machine::play_motion(int motion_id)
 				read_from_sd((char*)"/sd/mydir/default.csv");
 				break;
 			case 2:
+				//左腕攻撃
 				read_from_sd((char*)"/sd/mydir/punch.csv");
 				break;
 			case 3:
 				read_from_sd((char*)"/sd/mydir/motion.csv");
+				break;
+			case 4:
+				//足踏み
+				read_from_sd((char*)"/sd/mydir/walk2.csv");
 				break;
 			default:
 				break;
@@ -91,7 +96,7 @@ void Machine::move_servo(int id, float angle)
 	}
 	//printf("id:%d, angle:%f\r\n", id, angle);
 	float omega = gyro.get_y_angular_velocity();
-	float k=2;
+	float k=3;
 	//printf("omega = %f\r\n", omega);
 	if((id!=0) || (id!=5)){
 		servos.move(id, angle);
@@ -245,4 +250,11 @@ void Machine::read_from_sd(char* file_name)
 	}
 	fclose(fp);
 	//printf("file closed!\r\n");
+}
+
+void Machine::free(void)
+{
+	for(int i=0;i<SERVO_NUM;i++){
+		servos.free(i);
+	}
 }

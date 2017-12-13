@@ -24,6 +24,7 @@ public:
 	void power_off(void);
 	float get_angular_velocity_x(void);
 	float get_angular_velocity_y(void);
+	void free(void);
 
 	Motion motion;
 

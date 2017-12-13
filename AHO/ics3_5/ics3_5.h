@@ -7,8 +7,10 @@ class ICS3_5
 {
 public:
     ICS3_5(Serial&, PinName);
-    
+
     void move(int, float);
+    void free(int);
+
 private:
     static const float MIN_ANGLE = 0;
     static const float CENTER_ANGLE = 135;
@@ -19,10 +21,10 @@ private:
 
     Serial* serial;
     DigitalOut enable_pin;
-    
+
     void output(void);
     void input(void);
-    
+
 };
 
 #endif

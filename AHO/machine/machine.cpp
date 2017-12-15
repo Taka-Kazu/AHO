@@ -49,7 +49,7 @@ Machine::Machine(int motion_num)
 void Machine::play_motion(int motion_id)
 {
 	//alert();
-	wait(0.3);
+	//wait(0.3);
 	if(!(motion_id<0||motion_id>MOTION_NUM)){
 		printf("motion_id:%d\r\n", motion_id);
 		switch (motion_id) {

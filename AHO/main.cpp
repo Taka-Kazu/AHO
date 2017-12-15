@@ -38,20 +38,20 @@ int main() {
             }
     	}
     }else{
-    	machine.alert(1760);
-    	wait(0.1);
-    	machine.alert(0);
-    	wait(0.1);
-    	machine.alert(1760);
-    	wait(0.1);
-    	machine.alert(0);
-    	wait(0.1);
-    	machine.alert(1760);
-    	wait(0.1);
-    	machine.alert(0);
-    	wait(0.1);
     	Dualshock3 ds3(PA_2, PA_3);
     	ds3.initialize();
+    	machine.alert(1760);
+    	wait(0.1);
+    	machine.alert(0);
+    	wait(0.1);
+    	machine.alert(1760);
+    	wait(0.1);
+    	machine.alert(0);
+    	wait(0.1);
+    	machine.alert(1760);
+    	wait(0.1);
+    	machine.alert(0);
+    	wait(0.1);
     	float interval = 0.3;
     	while(1) {
     		if(ds3.l1_has_been_pushed()){

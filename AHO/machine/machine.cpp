@@ -25,7 +25,7 @@ Machine::Machine(int motion_num)
 	neutral_angle[6] = 137;min_angle[6] = 137;max_angle[6] = 213;
 	neutral_angle[7] = 143;min_angle[7] = 74;max_angle[7] = 143;
 	neutral_angle[8] = 123;min_angle[8] = 32;max_angle[8] = 123;
-	neutral_angle[9] = 137;min_angle[9] = 137;max_angle[9] = 185;
+	neutral_angle[9] = 137;min_angle[9] = 97;max_angle[9] = 185;
 	neutral_angle[10] = 180;min_angle[10] = 0;max_angle[10] = 180;
 	neutral_angle[11] = 112;min_angle[11] = 16;max_angle[11] = 135;
 	neutral_angle[12] = 16;min_angle[12] = 16;max_angle[12] = 196;
@@ -36,11 +36,6 @@ Machine::Machine(int motion_num)
 	for(int i=0;i<SERVO_NUM;i++){
 		current_angle[i] = target_angle[i] = neutral_angle[i];
 	}
-
-	alert(1760);
-    wait(0.5);
-    alert(0);
-	wait(0.5);
 
 	//_thread = new Thread(&Machine::thread_starter, this);
 	for(int i=0;i<SERVO_NUM;i++){
@@ -73,8 +68,12 @@ void Machine::play_motion(int motion_id)
 				read_from_sd((char*)"/sd/mydir/motion.csv");
 				break;
 			case 4:
-				//足踏み
-				read_from_sd((char*)"/sd/mydir/walk2.csv");
+				//前進
+				read_from_sd((char*)"/sd/mydir/go2.csv");
+				break;
+			case 5:
+				//後退
+				read_from_sd((char*)"/sd/mydir/back.csv");
 				break;
 			default:
 				break;

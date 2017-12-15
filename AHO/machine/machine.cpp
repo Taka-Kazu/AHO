@@ -116,14 +116,14 @@ void Machine::move_servo(int id, float angle)
 	float omega = gyro.get_y_angular_velocity();
 	float k=10;
 	//printf("omega = %f\r\n", omega);
-	if((id!=0) || (id!=5)){
-		servos.move(id, angle);
-	}else if(id==0){
+	if(id==0){
 		//right ankle
 		servos.move(id, angle-omega*k);
 	}else if(id==5){
 		//left ankle
 		servos.move(id, angle-omega*k);
+	}else{
+		servos.move(id, angle);
 	}
 }
 

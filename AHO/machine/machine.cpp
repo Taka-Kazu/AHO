@@ -76,6 +76,24 @@ void Machine::play_motion(int motion_id)
 				//後退
 				read_from_sd((char*)"/sd/mydir/back.csv");
 				break;
+			case 6:
+				//右旋回
+				read_from_sd((char*)"/sd/mydir/turn_r.csv");
+				break;
+			case 7:
+				//左旋回
+				read_from_sd((char*)"/sd/mydir/turn_l.csv");
+				break;
+			case 8:
+				//起き上がり
+				break;
+			case 9:
+				//待機姿勢
+				read_from_sd((char*)"/sd/mydir/ready.csv");
+				break;
+			case 10:
+				//左横攻撃
+				break;
 			default:
 				break;
 		}
@@ -96,7 +114,7 @@ void Machine::move_servo(int id, float angle)
 	}
 	//printf("id:%d, angle:%f\r\n", id, angle);
 	float omega = gyro.get_y_angular_velocity();
-	float k=3;
+	float k=10;
 	//printf("omega = %f\r\n", omega);
 	if((id!=0) || (id!=5)){
 		servos.move(id, angle);

@@ -64,6 +64,16 @@ int main() {
     		}else if(ds3.get_left_stick_y() < -0.5){
     			machine.play_motion(5);
     			continue;
+    		}else if(ds3.get_right_stick_x() > 0.5){
+    			machine.play_motion(6);
+    			continue;
+    		}else if(ds3.get_right_stick_x() < -0.5){
+    			machine.play_motion(7);
+    			continue;
+    		}else if(ds3.up_has_been_pushed()){
+    			machine.play_motion(8);
+    		}else if(ds3.start_has_been_pushed()){
+    			machine.play_motion(9);
     		}else{
 
     		}

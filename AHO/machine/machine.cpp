@@ -39,11 +39,8 @@ Machine::Machine(int motion_num)
 	}
 
 	//_thread = new Thread(&Machine::thread_starter, this);
-	for(int i=0;i<SERVO_NUM;i++){
-		move_servo(i, neutral_angle[i]);
-		//printf("hello\r\n");
-	}
 	gyro.calibrate(100);
+	play_motion(9);
 	//printf("Machine is ready\r\n");
 }
 
@@ -93,7 +90,20 @@ void Machine::play_motion(int motion_id)
 				read_from_sd((char*)"/sd/mydir/ready.csv");
 				break;
 			case 10:
-
+				//左横攻撃
+				read_from_sd((char*)"/sd/mydir/punch_l_side.csv");
+				break;
+			case 11:
+				//右横攻撃
+				read_from_sd((char*)"/sd/mydir/punch_r_side.csv");
+				break;
+			case 12:
+				//手をふる
+				read_from_sd((char*)"/sd/mydir/demo1.csv");
+				break;
+			case 13:
+				//グリコ
+				read_from_sd((char*)"/sd/mydir/glico.csv");
 				break;
 			default:
 				break;

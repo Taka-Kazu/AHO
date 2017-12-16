@@ -75,6 +75,15 @@ int main() {
     			machine.play_motion(8);
     		}else if(ds3.start_has_been_pushed()){
     			machine.play_motion(9);
+    		}else if(ds3.l2_has_been_pushed()){
+    			machine.play_motion(10);
+    		}else if(ds3.r2_has_been_pushed()){
+    			machine.play_motion(11);
+    		}else if(ds3.circle_is_pushed()){
+    			machine.play_motion(12);
+    			continue;
+    		}else if(ds3.triangle_has_been_pushed()){
+    			machine.play_motion(13);
     		}else if(ds3.select_has_been_pushed()){
     			machine.free();
     		}else{

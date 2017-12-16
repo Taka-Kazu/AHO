@@ -63,10 +63,10 @@ void Machine::play_motion(int motion_id)
 				break;
 			case 2:
 				//左腕攻撃
-				read_from_sd((char*)"/sd/mydir/punch.csv");
+				read_from_sd((char*)"/sd/mydir/punch_l.csv");
 				break;
 			case 3:
-				read_from_sd((char*)"/sd/mydir/motion.csv");
+				//左横攻撃
 				break;
 			case 4:
 				//前進
@@ -74,7 +74,7 @@ void Machine::play_motion(int motion_id)
 				break;
 			case 5:
 				//後退
-				read_from_sd((char*)"/sd/mydir/back.csv");
+				read_from_sd((char*)"/sd/mydir/back2.csv");
 				break;
 			case 6:
 				//右旋回
@@ -86,13 +86,14 @@ void Machine::play_motion(int motion_id)
 				break;
 			case 8:
 				//起き上がり
+				read_from_sd((char*)"/sd/mydir/wake.csv");
 				break;
 			case 9:
 				//待機姿勢
 				read_from_sd((char*)"/sd/mydir/ready.csv");
 				break;
 			case 10:
-				//左横攻撃
+
 				break;
 			default:
 				break;
@@ -114,14 +115,14 @@ void Machine::move_servo(int id, float angle)
 	}
 	//printf("id:%d, angle:%f\r\n", id, angle);
 	float omega = gyro.get_y_angular_velocity();
-	float k=10;
+	float k=5;
 	//printf("omega = %f\r\n", omega);
 	if(id==0){
 		//right ankle
-		servos.move(id, angle-omega*k);
+		servos.move(id, angle+omega*k);
 	}else if(id==5){
 		//left ankle
-		servos.move(id, angle-omega*k);
+		servos.move(id, angle+omega*k);
 	}else{
 		servos.move(id, angle);
 	}

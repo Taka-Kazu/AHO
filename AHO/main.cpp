@@ -36,6 +36,7 @@ int main() {
     		if(aho.has_changed()){
                 machine.play_motion(0);
             }
+    		//printf("omega_y = %f\r\n", machine.get_angular_velocity_y());
     	}
     }else{
     	Dualshock3 ds3(PA_2, PA_3);
@@ -56,8 +57,8 @@ int main() {
     	while(1) {
     		if(ds3.l1_has_been_pushed()){
     			machine.play_motion(2);
-    		}else if(ds3.select_has_been_pushed()){
-    			machine.free();
+    		}else if(ds3.l2_has_been_pushed()){
+    			machine.play_motion(3);
     		}else if(ds3.get_left_stick_y() > 0.5){
     			machine.play_motion(4);
     			continue;
@@ -74,6 +75,8 @@ int main() {
     			machine.play_motion(8);
     		}else if(ds3.start_has_been_pushed()){
     			machine.play_motion(9);
+    		}else if(ds3.select_has_been_pushed()){
+    			machine.free();
     		}else{
 
     		}

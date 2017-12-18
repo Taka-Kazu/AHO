@@ -40,7 +40,11 @@ Machine::Machine(int motion_num)
 
 	//_thread = new Thread(&Machine::thread_starter, this);
 	gyro.calibrate(100);
-	play_motion(9);
+	for(int i=0;i<SERVO_NUM;i++){
+		move_servo(i, neutral_angle[i]);
+		//printf("hello\r\n");
+	}
+	//play_motion(9);
 	//printf("Machine is ready\r\n");
 }
 
